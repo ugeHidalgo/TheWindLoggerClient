@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'MoWizz - The money wizzard';
+  title = 'The Wind Logger 2.0';
 
   constructor ( protected globals: GlobalsService, private router: Router) {
     const me = this,
