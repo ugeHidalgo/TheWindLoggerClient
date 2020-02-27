@@ -13,6 +13,10 @@
         <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="model.password">
       </mat-form-field>
     </form>
+    <div>
+      <p>¿No tienes cuenta? Regístrate <a [routerLink]="['/register']">aquí</a></p>
+      <p>¿Olvidaste la <a [routerLink]="['/forgot']">contraseña?</a></p>
+    </div>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button (click)="login()" color="primary">Login</button>
