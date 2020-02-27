@@ -37,49 +37,6 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <mat-label>Tipo de movimiento por defecto en movimientos:</mat-label>
-        <mat-select placeholder="Tipo movimiento: " formControlName="transactionType" (selectionChange)="onTransactionTypeSelected()">
-            <mat-option *ngFor="let transactionType of transactionTypes" [(value)]=transactionType.value>
-                {{transactionType.name}}
-            </mat-option>
-        </mat-select>
-        <!-- <mat-error *ngFor="let validation of validation_messages.transactionType">
-          <mat-error align="end" *ngIf="isInvalidField('transactionType',validation.type)">{{validation.message}}</mat-error>
-        </mat-error> -->
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>Cuenta de cargo por defecto en movimientos:</mat-label>
-        <mat-select placeholder="Cuenta: " formControlName="account">
-            <mat-option *ngFor="let account of accounts" [(value)]=account.name>
-                {{account.name}}: {{account.description}}
-            </mat-option>
-        </mat-select>
-        <!-- <mat-error *ngFor="let validation of validation_messages.account">
-          <mat-error align="end" *ngIf="isInvalidField('account',validation.type)">{{validation.message}}</mat-error>
-        </mat-error> -->
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label>Centro de gasto por defecto en movimientos:</mat-label>
-        <mat-select placeholder="Centro de gasto: " formControlName="costCentre">
-            <mat-option *ngFor="let costCentre of costCentres" [(value)]=costCentre.name>
-                {{costCentre.name}}: {{costCentre.description}}
-            </mat-option>
-        </mat-select>
-        <!-- <mat-error *ngFor="let validation of validation_messages.costCentre">
-          <mat-error align="end" *ngIf="isInvalidField('costCentre',validation.type)">{{validation.message}}</mat-error>
-        </mat-error> -->
-      </mat-form-field>
-      <!-- <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input  matInput  placeholder="Password"  name="password" [(ngModel)]="user.password" type="password" required>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-label>Repetir Password</mat-label>
-        <input  matInput  placeholder="Repetir Password"  name="repeatPassword" type="password" required>
-      </mat-form-field> -->
-      <mat-form-field class="full-width">
         <mat-label>Libro contable</mat-label>
         <input matInput placeholder="Libro contable" formControlName="company" [value]="user.company" required>
       </mat-form-field>

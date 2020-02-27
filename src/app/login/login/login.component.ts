@@ -30,22 +30,18 @@ export class LoginComponent {
     me.usersService.isUserAuthenticated(me.model)
       .subscribe(
         data => {
-          me.globals.setUser(me.model.userName);
-          me.globals.setCompany(data.company);
-          me.globals.storeUserDataInLocalStorage(me.model.userName, data.company, data.token);
-          me.globals.unMaskScreen();
-          me.toastr.success("Bienvenido " + me.model.userName);
-          me.router.navigate(['/mainscreen']);
-        },
-        error => {
-          let errorMessage = error.message;
-          if (error.status === 401)
-          {
-            errorMessage = 'Usuario o contraseña erróneos. Inténtelo de nuevo.';
+          if (data) {
+            me.globals.setUser(me.model.userName);
+            me.globals.setCompany(data.company);
+            me.globals.storeUserDataInLocalStorage(me.model.userName, data.company, data.token);
+            me.globals.unMaskScreen();
+            me.toastr.success("Bienvenido " + me.model.userName);
+            me.router.navigate(['/mainscreen']);
+          } else {
+            me.globals.clearUser();
+            me.globals.unMaskScreen();
+            me.toastr.error('Usuario o contraseña erróneos. Inténtelo de nuevo.');
           }
-          me.globals.clearUser();
-          me.globals.unMaskScreen();
-          me.toastr.error(errorMessage);
         }
       );
   }
