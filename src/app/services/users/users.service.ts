@@ -78,4 +78,21 @@ export class UsersService {
       catchError(me.operationHelper.handleError<User>('isUserAuthenticated'))
     );
   }
+
+  /**.*/
+  sendUserPasswordRecoverMail(user: User): Observable<boolean> {
+    return this.http.post<boolean>(this.usersUrl + '/userrecover', user);
+  }
+
+  /**.*/
+  updateUserPassword(userName: string, oldHashedPassword, newPassword: any): Observable<boolean> {
+    const me = this,
+          updateUserPasswordUrl = `${me.usersUrl}/${userName}`;
+    let data = {
+      hashedPassword: oldHashedPassword,
+      newPassword: newPassword
+    };
+
+    return me.http.post<any>(updateUserPasswordUrl, data);
+  }
 }

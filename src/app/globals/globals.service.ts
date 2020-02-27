@@ -10,8 +10,8 @@ export class GlobalsService {
   companyInUse: string;
   localStorageStore = 'currentUser';
 
-  server = 'https://thewindloggerserver.herokuapp.com/';  //To be used when API is in production
-  //server = 'http://192.168.1.104:3000/';  //To be used when API is in development mode and in local network server.
+  //server = 'https://thewindloggerserver.herokuapp.com/';  //To be used when API is in production
+  server = 'http://192.168.1.104:3000/';  //To be used when API is in development mode and in local network server.
   //server = 'http://localhost:3000/';  // To be used when API is in development mode and without connection to any network
 
   constructor() {

@@ -30,6 +30,8 @@ import { UserComponent } from './login/user/user.component';
 import { PageNotFoundComponent } from './components/main/notFound/not-found.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
 import { UpdateAmountDialogComponent } from './components/dialogs/update-amount-dialog/update-amount-dialog.component';
+import { ForgottenPasswordComponent } from './login/forgotten-password/forgotten-password.component';
+import { RecoverPasswordComponent } from './login/recover-password/recover-password.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { UpdateAmountDialogComponent } from './components/dialogs/update-amount-
     EuroCurrencyPipe,
     UserComponent,
     DeleteDialogComponent,
-    UpdateAmountDialogComponent
+    UpdateAmountDialogComponent,
+    ForgottenPasswordComponent,
+    RecoverPasswordComponent
   ],
   imports: [
     GlobalRoutingModule,
