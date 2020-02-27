@@ -1,27 +1,49 @@
-# TheWindLoggerClient
+## TheWindLogger Client.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
+## Client side
 
-## Development server
+Client side project implemented using:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- angular
+- mongoDB
 
-## Code scaffolding
+___
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+**Database**: Mongo.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+**Authorizing**: token authorization with (Username/Password).
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+___
 
-## Running end-to-end tests
+#Install process:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+-1 Clone repository:
 
-## Further help
+    git clone https://github.com/ugeHidalgo/thewindloggerclient.git TheWindLoggerClient
+    (This will clone the repository to a TheWindLoggerClient folder)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+-2 Install:
+
+    - Install dependecies needed:
+    ```
+        cd TheWindLoggerClient
+        cd server
+        npm install
+    ```
+
+-3 Run:
+    
+    Launch client side with:
+    ```
+        - npm start
+    ```
+    Access site to http://localhost:4200
+
+-4 Debug server side with the debugger in visual studio code
+
+-5 Remote Data base can also be used hosted in mLab (Need to change local db config to remote. See dbConfig.js to change it)
+
+-6 Hosted on Firebase (https://thewindlogger.web.app/) To deploy, first run ng build and then firebase deploy
+
