@@ -24,7 +24,7 @@ export class UsersService {
     const me = this;
 
     me.usersUrl  = globals.server + 'api/users';
-    me.grantUserAccessUrl = globals.server + 'api/users/auth';
+    me.grantUserAccessUrl = globals.server + 'api/users/auth/login';
     me.operationHelper = new OperationsHelper(globals,router);
   }
 

@@ -32,6 +32,11 @@ import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete
 import { UpdateAmountDialogComponent } from './components/dialogs/update-amount-dialog/update-amount-dialog.component';
 import { ForgottenPasswordComponent } from './login/forgotten-password/forgotten-password.component';
 import { RecoverPasswordComponent } from './login/recover-password/recover-password.component';
+import { MaterialTypesComponent } from './components/main/materialTypes/material-types/material-types.component';
+import { MaterialsComponent } from './components/main/materials/materials/materials.component';
+import { SpotsComponent } from './components/main/spots/spots/spots.component';
+import { SessionsComponent } from './components/main/sessions/sessions/sessions.component';
+import { ImportDataComponent } from './tools/import-data/import-data.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,12 @@ import { RecoverPasswordComponent } from './login/recover-password/recover-passw
     DeleteDialogComponent,
     UpdateAmountDialogComponent,
     ForgottenPasswordComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    MaterialTypesComponent,
+    MaterialsComponent,
+    SpotsComponent,
+    SessionsComponent,
+    ImportDataComponent
   ],
   imports: [
     GlobalRoutingModule,
