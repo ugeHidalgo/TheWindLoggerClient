@@ -33,7 +33,8 @@ export class OperationsHelper {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${authToken}`
+        //'Authorization': `Bearer ${authToken}`
+        'Authorization-token': authToken
       })
     };
   }

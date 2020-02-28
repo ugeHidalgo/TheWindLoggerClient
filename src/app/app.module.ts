@@ -29,7 +29,6 @@ import { UserComponent } from './login/user/user.component';
 
 import { PageNotFoundComponent } from './components/main/notFound/not-found.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
-import { UpdateAmountDialogComponent } from './components/dialogs/update-amount-dialog/update-amount-dialog.component';
 import { ForgottenPasswordComponent } from './login/forgotten-password/forgotten-password.component';
 import { RecoverPasswordComponent } from './login/recover-password/recover-password.component';
 import { MaterialTypesComponent } from './components/main/materialTypes/material-types/material-types.component';
@@ -48,7 +47,6 @@ import { ImportDataComponent } from './tools/import-data/import-data.component';
     EuroCurrencyPipe,
     UserComponent,
     DeleteDialogComponent,
-    UpdateAmountDialogComponent,
     ForgottenPasswordComponent,
     RecoverPasswordComponent,
     MaterialTypesComponent,
@@ -73,8 +71,7 @@ import { ImportDataComponent } from './tools/import-data/import-data.component';
     { provide: LOCALE_ID, useValue: 'es'}
   ],
   entryComponents: [
-    DeleteDialogComponent,
-    UpdateAmountDialogComponent
+    DeleteDialogComponent
   ],
   bootstrap: [
     AppComponent
