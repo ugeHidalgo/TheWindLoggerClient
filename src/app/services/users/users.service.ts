@@ -57,7 +57,7 @@ export class UsersService {
   updateUser(user: User): Observable<User> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken(),
-          updateUserUrl = `${me.usersUrl}/update`;
+          updateUserUrl = `${me.usersUrl}`;
 
     return me.http.post<User>(updateUserUrl, user, httpOptions)
     .pipe(
