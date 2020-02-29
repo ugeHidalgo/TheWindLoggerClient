@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 })
 export class UsersService {
 
-  private usersUrl;
-  private grantUserAccessUrl;
+  private usersUrl: string;
+  private grantUserAccessUrl: string;
   private operationHelper: OperationsHelper;
 
   constructor(

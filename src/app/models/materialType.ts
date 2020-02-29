@@ -1,10 +1,10 @@
-export class User {
+export class MaterialType {
     _id: string;
     userName: string;
-    company: string;
+    sport: string;
     name: string;
     description: String;
-    state : string;
+    active : boolean;
     created :  Date;
     updated :  Date;
   }
