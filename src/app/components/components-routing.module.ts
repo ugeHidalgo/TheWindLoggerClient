@@ -7,10 +7,12 @@ import { MaterialTypesComponent } from './main/materialTypes/material-types/mate
 import { MaterialsComponent } from './main/materials/materials/materials.component';
 import { ImportDataComponent } from '../tools/import-data/import-data.component';
 import { SessionsComponent } from './main/sessions/sessions/sessions.component';
+import { SportsComponent } from './main/sports/sports/sports.component';
 
 const componentRoutes: Routes = [
     { path: 'mainscreen', component: MainScreenComponent },
     { path: 'spots', component: SpotsComponent },
+    { path: 'sports', component: SportsComponent },
     { path: 'sessions', component: SessionsComponent },
     { path: 'material-types', component: MaterialTypesComponent },
     { path: 'materials', component: MaterialsComponent },

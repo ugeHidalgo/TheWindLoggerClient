@@ -36,6 +36,7 @@ import { MaterialsComponent } from './components/main/materials/materials/materi
 import { SpotsComponent } from './components/main/spots/spots/spots.component';
 import { SessionsComponent } from './components/main/sessions/sessions/sessions.component';
 import { ImportDataComponent } from './tools/import-data/import-data.component';
+import { SportsComponent } from './components/main/sports/sports/sports.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ImportDataComponent } from './tools/import-data/import-data.component';
     MaterialsComponent,
     SpotsComponent,
     SessionsComponent,
-    ImportDataComponent
+    ImportDataComponent,
+    SportsComponent
   ],
   imports: [
     GlobalRoutingModule,

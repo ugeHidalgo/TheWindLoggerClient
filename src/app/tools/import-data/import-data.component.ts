@@ -4,6 +4,10 @@ import { ToastrService } from 'ngx-toastr';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { ImportMaterialTypesHelper } from './helpers/import-materialTypes.helper';
 import { MaterialTypesService } from 'src/app/services/materialTypes/material-types.service';
+import { ImportSpotsHelper } from './helpers/import-spots.helper';
+import { ImportSportsHelper } from './helpers/import-sports.helper';
+import { SpotsService } from 'src/app/services/spots/spots.service';
+import { SportsService } from 'src/app/services/sports/sports.service';
 
 type AOA = any[][];
 export interface DataEntity {
@@ -21,9 +25,12 @@ export class ImportDataComponent {
   data: AOA;
   selectedEntity : string;
   importMaterialTypessHelper: ImportMaterialTypesHelper;
+  importSpotsHelper: ImportSpotsHelper;
+  importSportsHelper: ImportSportsHelper;
 	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';
   dataEntities: DataEntity[] = [
+    {value: 'sports', viewValue: 'Deportes'},
     {value: 'materials', viewValue: 'Material deportivo'},
     {value: 'materialTypes', viewValue: 'ConTipos de material deportivo'},
     {value: 'spots', viewValue: 'Lugares'}
@@ -32,11 +39,15 @@ export class ImportDataComponent {
   constructor(
     private toastr: ToastrService,
     private materialTypesService: MaterialTypesService,
+    private spotsService: SpotsService,
+    private sportsService: SportsService,
     private globals: GlobalsService
   ) {
     var me = this;
 
     me.importMaterialTypessHelper = new ImportMaterialTypesHelper(materialTypesService);
+    me.importSpotsHelper = new ImportSpotsHelper(spotsService);
+    me.importSportsHelper = new ImportSportsHelper(sportsService);
   }
 
   onFileChange(evt: any) {
@@ -75,12 +86,28 @@ export class ImportDataComponent {
             });
         break;
 
-      case "concepts":
-        
+      case "sports":
+          me.importSportsHelper.import(me.data)
+          .subscribe(savedObjects => {
+            me.globals.unMaskScreen();
+            me.toastr.success(`A total of ${savedObjects.length} sports were successfully created.`);
+          },
+          error => {
+            me.globals.unMaskScreen();
+            me.toastr.error(error.message);
+          });
         break;
 
-      case "costCenters":
-        
+      case "spots":
+          me.importSpotsHelper.import(me.data)
+          .subscribe(savedObjects => {
+            me.globals.unMaskScreen();
+            me.toastr.success(`A total of ${savedObjects.length} spots were successfully created.`);
+          },
+          error => {
+            me.globals.unMaskScreen();
+            me.toastr.error(error.message);
+          });
         break;
 
       default:

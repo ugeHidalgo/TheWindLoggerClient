@@ -1,31 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Spot } from 'src/app/models/spot';
+import { Sport } from 'src/app/models/sport';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
-import { SpotsService } from 'src/app/services/spots/spots.service';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { Router } from '@angular/router';
+import { SportsService } from 'src/app/services/sports/sports.service';
 
 @Component({
-  selector: 'app-spots',
-  templateUrl: './spots.component.html',
-  styleUrls: ['./spots.component.scss']
+  selector: 'app-sports',
+  templateUrl: './sports.component.html',
+  styleUrls: ['./sports.component.scss']
 })
-export class SpotsComponent {
+export class SportsComponent  {
 
   selectedRowId: string = '-1';
   userName: string;
-  selectedSpot: Spot;
-  spots: Spot[];
+  selectedSport: Sport;
+  sports: Sport[];
   displayedColumns: string[];
   displayedFooterColumns: string[];
-  dataSource: MatTableDataSource<Spot>;
+  dataSource: MatTableDataSource<Sport>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    private spotsService: SpotsService,
+    private sportsService: SportsService,
     private toastr: ToastrService,
     private globals: GlobalsService,
     private router: Router,
@@ -33,19 +33,19 @@ export class SpotsComponent {
   ) {
     const me = this;
 
-    me.displayedColumns = ['name', 'description', 'country', 'province', 'place', 'active'];
+    me.displayedColumns = ['name', 'description', 'active'];
     me.userName = me.globals.userNameLogged;
-    me.getSpotsForCompany(me.userName);
+    me.getSportsForCompany(me.userName);
   }
 
-  private getSpotsForCompany(userName: string): void {
+  private getSportsForCompany(userName: string): void {
     const me = this;
 
     me.globals.maskScreen();
-    me.spotsService.getSpots(userName)
-      .subscribe(spots => {
-        me.spots = spots;
-        me.dataSource = new MatTableDataSource<Spot>(spots);
+    me.sportsService.getSports(userName)
+      .subscribe(sports => {
+        me.sports = sports;
+        me.dataSource = new MatTableDataSource<Sport>(sports);
         me.dataSource.paginator = me.paginator;
         me.dataSource.sort = me.sort;
         me.globals.unMaskScreen();
@@ -82,10 +82,12 @@ export class SpotsComponent {
     const me = this;
 
     me.selectedRowId = row.id;
-    me.selectedSpot = me.getSpotById(me.selectedRowId);
+    me.selectedSport = me.getSportById(me.selectedRowId);
   }
 
-  getSpotById(selectedRowId: string): Spot {
-    return this.spots.find( function(x) { return x._id === selectedRowId; });
+  getSportById(selectedRowId: string): Sport {
+    return this.sports.find( function(x) { return x._id === selectedRowId; });
   }
 }
+
+

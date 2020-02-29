@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <div class="grid-title">Lugares</div>
+        <div class="grid-title">Deportes</div>
         <mat-toolbar color="primary" class="my-header-bar">
           <button mat-raised-button color="primary" (click)="onClickAddButton()">
             <i class="material-icons">note_add</i>
@@ -22,33 +22,18 @@
  
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Nombre</h3></th>
-          <td mat-cell *matCellDef="let spot">{{spot.name}}</td>
+          <td mat-cell *matCellDef="let sport">{{sport.name}}</td>
         </ng-container>
   
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Descripción</h3></th>
-          <td mat-cell *matCellDef="let spot">{{spot.description}}</td>
+          <td mat-cell *matCellDef="let sport">{{sport.description}}</td>
         </ng-container>
-
-        <ng-container matColumnDef="country">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Pais</h3></th>
-            <td mat-cell *matCellDef="let spot">{{spot.country}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="province">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Provincia</h3></th>
-            <td mat-cell *matCellDef="let spot">{{spot.province}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="place">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Sitio</h3></th>
-            <td mat-cell *matCellDef="let spot">{{spot.place}}</td>
-        </ng-container>
-
+  
         <ng-container matColumnDef="active">
           <th mat-header-cell *matHeaderCellDef><h3>En uso</h3></th>
-          <td *matCellDef="let spot">
-            <mat-checkbox [checked]="spot.active"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+          <td *matCellDef="let sport">
+            <mat-checkbox [checked]="sport.active"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
           </td>
         </ng-container>
   
