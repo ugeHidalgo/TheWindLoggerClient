@@ -7,10 +7,8 @@ export class User {
   firstName: String;
   lastName: String;
   eMail: String;
-  state : string;
-  birthDate: Date;
+  active : boolean;
+  admin: boolean;
   created :  Date;
   updated :  Date;
-  phone: String;
-  mobile: String;
 }

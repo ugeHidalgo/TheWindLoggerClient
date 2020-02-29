@@ -24,9 +24,6 @@ export class UserComponent implements OnInit {
     'firstName': [
       { type: 'required', message: 'El nombre es obligatorio.'}
     ],
-    'company': [
-      { type: 'required', message: 'La compañia es obligatoria.'}
-    ],
     'email': [
       { type: 'required', message: 'El mail es obligatorio.'},
       { type: 'email', message: 'No es una dirección de correo válida'}
@@ -113,8 +110,7 @@ export class UserComponent implements OnInit {
       userName: new FormControl('', []),
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', []),
-      eMail: new FormControl('', [Validators.email, Validators.required]),
-      company: new FormControl('', [Validators.required])
+      eMail: new FormControl('', [Validators.email, Validators.required])
     },
     { updateOn: 'blur'});
   }
@@ -126,8 +122,7 @@ export class UserComponent implements OnInit {
       userName: me.user.userName,
       firstName: me.user.firstName,
       lastName: me.user.lastName,
-      eMail: me.user.eMail,
-      company: me.user.company
+      eMail: me.user.eMail
     });
   }
 
@@ -139,7 +134,6 @@ export class UserComponent implements OnInit {
     updatedUser.firstName = formModel.firstName;
     updatedUser.lastName = formModel.lastName;
     updatedUser.eMail = formModel.eMail;
-    updatedUser.company = formModel.company;
 
     return updatedUser;
   }

@@ -28,10 +28,6 @@
             <mat-label>Repetir Password</mat-label>
             <input  matInput  placeholder="Repetir Password"  name="repeatPassword" type="password" required>
           </mat-form-field>
-          <mat-form-field class="full-width">
-            <mat-label>Nombre libro contable</mat-label>
-            <input  matInput  placeholder="Nombre libro contable" [(ngModel)]="user.company" name="company" required>
-          </mat-form-field>
       </form>
       <div>
         <p>¿Tienes ya una cuenta de usuario? <a [routerLink]="['/login']">Inicio de sesión</a></p>

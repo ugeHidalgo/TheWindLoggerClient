@@ -34,8 +34,7 @@ export class RegisterComponent {
       firstName: '',
       lastName: '',
       password: '',
-      eMail: [ '', Validators.email ],
-      company: [ '', Validators.required ]
+      eMail: [ '', Validators.email ]
     });
   }
 
@@ -43,6 +42,7 @@ export class RegisterComponent {
     const me = this;
 
     me.globals.maskScreen();
+
     me.usersService.registerUser(me.user)
       .subscribe(
         newUserAdded => {
