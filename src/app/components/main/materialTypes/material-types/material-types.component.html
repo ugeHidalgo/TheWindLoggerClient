@@ -21,9 +21,9 @@
       <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
 
         <ng-container matColumnDef="sport">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Deporte</h3></th>
-            <td mat-cell *matCellDef="let materialType">{{materialType.sport}}</td>
-          </ng-container>
+            <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Deporte</h3></th>
+            <td mat-cell *matCellDef="let materialType">{{materialType.sport ? materialType.sport.name : ''}}</td>
+        </ng-container>
   
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Nombre</h3></th>

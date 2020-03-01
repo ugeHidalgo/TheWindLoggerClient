@@ -33,7 +33,10 @@
   }
   
   .mat-column-name,
-  .mat-column-description {
+  .mat-column-description,
+  .mat-column-country, 
+  .mat-column-province,
+  .mat-column-place {
     text-align: left;
   }
   

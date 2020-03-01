@@ -1,7 +1,9 @@
+import { Sport } from './sport';
+
 export class MaterialType {
     _id: string;
     userName: string;
-    sport: string;
+    sport: Sport;
     name: string;
     description: String;
     active : boolean;
