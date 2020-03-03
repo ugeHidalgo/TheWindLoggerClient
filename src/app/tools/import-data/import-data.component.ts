@@ -8,6 +8,8 @@ import { ImportSpotsHelper } from './helpers/import-spots.helper';
 import { ImportSportsHelper } from './helpers/import-sports.helper';
 import { SpotsService } from 'src/app/services/spots/spots.service';
 import { SportsService } from 'src/app/services/sports/sports.service';
+import { ImportMaterialsHelper } from './helpers/import-materials.helper';
+import { MaterialsService } from 'src/app/services/materials/materials-service.service';
 
 type AOA = any[][];
 export interface DataEntity {
@@ -25,6 +27,7 @@ export class ImportDataComponent {
   data: AOA;
   selectedEntity : string;
   importMaterialTypesHelper: ImportMaterialTypesHelper;
+  importMaterialsHelper: ImportMaterialsHelper;
   importSpotsHelper: ImportSpotsHelper;
   importSportsHelper: ImportSportsHelper;
 	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
@@ -38,6 +41,7 @@ export class ImportDataComponent {
 
   constructor(
     private toastr: ToastrService,
+    private materialsService: MaterialsService,
     private materialTypesService: MaterialTypesService,
     private spotsService: SpotsService,
     private sportsService: SportsService,
@@ -46,6 +50,7 @@ export class ImportDataComponent {
     var me = this;
 
     me.importMaterialTypesHelper = new ImportMaterialTypesHelper(materialTypesService);
+    me.importMaterialsHelper = new ImportMaterialsHelper(materialsService);
     me.importSpotsHelper = new ImportSpotsHelper(spotsService);
     me.importSportsHelper = new ImportSportsHelper(sportsService);
   }
@@ -87,7 +92,15 @@ export class ImportDataComponent {
         break;
 
       case "materials":
+        me.importMaterialsHelper.import(me.data)
+        .subscribe(savedObjects => {
           me.globals.unMaskScreen();
+          me.toastr.success(`A total of ${savedObjects.length} material were successfully created.`);
+        },
+        error => {
+          me.globals.unMaskScreen();
+          me.toastr.error(error.message);
+        });
         break;
 
       case "sports":
