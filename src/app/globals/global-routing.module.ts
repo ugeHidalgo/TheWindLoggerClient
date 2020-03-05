@@ -24,11 +24,6 @@ const routes: Routes = [
   { path: 'forgot', component: ForgottenPasswordComponent }, 
   { path: 'recover/:u/:p', component: RecoverPasswordComponent },
   { path: 'user', component: UserComponent },
- /*  { path: 'mainscreen', component: MainScreenComponent },
-  { path: 'spots', component: SpotsComponent },
-  { path: 'material-types', component: MaterialTypesComponent },
-  { path: 'materials', component: MaterialsComponent },
-  { path: 'import-data', component: ImportDataComponent }, */
   { path: '', redirectTo: 'mainscreen', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];

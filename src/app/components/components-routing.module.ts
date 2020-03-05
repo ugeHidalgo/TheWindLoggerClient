@@ -8,10 +8,12 @@ import { MaterialsComponent } from './main/materials/materials/materials.compone
 import { ImportDataComponent } from '../tools/import-data/import-data.component';
 import { SessionsComponent } from './main/sessions/sessions/sessions.component';
 import { SportsComponent } from './main/sports/sports/sports.component';
+import { SportTypesComponent } from './main/sportTypes/sport-types/sport-types.component';
 
 const componentRoutes: Routes = [
     { path: 'mainscreen', component: MainScreenComponent },
     { path: 'spots', component: SpotsComponent },
+    { path: 'sport-types', component: SportTypesComponent },
     { path: 'sports', component: SportsComponent },
     { path: 'sessions', component: SessionsComponent },
     { path: 'material-types', component: MaterialTypesComponent },

@@ -23,20 +23,23 @@ import { EuroCurrencyPipe } from './pipes/EuroCurrencyPipe';
 import { UsersService } from './services/users/users.service';
 import { GlobalsService } from './globals/globals.service';
 import { MainScreenComponent } from './components/main/mainScreen/main-screen.component';
+import { UserComponent } from './login/user/user.component';
+
 import { RegisterComponent } from './login/register/register.component';
 import { LoginComponent } from './login/login/login.component';
-import { UserComponent } from './login/user/user.component';
+import { ForgottenPasswordComponent } from './login/forgotten-password/forgotten-password.component';
+import { RecoverPasswordComponent } from './login/recover-password/recover-password.component';
 
 import { PageNotFoundComponent } from './components/main/notFound/not-found.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
-import { ForgottenPasswordComponent } from './login/forgotten-password/forgotten-password.component';
-import { RecoverPasswordComponent } from './login/recover-password/recover-password.component';
+
 import { MaterialTypesComponent } from './components/main/materialTypes/material-types/material-types.component';
 import { MaterialsComponent } from './components/main/materials/materials/materials.component';
 import { SpotsComponent } from './components/main/spots/spots/spots.component';
 import { SessionsComponent } from './components/main/sessions/sessions/sessions.component';
 import { ImportDataComponent } from './tools/import-data/import-data.component';
 import { SportsComponent } from './components/main/sports/sports/sports.component';
+import { SportTypesComponent } from './components/main/sportTypes/sport-types/sport-types.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,8 @@ import { SportsComponent } from './components/main/sports/sports/sports.componen
     SpotsComponent,
     SessionsComponent,
     ImportDataComponent,
-    SportsComponent
+    SportsComponent,
+    SportTypesComponent
   ],
   imports: [
     GlobalRoutingModule,
