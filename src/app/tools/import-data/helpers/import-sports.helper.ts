@@ -14,15 +14,17 @@ export class ImportSportsHelper {
     const me = this;
     var sport: Sport,
         sports: Sport[] = [],
-        userNameIndex,
-        nameIndex,
-        descriptionIndex,
-        activeIndex;
+        userNameIndex: number,
+        nameIndex: number,
+        descriptionIndex: number,
+        sportTypeIndex: number,
+        activeIndex: number;
 
     me.fieldNames = data[0];
     userNameIndex = me.fieldNames.indexOf('UserName');
     nameIndex = me.fieldNames.indexOf('Name');
     descriptionIndex = me.fieldNames.indexOf('Description');
+    sportTypeIndex = me.fieldNames.indexOf('SportType');
     activeIndex = me.fieldNames.indexOf('Active');
 
     for (var f=1; f<data.length; f++)
@@ -33,6 +35,7 @@ export class ImportSportsHelper {
       sport.userName = rowData[userNameIndex];
       sport.name = rowData[nameIndex];
       sport.description = rowData[descriptionIndex];
+      sport.sportType = rowData[sportTypeIndex];
       sport.active = rowData[activeIndex].trim() === 'true' ? true : false;
 
       sports.push(sport);
