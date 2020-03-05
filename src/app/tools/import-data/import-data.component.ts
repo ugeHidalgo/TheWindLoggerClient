@@ -6,8 +6,10 @@ import { ImportMaterialTypesHelper } from './helpers/import-materialTypes.helper
 import { MaterialTypesService } from 'src/app/services/materialTypes/material-types.service';
 import { ImportSpotsHelper } from './helpers/import-spots.helper';
 import { ImportSportsHelper } from './helpers/import-sports.helper';
+import { ImportSportTypesHelper } from './helpers/import-sportTypes.helper';
 import { SpotsService } from 'src/app/services/spots/spots.service';
 import { SportsService } from 'src/app/services/sports/sports.service';
+import { SportTypesService } from 'src/app/services/sportTypes/sport-types.service';
 import { ImportMaterialsHelper } from './helpers/import-materials.helper';
 import { MaterialsService } from 'src/app/services/materials/materials-service.service';
 
@@ -30,9 +32,11 @@ export class ImportDataComponent {
   importMaterialsHelper: ImportMaterialsHelper;
   importSpotsHelper: ImportSpotsHelper;
   importSportsHelper: ImportSportsHelper;
+  importSportTypesHelper: ImportSportTypesHelper;
 	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';
   dataEntities: DataEntity[] = [
+    {value: 'sporttypes', viewValue: 'Tipos de deportes'},
     {value: 'sports', viewValue: 'Deportes'},
     {value: 'materials', viewValue: 'Material deportivo'},
     {value: 'materialTypes', viewValue: 'Tipos de material deportivo'},
@@ -45,6 +49,7 @@ export class ImportDataComponent {
     private materialTypesService: MaterialTypesService,
     private spotsService: SpotsService,
     private sportsService: SportsService,
+    private sportTypesService: SportTypesService,
     private globals: GlobalsService
   ) {
     var me = this;
@@ -53,6 +58,7 @@ export class ImportDataComponent {
     me.importMaterialsHelper = new ImportMaterialsHelper(materialsService);
     me.importSpotsHelper = new ImportSpotsHelper(spotsService);
     me.importSportsHelper = new ImportSportsHelper(sportsService);
+    me.importSportTypesHelper = new ImportSportTypesHelper(sportTypesService);
   }
 
   onFileChange(evt: any) {
@@ -101,6 +107,18 @@ export class ImportDataComponent {
           me.globals.unMaskScreen();
           me.toastr.error(error.message);
         });
+        break;
+
+      case "sporttypes":
+          me.importSportTypesHelper.import(me.data)
+          .subscribe(savedObjects => {
+            me.globals.unMaskScreen();
+            me.toastr.success(`A total of ${savedObjects.length} sport types were successfully created.`);
+          },
+          error => {
+            me.globals.unMaskScreen();
+            me.toastr.error(error.message);
+          });
         break;
 
       case "sports":
