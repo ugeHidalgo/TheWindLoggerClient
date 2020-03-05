@@ -5,13 +5,16 @@
        <div *ngIf="globals.userNameLogged">
         <button mat-button [matMenuTriggerFor]="archivemenu">Archivos</button>
         <mat-menu #archivemenu="matMenu">
+          <button mat-menu-item routerLink="/sessions">Sesiones</button>
+          <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/spots">Lugares</button>
           <mat-divider></mat-divider>
-          <button mat-menu-item routerLink="/sports">Tipos de deporte</button>
+          <button mat-menu-item routerLink="/sport-types">Tipos de deporte</button>
+          <button mat-menu-item routerLink="/sports">Deportes</button>
+          <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/material-types">Tipos de material deportivo</button>
           <button mat-menu-item routerLink="/materials">Material deportivo</button>
-          <mat-divider></mat-divider>
-          <button mat-menu-item routerLink="/sessions">Sesiones</button>
+          <button mat-menu-item routerLink="/material-groups">Agrupaciones de material deportivo</button>
           <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/import-data">Importar datos</button>
         </mat-menu>
