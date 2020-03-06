@@ -26,6 +26,21 @@ export class MaterialsService {
   }
 
   /**.*/
+  getMaterials(userName: string): Observable<Material[]> {
+    const me = this,
+          httpOptions = me.operationHelper.createHttpOptionsWithToken(),
+          getMaterialsUrl = `${me.materialsUrl}/?username=${userName}`;
+
+    return this.http.get<Material[]>(getMaterialsUrl, httpOptions)
+              .pipe(
+                // tslint:disable-next-line:no-shadowed-variable
+                tap( materials => console.log(`A total of ${materials.length} materials were successfully retrieved.`)),
+                catchError(me.operationHelper.handleError<Material[]>('getMaterials', []))
+              );
+  }
+
+
+  /**.*/
   createMaterials(materials: Material[]): Observable<Material[]> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken();

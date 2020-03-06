@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { MaterialType } from 'src/app/models/materialType';
 import { MaterialTypesService } from 'src/app/services/materialTypes/material-types.service';
