@@ -34,11 +34,14 @@
   
   .mat-column-materialType,
   .mat-column-name,
-  .mat-column-description {
+  .mat-column-description,
+  .mat-column-materialtype,
+  .mat-column-brand,
+  .mat-column-model {
     text-align: left;
   }
   
-  .mat-column-amount{
+  .mat-column-size{
     text-align: right;
   }
   
