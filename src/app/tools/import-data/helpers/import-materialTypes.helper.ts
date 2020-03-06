@@ -33,6 +33,8 @@ export class ImportMaterialTypesHelper {
 
       materialType = new MaterialType;
       materialType.userName = rowData[userNameIndex];
+      if (!materialType.userName) continue;
+
       materialType.name = rowData[nameIndex];
       materialType.description = rowData[descriptionIndex];
       materialType.sport = rowData[sportIndex];

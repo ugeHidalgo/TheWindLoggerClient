@@ -31,6 +31,8 @@ export class ImportSportTypesHelper {
 
       sportType = new SportType;
       sportType.userName = rowData[userNameIndex];
+      if (!sportType.userName) continue;
+
       sportType.name = rowData[nameIndex];
       sportType.description = rowData[descriptionIndex];
       sportType.active = rowData[activeIndex].trim() === 'true' ? true : false;

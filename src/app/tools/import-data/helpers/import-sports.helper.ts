@@ -33,6 +33,8 @@ export class ImportSportsHelper {
 
       sport = new Sport;
       sport.userName = rowData[userNameIndex];
+      if (!sport.userName) continue;
+      
       sport.name = rowData[nameIndex];
       sport.description = rowData[descriptionIndex];
       sport.sportType = rowData[sportTypeIndex];

@@ -57,6 +57,8 @@ export class ImportMaterialsHelper {
 
       material = new Material;
       material.userName = rowData[userNameIndex];
+      if (!material.userName) continue;
+      
       material.name = rowData[nameIndex];
       material.description = rowData[descriptionIndex];
       material.materialType = rowData[materialTypeIndex];

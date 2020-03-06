@@ -41,6 +41,8 @@ export class ImportSpotsHelper {
 
       spot = new Spot;
       spot.userName = rowData[userNameIndex];
+      if (!spot.userName) continue;
+
       spot.name = rowData[nameIndex];
       spot.description = rowData[descriptionIndex];
       spot.country = rowData[countryIndex];
