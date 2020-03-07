@@ -1,1 +1,64 @@
-<p>sessions to be implemented</p>
+<div class="card">
+    <div class="card-header">
+        <div class="grid-title">Sesiones</div>
+        <mat-toolbar color="primary" class="my-header-bar">
+          <button mat-raised-button color="primary" (click)="onClickAddButton()">
+            <i class="material-icons">note_add</i>
+          </button>
+          <button  mat-raised-button color="primary" (click)="onClickEditButton()">
+            <i class="material-icons">edit</i>
+          </button>
+          <button mat-raised-button color="warn" (click)="onClickRemoveButton()">
+            <i class="material-icons">delete</i>
+          </button>
+          <i class="material-icons">search</i>
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)">
+          </mat-form-field>
+        </mat-toolbar>
+    </div>
+    <div class="card-body">
+      <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="sessiondate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Fecha</h3></th>
+            <td mat-cell *matCellDef="let session">{{session.sessionDate | date:'dd/MM/yyyy'}}</td>
+        </ng-container>
+ 
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Nombre</h3></th>
+          <td mat-cell *matCellDef="let session">{{session.name}}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="sessiontime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Tiempo</h3></th>
+          <td mat-cell *matCellDef="let session">{{session.sessionTime}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="sessiondistance">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Distancia</h3></th>
+            <td mat-cell *matCellDef="let session">{{session.sessionDistance}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="sessionsport">
+          <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Deporte</h3></th>
+          <td mat-cell *matCellDef="let session">{{session.sportName}}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef><h3>En uso</h3></th>
+          <td *matCellDef="let session">
+            <mat-checkbox [checked]="session.active"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="selectRow(row)"
+            [style.background]="row.id == selectedRowId ? 'bisque' : ''">
+        </tr>
+        <tr mat-footer-row *matFooterRowDef="displayedFooterColumns"></tr>
+      </table>
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+    </div>
+  </div>
+  
