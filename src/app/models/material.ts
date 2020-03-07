@@ -6,6 +6,7 @@ export class Material {
     name: string;
     description: String;
     materialType: MaterialType;
+    materialTypeName: String;
     brand: String;
     model: String;
     year: String;
