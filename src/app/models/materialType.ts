@@ -4,6 +4,7 @@ export class MaterialType {
     _id: string;
     userName: string;
     sport: Sport;
+    sportName: String;
     name: string;
     description: String;
     active : boolean;

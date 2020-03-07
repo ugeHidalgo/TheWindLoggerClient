@@ -6,6 +6,7 @@ export class Sport {
     name: String;
     description: String;
     sportType: SportType;
+    sportTypeName: String;
     active : boolean;
     created :  Date;
     updated :  Date;
