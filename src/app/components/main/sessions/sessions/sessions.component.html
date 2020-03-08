@@ -19,7 +19,7 @@
     </div>
     <div class="card-body">
       <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="sessiondate">
+        <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Fecha</h3></th>
             <td mat-cell *matCellDef="let session">{{session.sessionDate | date:'dd/MM/yyyy'}}</td>
         </ng-container>
@@ -28,27 +28,25 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Nombre</h3></th>
           <td mat-cell *matCellDef="let session">{{session.name}}</td>
         </ng-container>
+
+        <ng-container matColumnDef="sport">
+            <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Deporte</h3></th>
+            <td mat-cell *matCellDef="let session">{{session.sportName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="spot">
+            <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Lugar</h3></th>
+            <td mat-cell *matCellDef="let session">{{session.spotName}}</td>
+        </ng-container>
   
-        <ng-container matColumnDef="sessiontime">
+        <ng-container matColumnDef="time">
           <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Tiempo</h3></th>
           <td mat-cell *matCellDef="let session">{{session.sessionTime}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="sessiondistance">
+        <ng-container matColumnDef="distance">
             <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Distancia</h3></th>
             <td mat-cell *matCellDef="let session">{{session.sessionDistance}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="sessionsport">
-          <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Deporte</h3></th>
-          <td mat-cell *matCellDef="let session">{{session.sportName}}</td>
-        </ng-container>
-  
-        <ng-container matColumnDef="active">
-          <th mat-header-cell *matHeaderCellDef><h3>En uso</h3></th>
-          <td *matCellDef="let session">
-            <mat-checkbox [checked]="session.active"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
-          </td>
         </ng-container>
   
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -33,7 +33,7 @@ export class SessionsComponent {
   ) {
     const me = this;
 
-    me.displayedColumns = ['name', 'sessiondate', 'sessiontime', 'sessiondistance', 'sessionsport', 'active'];
+    me.displayedColumns = ['date', 'name', 'sport', 'spot', 'time', 'distance'];
     me.userName = me.globals.userNameLogged;
     me.getSessionsForCompany(me.userName);
   }
