@@ -33,7 +33,7 @@ export class SportsComponent  {
   ) {
     const me = this;
 
-    me.displayedColumns = ['name', 'description', 'sporttype', 'active'];
+    me.displayedColumns = ['name', 'description', 'sportTypeName', 'active'];
     me.userName = me.globals.userNameLogged;
     me.getSportsForCompany(me.userName);
   }

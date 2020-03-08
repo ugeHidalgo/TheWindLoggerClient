@@ -33,7 +33,7 @@ export class MaterialsComponent {
   ) {
     const me = this;
 
-    me.displayedColumns = ['name', 'description','materialtype', 'brand', 'model', 'size', 'secondhand', 'purchasedate', 'active'];
+    me.displayedColumns = ['name', 'description','materialTypeName', 'brand', 'model', 'size', 'secondhand', 'purchasedate', 'active'];
     me.userName = me.globals.userNameLogged;
     me.getMaterialsForCompany(me.userName);
   }

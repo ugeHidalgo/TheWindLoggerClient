@@ -20,6 +20,11 @@
     <div class="card-body">
       <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
 
+        <ng-container matColumnDef="sportName">
+          <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Deporte</h3></th>
+          <td mat-cell *matCellDef="let materialType">{{materialType.sportName ? materialType.sportName : ''}}</td>
+        </ng-container>
+        
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Nombre</h3></th>
           <td mat-cell *matCellDef="let materialType">{{materialType.name}}</td>
@@ -29,12 +34,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Descripción</h3></th>
           <td mat-cell *matCellDef="let materialType">{{materialType.description}}</td>
         </ng-container>
-
-        <ng-container matColumnDef="sport">
-          <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Deporte</h3></th>
-          <td mat-cell *matCellDef="let materialType">{{materialType.sportName ? materialType.sportName : ''}}</td>
-        </ng-container>
-  
+ 
         <ng-container matColumnDef="active">
           <th mat-header-cell *matHeaderCellDef><h3>En uso</h3></th>
           <td *matCellDef="let materialType">

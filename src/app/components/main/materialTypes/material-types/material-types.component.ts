@@ -33,7 +33,7 @@ export class MaterialTypesComponent {
   ) {
     const me = this;
 
-    me.displayedColumns = ['sport','name', 'description', 'active'];
+    me.displayedColumns = ['sportName','name', 'description', 'active'];
     me.userName = me.globals.userNameLogged;
     me.getMaterialTypesForCompany(me.userName);
   }

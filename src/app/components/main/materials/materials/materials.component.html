@@ -30,7 +30,7 @@
           <td mat-cell *matCellDef="let material">{{material.description}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="materialtype">
+        <ng-container matColumnDef="materialTypeName">
           <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Tipo de material</h3></th>
           <td mat-cell *matCellDef="let material">{{material.materialTypeName ? material.materialTypeName : ''}}</td>
         </ng-container>

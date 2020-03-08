@@ -30,7 +30,7 @@
           <td mat-cell *matCellDef="let sport">{{sport.description}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="sporttype">
+        <ng-container matColumnDef="sportTypeName">
           <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Tipo de deporte</h3></th>
           <td mat-cell *matCellDef="let sport">{{sport.sportTypeName ? sport.sportTypeName : ''}}</td>
       </ng-container>
