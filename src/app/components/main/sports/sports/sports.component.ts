@@ -81,7 +81,7 @@ export class SportsComponent  {
   selectRow(row) {
     const me = this;
 
-    me.selectedRowId = row.id;
+    me.selectedRowId = row._id;
     me.selectedSport = me.getSportById(me.selectedRowId);
   }
 

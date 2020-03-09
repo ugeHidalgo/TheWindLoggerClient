@@ -81,7 +81,7 @@ export class MaterialTypesComponent {
   selectRow(row) {
     const me = this;
 
-    me.selectedRowId = row.id;
+    me.selectedRowId = row._id;
     me.selectedMaterialType = me.getMaterialTypeById(me.selectedRowId);
   }
 

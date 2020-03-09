@@ -81,7 +81,7 @@ export class SessionsComponent {
   selectRow(row) {
     const me = this;
 
-    me.selectedRowId = row.id;
+    me.selectedRowId = row._id;
     me.selectedSession = me.getSessionById(me.selectedRowId);
   }
 

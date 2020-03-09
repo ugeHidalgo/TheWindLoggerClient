@@ -81,7 +81,7 @@ export class SpotsComponent {
   selectRow(row) {
     const me = this;
 
-    me.selectedRowId = row.id;
+    me.selectedRowId = row._id;
     me.selectedSpot = me.getSpotById(me.selectedRowId);
   }
 
