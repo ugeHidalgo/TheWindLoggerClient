@@ -41,6 +41,20 @@ export class SpotsService {
   }
 
   /**.*/
+  getActiveSpots(userName: string): Observable<Spot[]> {
+    const me = this,
+          httpOptions = me.operationHelper.createHttpOptionsWithToken(),
+          getSpotsUrl = `${me.spotsUrl}/?username=${userName}&active=true`;
+
+    return this.http.get<Spot[]>(getSpotsUrl, httpOptions)
+              .pipe(
+                // tslint:disable-next-line:no-shadowed-variable
+                tap( spots => console.log(`A total of ${spots.length} active spots were successfully retrieved.`)),
+                catchError(me.operationHelper.handleError<Spot[]>('getSpots', []))
+              );
+  }
+
+  /**.*/
   createSpots(spots: Spot[]): Observable<Spot[]> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken();

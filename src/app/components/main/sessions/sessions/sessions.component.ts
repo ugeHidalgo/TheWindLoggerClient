@@ -68,10 +68,9 @@ export class SessionsComponent {
   }
 
   onClickEditButton() {
-    this.toastr.warning('To be implemented.');
-    /* const pathToAccountDetail = `/accountdetail/` + this.selectedRowId;
+    const pathToAccountDetail = `/session-details/` + this.selectedRowId;
 
-    this.router.navigate([pathToAccountDetail]); */
+    this.router.navigate([pathToAccountDetail]);
   }
 
   onClickRemoveButton() {
@@ -83,6 +82,7 @@ export class SessionsComponent {
 
     me.selectedRowId = row._id;
     me.selectedSession = me.getSessionById(me.selectedRowId);
+    me.globals.selectedSession = me.selectedSession;
   }
 
   getSessionById(selectedRowId: string): Session {

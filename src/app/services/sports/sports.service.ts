@@ -41,6 +41,21 @@ export class SportsService {
   }
 
   /**.*/
+  getActiveSports(userName: string,): Observable<Sport[]> {
+    const me = this,
+          httpOptions = me.operationHelper.createHttpOptionsWithToken(),
+          getSportsUrl = `${me.sportsUrl}/?username=${userName}&active=true`;
+
+    return this.http.get<Sport[]>(getSportsUrl, httpOptions)
+              .pipe(
+                // tslint:disable-next-line:no-shadowed-variable
+                tap( sports => console.log(`A total of ${sports.length} active sports were successfully retrieved.`)),
+                catchError(me.operationHelper.handleError<Sport[]>('getSports', []))
+              );
+  }
+
+
+  /**.*/
   createSports(sports: Sport[]): Observable<Sport[]> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken();

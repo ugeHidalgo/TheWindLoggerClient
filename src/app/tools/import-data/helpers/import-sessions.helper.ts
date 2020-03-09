@@ -69,6 +69,8 @@ export class ImportSessionsHelper {
       session.value = rowData[valueIndex];
       session.effort = rowData[effortIndex];
       session.maxSpeed = rowData[maxSpeedIndex];
+      session.maxPower = 0;
+      session.medPower = 0;
       session.active = rowData[activeIndex].trim() === 'true' ? true : false;
 
       sessions.push(session);

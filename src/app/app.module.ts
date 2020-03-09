@@ -40,6 +40,9 @@ import { SessionsComponent } from './components/main/sessions/sessions/sessions.
 import { ImportDataComponent } from './tools/import-data/import-data.component';
 import { SportsComponent } from './components/main/sports/sports/sports.component';
 import { SportTypesComponent } from './components/main/sportTypes/sport-types/sport-types.component';
+import { SessionDetailsComponent } from './components/main/sessions/session-details/session-details.component';
+import { SportsService } from './services/sports/sports.service';
+import { SpotsService } from './services/spots/spots.service';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,7 @@ import { SportTypesComponent } from './components/main/sportTypes/sport-types/sp
     MaterialsComponent,
     SpotsComponent,
     SessionsComponent,
+    SessionDetailsComponent,
     ImportDataComponent,
     SportsComponent,
     SportTypesComponent
@@ -73,7 +77,10 @@ import { SportTypesComponent } from './components/main/sportTypes/sport-types/sp
   ],
   providers: [
     GlobalsService,
+    SportsService,
+    SpotsService,
     UsersService,
+    Location,
     { provide: LOCALE_ID, useValue: 'es'}
   ],
   entryComponents: [
