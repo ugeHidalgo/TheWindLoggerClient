@@ -48,6 +48,21 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Distancia</h3></th>
             <td mat-cell *matCellDef="let session">{{session.sessionDistance | number:'1.3-3'}}</td>
         </ng-container>
+
+        <ng-container matColumnDef="maxSpeed">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>V.Max</h3></th>
+          <td mat-cell *matCellDef="let session">{{session.maxSpeed | number:'1.3-3'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="medSpeed">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>V.Med</h3></th>
+          <td mat-cell *matCellDef="let session">{{session.medSpeed | number:'1.3-3'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Value</h3></th>
+          <td mat-cell *matCellDef="let session">{{session.value}}</td>
+        </ng-container>
   
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"

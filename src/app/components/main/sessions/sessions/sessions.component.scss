@@ -38,7 +38,10 @@
     text-align: left;
   }
   
-  .mat-column-sessionDistance{
+  .mat-column-sessionDistance,
+  .mat-column-maxSpeed,
+  .mat-column-medSpeed,
+  .mat-column-value{
     text-align: right;
   }
   

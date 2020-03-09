@@ -13,6 +13,14 @@ export class Session {
     sportName: String;
     spot: Spot;
     spotName: String;
+    race: boolean;
+    indoor: boolean;
+    value: Number;
+    effort: Number;
+    maxSpeed: Number;
+    medSpeed: Number;
+    maxPower: Number;
+    medPower: Number
     active : boolean;
     created :  Date;
     updated :  Date;

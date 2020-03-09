@@ -25,6 +25,11 @@ export class ImportSessionsHelper {
         sessionDistanceIndex,
         sportIndex,
         spotIndex,
+        raceIndex,
+        indoorIndex,
+        valueIndex,
+        effortIndex,
+        maxSpeedIndex,
         activeIndex;
 
     me.fieldNames = data[0];
@@ -36,6 +41,11 @@ export class ImportSessionsHelper {
     sessionDistanceIndex = me.fieldNames.indexOf('SessionDistance');
     sportIndex = me.fieldNames.indexOf('Sport');
     spotIndex = me.fieldNames.indexOf('Spot');
+    raceIndex = me.fieldNames.indexOf('Race');
+    indoorIndex = me.fieldNames.indexOf('Indoor');
+    valueIndex = me.fieldNames.indexOf('Value');
+    effortIndex = me.fieldNames.indexOf('Effort');
+    maxSpeedIndex = me.fieldNames.indexOf('MaxSpeed');
     activeIndex = me.fieldNames.indexOf('Active');
 
     for (var f=1; f<data.length; f++)
@@ -54,6 +64,11 @@ export class ImportSessionsHelper {
       session.sessionDistance = rowData[sessionDistanceIndex];
       session.sport = rowData[sportIndex];
       session.spot = rowData[spotIndex];
+      session.race = rowData[raceIndex];
+      session.indoor = rowData[indoorIndex];
+      session.value = rowData[valueIndex];
+      session.effort = rowData[effortIndex];
+      session.maxSpeed = rowData[maxSpeedIndex];
       session.active = rowData[activeIndex].trim() === 'true' ? true : false;
 
       sessions.push(session);
