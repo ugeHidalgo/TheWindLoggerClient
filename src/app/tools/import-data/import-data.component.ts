@@ -14,6 +14,8 @@ import { ImportMaterialsHelper } from './helpers/import-materials.helper';
 import { MaterialsService } from 'src/app/services/materials/materials-service.service';
 import { ImportSessionsHelper } from './helpers/import-sessions.helper';
 import { SessionsService } from 'src/app/services/sessions/sessions.service';
+import { SessionMaterialsService } from 'src/app/services/sessionMaterials/session-materials.service';
+import { ImportSessionMaterialsHelper } from './helpers/import-sessionMaterials.helper';
 
 type AOA = any[][];
 export interface DataEntity {
@@ -35,6 +37,7 @@ export class ImportDataComponent {
   importSpotsHelper: ImportSpotsHelper;
   importSportsHelper: ImportSportsHelper;
   importSessionsHelper: ImportSessionsHelper;
+  importSessionMaterialsHelper: ImportSessionMaterialsHelper;
   importSportTypesHelper: ImportSportTypesHelper;
 	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';
@@ -44,7 +47,8 @@ export class ImportDataComponent {
     {value: 'materials', viewValue: 'Material deportivo'},
     {value: 'materialTypes', viewValue: 'Tipos de material deportivo'},
     {value: 'spots', viewValue: 'Lugares'},
-    {value: 'sessions', viewValue: 'Sesiones'}
+    {value: 'sessions', viewValue: 'Sesiones'},
+    {value: 'sessionMaterials', viewValue: 'Materiales usados en sesiones'}
   ];
 
   constructor(
@@ -54,6 +58,7 @@ export class ImportDataComponent {
     private spotsService: SpotsService,
     private sportsService: SportsService,
     private sessionsService: SessionsService,
+    private sessionMaterialsService: SessionMaterialsService,
     private sportTypesService: SportTypesService,
     private globals: GlobalsService
   ) {
@@ -64,6 +69,7 @@ export class ImportDataComponent {
     me.importSpotsHelper = new ImportSpotsHelper(spotsService);
     me.importSportsHelper = new ImportSportsHelper(sportsService);
     me.importSessionsHelper = new ImportSessionsHelper(sessionsService);
+    me.importSessionMaterialsHelper = new ImportSessionMaterialsHelper(sessionMaterialsService);
     me.importSportTypesHelper = new ImportSportTypesHelper(sportTypesService);
   }
 
@@ -151,7 +157,7 @@ export class ImportDataComponent {
           });
         break;
 
-        case "sessions":
+      case "sessions":
           me.importSessionsHelper.import(me.data)
           .subscribe(savedObjects => {
             me.globals.unMaskScreen();
@@ -162,6 +168,19 @@ export class ImportDataComponent {
             me.toastr.error(error.message);
           });
         break;
+
+      case "sessionMaterials":
+        me.importSessionMaterialsHelper.import(me.data)
+          .subscribe(savedObjects => {
+            me.globals.unMaskScreen();
+            me.toastr.success(`A total of ${savedObjects.length} session materials were successfully created.`);
+          },
+          error => {
+            me.globals.unMaskScreen();
+            me.toastr.error(error.message);
+          });
+        break;
+
 
       default:
         break;
