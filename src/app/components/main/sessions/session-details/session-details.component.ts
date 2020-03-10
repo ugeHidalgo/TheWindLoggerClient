@@ -4,7 +4,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { Observable, forkJoin } from 'rxjs';
-import { SessionsService } from 'src/app/services/sessions/sessions.service';
 import { ToastrService } from 'ngx-toastr';
 import { Sport } from 'src/app/models/sport';
 import { Spot } from 'src/app/models/spot';
@@ -12,6 +11,7 @@ import { SportsService } from 'src/app/services/sports/sports.service';
 import { SpotsService } from 'src/app/services/spots/spots.service';
 import { SessionMaterialsService } from 'src/app/services/sessionMaterials/session-materials.service';
 import { SessionMaterial } from 'src/app/models/sessionMaterial';
+import { FormattersHelper } from 'src/app/pipes/formaters.helper';
 
 @Component({
   selector: 'app-session-details',
@@ -37,7 +37,8 @@ export class SessionDetailsComponent implements OnInit {
     private sportsService: SportsService,
     private spotsService: SpotsService,
     private sessionMaterialsService: SessionMaterialsService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private formattersHelper: FormattersHelper
   ) {
     const me = this;
     me.globals.maskScreen();
@@ -90,12 +91,12 @@ export class SessionDetailsComponent implements OnInit {
 
     me.validatingForm = new FormGroup({
       sessionDate: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.maxLength(80)]),
+      name: new FormControl('',  { validators: Validators.compose([Validators.maxLength(80),Validators.required])}),
       description: new FormControl('', [Validators.maxLength(150)]),
       sessionTime: new FormControl('', [Validators.required]),
       sessionDistance: new FormControl('', [Validators.required]),
       sport: new FormControl('', [Validators.required]),
-      spot: new FormControl('', []),
+      spot: new FormControl('', [Validators.required]),
       race: new FormControl('', []),
       indoor: new FormControl('', []),
       value: new FormControl('', { validators: Validators.compose([Validators.max(10), Validators.min(1)])}),
@@ -117,19 +118,18 @@ export class SessionDetailsComponent implements OnInit {
       name: me.session.name,
       description: me.session.description,
       sessionDate: me.session.sessionDate,
-      sessionTime: me.session.sessionTime,
-      sessionDistance: me.session.sessionDistance,
+      sessionTime: me.formattersHelper.timeFormatter(me.session.sessionTime),
+      sessionDistance: me.formattersHelper.decimalFormatter(me.session.sessionDistance),
       sport: sportName,
       spot: spotName,
       race: me.session.race,
       indoor: me.session.indoor,
       value: me.session.value,
       effort: me.session.effort,
-      maxSpeed: me.session.maxSpeed,
-      medSpeed: me.session.medSpeed,
-      maxPower: me.session.maxPower,
-      medPower: me.session.medPower
+      maxSpeed: me.formattersHelper.decimalFormatter(me.session.maxSpeed, '1.3-3'),
+      medSpeed: me.formattersHelper.decimalFormatter(me.session.medSpeed, '1.3-3'),
+      maxPower: me.formattersHelper.decimalFormatter(me.session.maxPower),
+      medPower: me.formattersHelper.decimalFormatter(me.session.medPower)
     });
   }
- 
 }

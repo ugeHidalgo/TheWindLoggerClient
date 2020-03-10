@@ -7,7 +7,7 @@ export class Session {
     name: string;
     description: string;
     sessionDate: Date;
-    sessionTime: Number;
+    sessionTime: number;
     sessionDistance: Number;
     sport: Sport;
     sportName: String;
@@ -18,7 +18,7 @@ export class Session {
     value: Number;
     effort: Number;
     maxSpeed: Number;
-    medSpeed: Number;
+    medSpeed: number;
     maxPower: Number;
     medPower: Number
     active : boolean;

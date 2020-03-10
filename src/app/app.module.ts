@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
 import { GlobalRoutingModule } from './globals/global-routing.module';
 import { MyMaterialModule } from './globals/material.module';
 
-import { EuroCurrencyPipe } from './pipes/EuroCurrencyPipe';
+import { SecondsToTimePipe } from './pipes/secondsToTimePipe';
 
 import { UsersService } from './services/users/users.service';
 import { GlobalsService } from './globals/globals.service';
@@ -43,6 +43,8 @@ import { SportTypesComponent } from './components/main/sportTypes/sport-types/sp
 import { SessionDetailsComponent } from './components/main/sessions/session-details/session-details.component';
 import { SportsService } from './services/sports/sports.service';
 import { SpotsService } from './services/spots/spots.service';
+import { FormattersHelper } from './pipes/formaters.helper';
+import { SessionDetailsMaterialsComponent } from './components/main/sessions/session-details-materials/session-details-materials.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,6 @@ import { SpotsService } from './services/spots/spots.service';
     MainScreenComponent,
     RegisterComponent,
     LoginComponent,
-    EuroCurrencyPipe,
     UserComponent,
     DeleteDialogComponent,
     ForgottenPasswordComponent,
@@ -63,7 +64,9 @@ import { SpotsService } from './services/spots/spots.service';
     SessionDetailsComponent,
     ImportDataComponent,
     SportsComponent,
-    SportTypesComponent
+    SportTypesComponent,
+    SecondsToTimePipe,
+    SessionDetailsMaterialsComponent
   ],
   imports: [
     GlobalRoutingModule,
@@ -81,6 +84,7 @@ import { SpotsService } from './services/spots/spots.service';
     SpotsService,
     UsersService,
     Location,
+    FormattersHelper,
     { provide: LOCALE_ID, useValue: 'es'}
   ],
   entryComponents: [
