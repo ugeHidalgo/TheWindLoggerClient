@@ -1,0 +1,57 @@
+  //Tables styles
+  table {
+    width: 100%;
+  }
+
+  .mat-header-row {
+    font: bold;
+    height: 25px;
+  }
+
+  .materials-grid-title{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: none;
+    background-color: #207dd4;
+    color: white;
+    height: 16px;
+    width: auto;
+    min-width: 30%;
+    position: relative;
+    margin: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+    font-weight: 600;
+  }
+  
+  .mat-header-cell {
+    padding: 5px;
+  }
+  
+  .mat-row {
+    height: 20px;
+  }
+  
+  tr.mat-row:hover {
+    background-color: aliceblue;
+  }
+  
+  .mat-cell {
+    padding: 5px;
+  }
+  
+  .mat-column {
+    margin-right: 10px;
+  }
+
+  .mat-column-materialName,
+  .mat-column-materialType {
+    text-align: left;
+  }

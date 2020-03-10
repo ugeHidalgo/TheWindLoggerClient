@@ -52,10 +52,9 @@ export class SessionDetailsComponent implements OnInit {
     me.session = me.globals.selectedSession;
     me.setScreenTitle();
     me.userName = me.globals.userNameLogged;
-    me.loadInitialData().subscribe(([sports, spots, materials]) => {
+    me.loadInitialData().subscribe(([sports, spots]) => {
       me.sports = sports;
       me.spots = spots;
-      me.sessionMaterials = materials;
       me.rebuildForm();
       me.globals.unMaskScreen();
     },
@@ -79,10 +78,9 @@ export class SessionDetailsComponent implements OnInit {
   loadInitialData(): Observable<any> {
     const me = this;
     let sports = me.sportsService.getActiveSports(me.userName),
-        spots = me.spotsService.getActiveSpots(me.userName),
-        sessionMaterials = me.sessionMaterialsService.getSessionMaterials(me.userName, me.sessionId);
+        spots = me.spotsService.getActiveSpots(me.userName);
 
-    return forkJoin([sports, spots, sessionMaterials]);
+    return forkJoin([sports, spots]);
   }
 
   // FormModel methods

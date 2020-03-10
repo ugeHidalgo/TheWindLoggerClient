@@ -15,8 +15,10 @@
     </div>
     <div class="card-body">
       <form [formGroup]="validatingForm" (ngSubmit)="onClickSaveButton()">
-        <mat-grid-list cols="4" rowHeight="60px">
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-grid-list cols="8" rowHeight="60px">
+
+            <!---------------- Row 1 ----------------->
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Fecha:</mat-label>
                     <input matInput [matDatepicker]="picker" placeholder="Fecha:" formControlName="sessionDate" required>
@@ -28,21 +30,14 @@
                 </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="3" [rowspan]="1">
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Nombre:</mat-label>
                     <input matInput placeholder="Nombre:" formControlName="name" required>
                 </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="4" [rowspan]="1">
-                <mat-form-field class="full-width">
-                    <mat-label>Descrpción:</mat-label>
-                    <input matInput placeholder="Descripción:" formControlName="description" >
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Deporte:</mat-label>
                     <mat-select placeholder="Deporte: " formControlName="sport" required>
@@ -55,8 +50,9 @@
                     </mat-error> -->
                 </mat-form-field>
             </mat-grid-tile>
-    
-            <mat-grid-tile [colspan]="2" [rowspan]="1">
+
+            <!---------------- Row 2 ----------------->
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Lugar:</mat-label>
                     <mat-select placeholder="Lugar: " formControlName="spot" required>
@@ -68,6 +64,17 @@
                         <mat-error align="end" *ngIf="isInvalidField('costCentre',validation.type)">{{validation.message}}</mat-error>
                     </mat-error> -->
                 </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="5" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Descripción:</mat-label>
+                    <input matInput placeholder="Descripción:" formControlName="description" >
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!---------------- Row 3 ----------------->
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -122,6 +129,18 @@
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
+            </mat-grid-tile>
+
+            <!---------------- Row 4 ----------------->
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-label>Competición:  </mat-label>
+                <mat-checkbox [checked]="session.race"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Valor:</mat-label>
                     <input matInput class="my-numeric-field" placeholder="Valor:"  formControlName="value" type="number">
@@ -140,24 +159,21 @@
                     </mat-error> -->
                 </mat-form-field>
             </mat-grid-tile>
-    
-            <mat-grid-tile [colspan]="2" [rowspan]="1">
-                <mat-label>Competición:  </mat-label>
-                <mat-checkbox [checked]="session.race"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
-            </mat-grid-tile>
         
             <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-label>Indoor:</mat-label>
                 <mat-checkbox [checked]="session.indoor"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="5">
-                <app-session-details-materials></app-session-details-materials>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
             </mat-grid-tile>
 
-           
-
+            <!---------------- Row 5 ----------------->
+            <!-- <mat-grid-tile [colspan]="8" [rowspan]="5">
+                <app-session-details-materials></app-session-details-materials>
+            </mat-grid-tile> -->
         </mat-grid-list>
+        <app-session-details-materials></app-session-details-materials>
       </form>
     </div>
   </div>

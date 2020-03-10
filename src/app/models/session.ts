@@ -1,5 +1,6 @@
 import { Sport } from './sport';
 import { Spot } from './spot';
+import { SessionMaterial } from './sessionMaterial';
 
 export class Session {
     _id: string;
@@ -13,6 +14,7 @@ export class Session {
     sportName: String;
     spot: Spot;
     spotName: String;
+    materialsUsed: SessionMaterial[];
     race: boolean;
     indoor: boolean;
     value: Number;
