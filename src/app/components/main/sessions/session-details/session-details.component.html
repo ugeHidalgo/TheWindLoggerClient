@@ -15,114 +15,146 @@
     </div>
     <div class="card-body">
       <form [formGroup]="validatingForm" (ngSubmit)="onClickSaveButton()">
-  
-        <mat-form-field class="full-width">
-          <mat-label>Fecha:</mat-label>
-          <input matInput [matDatepicker]="picker" placeholder="Fecha:" formControlName="sessionDate" [value]=session.sessionDate>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <!-- <mat-error *ngFor="let validation of validation_messages.date">
-            <mat-error align="end" *ngIf="isInvalidField('date',validation.type)">{{validation.message}}</mat-error>
-          </mat-error> -->
-        </mat-form-field>
+        <mat-grid-list cols="4" rowHeight="60px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Fecha:</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha:" formControlName="sessionDate" [value]=session.sessionDate>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <!-- <mat-error *ngFor="let validation of validation_messages.date">
+                        <mat-error align="end" *ngIf="isInvalidField('date',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
 
-        <mat-form-field class="full-width">
-            <mat-label>Nombre:</mat-label>
-            <input  matInput  placeholder="Nombre:" formControlName="name" [(ngModel)]="session.name">
-        </mat-form-field>
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Nombre:</mat-label>
+                    <input matInput placeholder="Nombre:" formControlName="name" [(ngModel)]="session.name">
+                </mat-form-field>
+            </mat-grid-tile>
 
-        <mat-form-field class="full-width">
-            <mat-label>Descrpción:</mat-label>
-            <input  matInput  placeholder="Descripción:" formControlName="description" [(ngModel)]="session.description">
-        </mat-form-field>
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Descrpción:</mat-label>
+                    <input matInput placeholder="Descripción:" formControlName="description" [(ngModel)]="session.description">
+                </mat-form-field>
+            </mat-grid-tile>
 
-        <mat-form-field class="full-width">
-          <mat-label>Deporte:</mat-label>
-          <mat-select placeholder="Deporte: " formControlName="sport">
-              <mat-option *ngFor="let sport of sports" [(value)]=sport.name>
-                  {{sport.name}}: {{sport.description}}
-              </mat-option>
-          </mat-select>
-         <!--  <mat-error *ngFor="let validation of validation_messages.account">
-            <mat-error align="end" *ngIf="isInvalidField('account',validation.type)">{{validation.message}}</mat-error>
-          </mat-error> -->
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-          <mat-label>Lugar:</mat-label>
-          <mat-select placeholder="Lugar: " formControlName="spot">
-              <mat-option *ngFor="let spot of spots" [(value)]=spot.name>
-                  {{spot.name}}: {{spot.description}}
-              </mat-option>
-          </mat-select>
-          <!-- <mat-error *ngFor="let validation of validation_messages.costCentre">
-            <mat-error align="end" *ngIf="isInvalidField('costCentre',validation.type)">{{validation.message}}</mat-error>
-          </mat-error> -->
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-            <mat-label>Tiempo:</mat-label>
-            <input  matInput  placeholder="Tiempo:" formControlName="sessionTime" [(ngModel)]="session.sessionTime">
-        </mat-form-field>
-   
-        <mat-form-field class="full-width">
-            <mat-label>Distancia:</mat-label>
-            <input  matInput  placeholder="Distancia:" formControlName="sessionDistance" [(ngModel)]="session.sessionDistance">
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-            <mat-label>V.Max:</mat-label>
-            <input  matInput  placeholder="V.Max:"  formControlName="maxSpeed" [ngModel]="session.maxSpeed" type="number">
-            <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-              <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-            </mat-error> -->
-        </mat-form-field>
-  
-          <mat-form-field class="full-width">
-              <mat-label>V.Med:</mat-label>
-              <input  matInput  placeholder="V.Med:"  formControlName="medSpeed" [ngModel]="session.medSpeed" type="number">
-              <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-                <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-              </mat-error> -->
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-            <mat-label>Pot.Max:</mat-label>
-            <input  matInput  placeholder="Pot.Max:"  formControlName="maxPower" [ngModel]="session.maxPower" type="number">
-            <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-              <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-            </mat-error> -->
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-              <mat-label>Pot.Med:</mat-label>
-              <input  matInput  placeholder="Pot.Med:"  formControlName="medPower" [ngModel]="session.medPower" type="number">
-              <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-                <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-              </mat-error> -->
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-            <mat-label>Valor:</mat-label>
-            <input  matInput  placeholder="Valor:"  formControlName="value" [ngModel]="session.value" type="number">
-            <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-              <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-            </mat-error> -->
-        </mat-form-field>
-  
-        <mat-form-field class="full-width">
-            <mat-label>Esfuerzo:</mat-label>
-            <input  matInput  placeholder="Esfuerzo:"  formControlName="effort" [ngModel]="session.effort" type="number">
-            <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-            <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-            </mat-error> -->
-        </mat-form-field>
-  
-        <mat-label>Competición:</mat-label>
-        <mat-checkbox [checked]="session.race"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Deporte:</mat-label>
+                    <mat-select placeholder="Deporte: " formControlName="sport">
+                        <mat-option *ngFor="let sport of sports" [(value)]=sport.name>
+                            {{sport.name}}: {{sport.description}}
+                        </mat-option>
+                    </mat-select>
+                    <!--  <mat-error *ngFor="let validation of validation_messages.account">
+                        <mat-error align="end" *ngIf="isInvalidField('account',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
     
-        <mat-label>Indoor:</mat-label>
-        <mat-checkbox [checked]="session.indoor"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Lugar:</mat-label>
+                    <mat-select placeholder="Lugar: " formControlName="spot">
+                        <mat-option *ngFor="let spot of spots" [(value)]=spot.name>
+                            {{spot.name}}: {{spot.description}}
+                        </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngFor="let validation of validation_messages.costCentre">
+                        <mat-error align="end" *ngIf="isInvalidField('costCentre',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Tiempo:</mat-label>
+                    <input  matInput class="my-numeric-field" placeholder="Tiempo:" formControlName="sessionTime" [(ngModel)]="session.sessionTime">
+                </mat-form-field>
+            </mat-grid-tile>
+    
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Distancia:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="sessionDistance" [(ngModel)]="session.sessionDistance">
+                </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>V.Max:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="V.Max:"  formControlName="maxSpeed" [(ngModel)]="session.maxSpeed" type="number">
+                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
+                    <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>V.Med:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="V.Med:"  formControlName="medSpeed" [(ngModel)]="session.medSpeed" type="number">
+                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
+                        <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Pot.Max:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="Pot.Max:"  formControlName="maxPower" [ngModel]="session.maxPower" type="number">
+                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
+                    <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Pot.Med:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="Pot.Med:"  formControlName="medPower" [ngModel]="session.medPower" type="number">
+                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
+                        <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Valor:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="Valor:"  formControlName="value" [ngModel]="session.value" type="number">
+                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
+                    <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
+    
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Esfuerzo:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="Esfuerzo:"  formControlName="effort" [ngModel]="session.effort" type="number">
+                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
+                    <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error> -->
+                </mat-form-field>
+            </mat-grid-tile>
+    
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-label>Competición:  </mat-label>
+                <mat-checkbox [checked]="session.race"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-label>Indoor:</mat-label>
+                <mat-checkbox [checked]="session.indoor"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+            </mat-grid-tile>
+
+        </mat-grid-list>
       </form>
     </div>
   </div>
