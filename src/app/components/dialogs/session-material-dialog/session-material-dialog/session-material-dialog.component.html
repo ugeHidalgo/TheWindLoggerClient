@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Material</h1>
+<div mat-dialog-content>
+    <form [formGroup]="validatingForm">
+        <mat-form-field class="full-width">
+            <mat-label>Deporte:</mat-label>
+            <mat-select placeholder="Material: " formControlName="material" required>
+                <mat-option *ngFor="let material of materials" [(value)]=material.name>
+                    {{material.name}}: {{material.description}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Tiempo:</mat-label>
+            <input  matInput class="my-numeric-field" placeholder="Tiempo:" formControlName="time" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Distancia:</mat-label>
+            <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="distance" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>% uso:</mat-label>
+            <input matInput class="my-numeric-field" placeholder="% uso:" formControlName="usePercentage" type="number">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="onCancelClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data">Ok</button>
+</div>

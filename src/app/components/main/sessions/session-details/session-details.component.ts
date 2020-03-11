@@ -65,10 +65,6 @@ export class SessionDetailsComponent implements OnInit {
     });
   }
 
-  onClickGoBackButton() {
-    this.location.back();
-  }
-
   //Private methods
   setScreenTitle(): void {
     const me = this;
@@ -86,6 +82,10 @@ export class SessionDetailsComponent implements OnInit {
         spots = me.spotsService.getActiveSpots(me.userName);
 
     return forkJoin([sports, spots]);
+  }
+
+  onClickGoBackButton() {
+    this.location.back();
   }
 
   // FormModel methods

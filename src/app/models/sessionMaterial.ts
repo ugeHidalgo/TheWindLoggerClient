@@ -6,10 +6,10 @@ export class SessionMaterial {
     userName: String;
     session: Session;
     material: Material;
-    time: Number;
-    distance: Number;
-    usePercentage: Number;
-    maxSpeed: Number;
+    time: number;
+    distance: number;
+    usePercentage: number;
+    maxSpeed: number;
     created :  Date;
     updated :  Date;
 }

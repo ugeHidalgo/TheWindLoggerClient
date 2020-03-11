@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { SessionMaterial } from 'src/app/models/sessionMaterial';
 import { GlobalsService } from 'src/app/globals/globals.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Session } from 'src/app/models/session';
 import { SessionMaterialsService } from 'src/app/services/sessionMaterials/session-materials.service';
 import { ToastrService } from 'ngx-toastr';
+import { SessionMaterialDialogComponent } from 'src/app/components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class SessionDetailsMaterialsComponent {
 
   constructor(
     private globals: GlobalsService,
+    private dialog: MatDialog,
     private toastr: ToastrService,
     private sessionMaterialsService: SessionMaterialsService
   ) { 
@@ -65,4 +67,32 @@ export class SessionDetailsMaterialsComponent {
   getSessionById(selectedRowId: string): SessionMaterial {
     return this.materialsUsed.find( function(x) { return x._id === selectedRowId; });
   }
+
+  onAddSessionMaterial() {
+    this.toastr.warning('To be implemented.');
+  }
+
+  onEditSessionMaterial() {
+    const me = this;
+    let dialogRef;
+
+    if (me.selectedRowId==='-1') {
+      me.toastr.error('Debe seleccionar el material a editar.');
+      return;
+    }
+
+    dialogRef = me.dialog.open(SessionMaterialDialogComponent, {
+        width: '250px',
+        data: me.selectedMaterial
+      });
+
+    dialogRef.afterClosed().subscribe(sessionMaterial => {
+      console.log('Cambiar valores aqui');
+    });
+  }
+
+  onDeleteSessionMaterial() {
+    this.toastr.warning('To be implemented.');
+  }
+
 }

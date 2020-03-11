@@ -45,6 +45,7 @@ import { SportsService } from './services/sports/sports.service';
 import { SpotsService } from './services/spots/spots.service';
 import { FormattersHelper } from './pipes/formaters.helper';
 import { SessionDetailsMaterialsComponent } from './components/main/sessions/session-details-materials/session-details-materials.component';
+import { SessionMaterialDialogComponent } from './components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { SessionDetailsMaterialsComponent } from './components/main/sessions/ses
     LoginComponent,
     UserComponent,
     DeleteDialogComponent,
+    SessionMaterialDialogComponent,
     ForgottenPasswordComponent,
     RecoverPasswordComponent,
     MaterialTypesComponent,
@@ -66,7 +68,8 @@ import { SessionDetailsMaterialsComponent } from './components/main/sessions/ses
     SportsComponent,
     SportTypesComponent,
     SecondsToTimePipe,
-    SessionDetailsMaterialsComponent
+    SessionDetailsMaterialsComponent,
+    SessionMaterialDialogComponent
   ],
   imports: [
     GlobalRoutingModule,
@@ -88,7 +91,8 @@ import { SessionDetailsMaterialsComponent } from './components/main/sessions/ses
     { provide: LOCALE_ID, useValue: 'es'}
   ],
   entryComponents: [
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    SessionMaterialDialogComponent
   ],
   bootstrap: [
     AppComponent
