@@ -49,8 +49,14 @@ export class SessionMaterialDialogComponent implements OnInit {
       });
   }
 
+  onOkClick(): void {
+    const me = this;
+    me.data = me.getFormData();
+    me.dialogRef.close(me.data);
+  }
+
   onCancelClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   // FormModel methods
@@ -76,5 +82,22 @@ export class SessionMaterialDialogComponent implements OnInit {
       distance: me.formattersHelper.decimalFormatter(me.data.distance),
       usePercentage: me.formattersHelper.decimalFormatter(me.data.usePercentage, '1.0-0')
     });
+  }
+
+  getFormData(): SessionMaterial {
+    const me = this,
+          formModel = me.validatingForm.value,
+          newSessionMaterial: SessionMaterial = me.data;
+
+    newSessionMaterial.material = me.getMaterialByName(formModel.material);
+    newSessionMaterial.time = formModel.time;
+    newSessionMaterial.distance = formModel.distance;
+    newSessionMaterial.usePercentage = formModel.usePercentage;
+
+    return newSessionMaterial;
+  }
+
+  getMaterialByName(name): Material {
+    return this.materials.find( function(x) { return x.name === name; });
   }
 }
