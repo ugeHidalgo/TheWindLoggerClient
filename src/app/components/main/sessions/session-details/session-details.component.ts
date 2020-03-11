@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Session } from 'src/app/models/session';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -30,7 +31,7 @@ export class SessionDetailsComponent implements OnInit {
   validatingForm: FormGroup;
 
   constructor(
-    //private location : Location,
+    private location : Location,
     private route : ActivatedRoute,
     protected globals: GlobalsService,
     //private sessionsService: SessionsService,
@@ -62,6 +63,10 @@ export class SessionDetailsComponent implements OnInit {
       me.globals.unMaskScreen();
       me.toastr.error(error.message);
     });
+  }
+
+  onClickGoBackButton() {
+    this.location.back();
   }
 
   //Private methods

@@ -14,7 +14,7 @@
     border: none;
     background-color: #207dd4;
     color: white;
-    height: 16px;
+    height: 25px;
     width: auto;
     min-width: 30%;
     position: relative;
@@ -28,7 +28,12 @@
     align-items: center;
     transition: all 0.2s ease-in-out;
     line-height: 24px;
-    font-weight: 600;
+    font-weight: 100;
+  }
+
+  .material-grid-title {
+      margin-left: 10px;
+      font-size: 14px;
   }
   
   .mat-header-cell {
@@ -54,4 +59,9 @@
   .mat-column-materialName,
   .mat-column-materialType {
     text-align: left;
+  }
+
+  .mat-column-distance,
+  .mat-column-usePercentage {
+    text-align: right;
   }
