@@ -39,7 +39,7 @@
             <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Distancia:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="distance" required>
+                    <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="distance" type="number" required>
                     <mat-error *ngFor="let validation of validationMessages.distance">
                         <mat-error align="end" *ngIf="isInvalidField('distance',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>

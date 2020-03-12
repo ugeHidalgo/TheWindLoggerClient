@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Session } from 'src/app/models/session';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { Observable, forkJoin } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Session } from 'src/app/models/session';
 import { Sport } from 'src/app/models/sport';
 import { Spot } from 'src/app/models/spot';
+import { SessionMaterial } from 'src/app/models/sessionMaterial';
 import { SportsService } from 'src/app/services/sports/sports.service';
 import { SpotsService } from 'src/app/services/spots/spots.service';
 import { SessionMaterialsService } from 'src/app/services/sessionMaterials/session-materials.service';
-import { SessionMaterial } from 'src/app/models/sessionMaterial';
 import { FormattersHelper } from 'src/app/tools/formaters.helper';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-session-details',
   templateUrl: './session-details.component.html',
   styleUrls: ['./session-details.component.scss']
 })
+
 export class SessionDetailsComponent implements OnInit {
 
   sessionId: string;
@@ -27,7 +29,8 @@ export class SessionDetailsComponent implements OnInit {
   session: Session;
   sports: Sport[];
   spots: Spot[];
-  sessionMaterials: SessionMaterial[];
+  dataSource: MatTableDataSource<SessionMaterial>;
+  materialsLoaded: boolean = false;
   validatingForm: FormGroup;
 
   constructor(
@@ -36,24 +39,29 @@ export class SessionDetailsComponent implements OnInit {
     protected globals: GlobalsService,
     private sportsService: SportsService,
     private spotsService: SpotsService,
+    private sessionMaterialsService: SessionMaterialsService,
     private toastr: ToastrService,
     private formattersHelper: FormattersHelper
   ) {
     const me = this;
+
     me.globals.maskScreen();
     me.createForm();
+    me.sessionId = me.route.snapshot.paramMap.get('id');
+    me.session = me.globals.selectedSession;
+    me.setScreenTitle();
+    me.userName = me.globals.userNameLogged;
   }
 
   ngOnInit() {
     const me = this;
 
-    me.sessionId = me.route.snapshot.paramMap.get('id');
-    me.session = me.globals.selectedSession;
-    me.setScreenTitle();
-    me.userName = me.globals.userNameLogged;
-    me.loadInitialData().subscribe(([sports, spots]) => {
+    me.materialsLoaded = false;
+    me.loadInitialData().subscribe(([sports, spots, sessionMaterials]) => {
       me.sports = sports;
       me.spots = spots;
+      me.dataSource = new MatTableDataSource<SessionMaterial>(sessionMaterials);
+      me.materialsLoaded = true;
       me.rebuildForm();
       me.globals.unMaskScreen();
     },
@@ -68,7 +76,7 @@ export class SessionDetailsComponent implements OnInit {
     const me = this;
 
     if (me.sessionId === '-1'){
-      me.title ='Nuevo sesión';
+      me.title ='Nueva sesión';
     } else {
       me.title ='Editar sesión';
     }
@@ -77,13 +85,22 @@ export class SessionDetailsComponent implements OnInit {
   loadInitialData(): Observable<any> {
     const me = this;
     let sports = me.sportsService.getActiveSports(me.userName),
-        spots = me.spotsService.getActiveSpots(me.userName);
+        spots = me.spotsService.getActiveSpots(me.userName),
+        sessionMaterials = me.sessionMaterialsService.getSessionMaterials(me.userName, me.sessionId)
 
-    return forkJoin([sports, spots]);
+    return forkJoin([sports, spots, sessionMaterials]);
   }
 
   onClickGoBackButton() {
     this.location.back();
+  }
+
+  onClickUndoButton() {
+    this.ngOnInit();
+  }
+
+  onClickSaveButton() {
+    this.toastr.warning('To be implemented.');
   }
 
   // FormModel methods

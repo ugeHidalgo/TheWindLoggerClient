@@ -173,7 +173,12 @@
                 <app-session-details-materials></app-session-details-materials>
             </mat-grid-tile> -->
         </mat-grid-list>
-        <app-session-details-materials></app-session-details-materials>
+        <div *ngIf="materialsLoaded">
+            <app-session-details-materials 
+                [materialsUsed]=sessionMaterials
+                [dataSource]=dataSource>
+            </app-session-details-materials>
+        </div>
       </form>
     </div>
   </div>

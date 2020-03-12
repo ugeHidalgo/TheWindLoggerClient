@@ -64,12 +64,11 @@ import { SessionMaterialDialogComponent } from './components/dialogs/session-mat
     SpotsComponent,
     SessionsComponent,
     SessionDetailsComponent,
+    SessionDetailsMaterialsComponent,
     ImportDataComponent,
     SportsComponent,
     SportTypesComponent,
-    SecondsToTimePipe,
-    SessionDetailsMaterialsComponent,
-    SessionMaterialDialogComponent
+    SecondsToTimePipe
   ],
   imports: [
     GlobalRoutingModule,
