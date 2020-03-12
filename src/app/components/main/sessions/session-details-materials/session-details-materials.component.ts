@@ -82,7 +82,7 @@ export class SessionDetailsMaterialsComponent {
     }
 
     dialogRef = me.dialog.open(SessionMaterialDialogComponent, {
-        width: '250px',
+        width: '450px',
         data: me.selectedMaterial
       });
 

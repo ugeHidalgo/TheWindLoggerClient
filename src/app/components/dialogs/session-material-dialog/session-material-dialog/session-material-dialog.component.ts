@@ -7,6 +7,7 @@ import { Material } from 'src/app/models/material';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormattersHelper } from 'src/app/tools/formaters.helper';
+import { ValidationMessagesList } from 'src/app/tools/validationMessages.list';
 
 @Component({
   selector: 'app-session-material-dialog',
@@ -17,7 +18,7 @@ export class SessionMaterialDialogComponent implements OnInit {
   userName: string;
   materials: Material[];
   validatingForm: FormGroup;
-
+  validationMessages = ValidationMessagesList.messages;
 
   constructor(
     private toastr: ToastrService,
@@ -67,7 +68,7 @@ export class SessionMaterialDialogComponent implements OnInit {
       material: new FormControl('', [Validators.required]),
       time: new FormControl('', [Validators.required]),
       distance: new FormControl('', [Validators.required]),
-      usePercentage: new FormControl('', { validators: Validators.compose([Validators.max(100), Validators.min(1)])})
+      usePercentage: new FormControl('', { validators: Validators.compose([Validators.required, Validators.max(100), Validators.min(1)])})
     },
     { updateOn: 'blur'});
   }
@@ -99,5 +100,15 @@ export class SessionMaterialDialogComponent implements OnInit {
 
   getMaterialByName(name): Material {
     return this.materials.find( function(x) { return x.name === name; });
+  }
+
+  isInvalidField(fieldName: string, validationType: string): boolean {
+    const me = this;
+
+    if (!me.validatingForm.get(fieldName)) {
+      return false;
+    }
+
+    return me.validatingForm.get(fieldName).hasError(validationType);
   }
 }

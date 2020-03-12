@@ -1,32 +1,54 @@
-<h1 mat-dialog-title>Material</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title>Uso del material</h1>
+<!-- <div mat-dialog-content> -->
     <form [formGroup]="validatingForm">
-        <mat-form-field class="full-width">
-            <mat-label>Deporte:</mat-label>
-            <mat-select placeholder="Material: " formControlName="material" required>
-                <mat-option *ngFor="let material of materials" [(value)]=material.name>
-                    {{material.name}}: {{material.description}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+        <mat-grid-list cols="4" rowHeight="60px">
+            <!---------------- Row 1 ----------------->
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Material:</mat-label>
+                    <mat-select placeholder="Material: " formControlName="material" required>
+                        <mat-option *ngFor="let material of materials" [(value)]=material.name>{{material.description}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngFor="let validation of validationMessages.material">
+                        <mat-error align="end" *ngIf="isInvalidField('material',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
 
-        <mat-form-field class="full-width">
-            <mat-label>Tiempo:</mat-label>
-            <input  matInput class="my-numeric-field" placeholder="Tiempo:" formControlName="time" required>
-        </mat-form-field>
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>% uso:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="% uso:" formControlName="usePercentage" type="number">
+                    <mat-error *ngFor="let validation of validationMessages.usePercentage">
+                        <mat-error align="end" *ngIf="isInvalidField('usePercentage',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
 
-        <mat-form-field class="full-width">
-            <mat-label>Distancia:</mat-label>
-            <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="distance" required>
-        </mat-form-field>
+            <!---------------- Row 2 ----------------->
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Tiempo:</mat-label>
+                    <input  matInput class="my-numeric-field" placeholder="Tiempo:" formControlName="time" required>
+                    <mat-error *ngFor="let validation of validationMessages.time">
+                        <mat-error align="end" *ngIf="isInvalidField('time',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
 
-        <mat-form-field class="full-width">
-            <mat-label>% uso:</mat-label>
-            <input matInput class="my-numeric-field" placeholder="% uso:" formControlName="usePercentage" type="number">
-        </mat-form-field>
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Distancia:</mat-label>
+                    <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="distance" required>
+                    <mat-error *ngFor="let validation of validationMessages.distance">
+                        <mat-error align="end" *ngIf="isInvalidField('distance',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
     </form>
-</div>
+<!-- </div> -->
 <div mat-dialog-actions>
   <button mat-button cdkFocusInitial (click)="onCancelClick()">Cancelar</button>
-  <button mat-button (click)="onOkClick()">Ok</button>
+  <button mat-button (click)="onOkClick()" [disabled]='validatingForm.invalid || !validatingForm.touched'>Ok</button>
 </div>

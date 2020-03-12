@@ -34,10 +34,8 @@ export class SessionDetailsComponent implements OnInit {
     private location : Location,
     private route : ActivatedRoute,
     protected globals: GlobalsService,
-    //private sessionsService: SessionsService,
     private sportsService: SportsService,
     private spotsService: SpotsService,
-    private sessionMaterialsService: SessionMaterialsService,
     private toastr: ToastrService,
     private formattersHelper: FormattersHelper
   ) {
