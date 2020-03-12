@@ -3,6 +3,7 @@ import { SessionMaterial } from 'src/app/models/sessionMaterial';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { SessionMaterialDialogComponent } from 'src/app/components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
+import { Material } from 'src/app/models/material';
 
 @Component({
   selector: 'app-session-details-materials',
@@ -11,7 +12,7 @@ import { SessionMaterialDialogComponent } from 'src/app/components/dialogs/sessi
 })
 export class SessionDetailsMaterialsComponent implements OnInit{
 
-  @Input() materialsUsed: SessionMaterial[];
+  @Input() materials: Material[];
   @Input() dataSource: MatTableDataSource<SessionMaterial>;
 
   selectedRowId: string = '-1';
@@ -63,7 +64,7 @@ export class SessionDetailsMaterialsComponent implements OnInit{
 
     dialogRef = me.dialog.open(SessionMaterialDialogComponent, {
         width: '450px',
-        data: me.selectedMaterial
+        data: { sessionMaterial: me.selectedMaterial, materials: me.materials }
       });
   }
 

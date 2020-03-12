@@ -14,6 +14,8 @@ import { SpotsService } from 'src/app/services/spots/spots.service';
 import { SessionMaterialsService } from 'src/app/services/sessionMaterials/session-materials.service';
 import { FormattersHelper } from 'src/app/tools/formaters.helper';
 import { MatTableDataSource } from '@angular/material';
+import { Material } from 'src/app/models/material';
+import { MaterialsService } from 'src/app/services/materials/materials-service.service';
 
 @Component({
   selector: 'app-session-details',
@@ -29,6 +31,7 @@ export class SessionDetailsComponent implements OnInit {
   session: Session;
   sports: Sport[];
   spots: Spot[];
+  materials: Material[];
   dataSource: MatTableDataSource<SessionMaterial>;
   materialsLoaded: boolean = false;
   validatingForm: FormGroup;
@@ -40,6 +43,7 @@ export class SessionDetailsComponent implements OnInit {
     private sportsService: SportsService,
     private spotsService: SpotsService,
     private sessionMaterialsService: SessionMaterialsService,
+    private materialsService: MaterialsService,
     private toastr: ToastrService,
     private formattersHelper: FormattersHelper
   ) {
@@ -57,9 +61,10 @@ export class SessionDetailsComponent implements OnInit {
     const me = this;
 
     me.materialsLoaded = false;
-    me.loadInitialData().subscribe(([sports, spots, sessionMaterials]) => {
+    me.loadInitialData().subscribe(([sports, spots, materials, sessionMaterials]) => {
       me.sports = sports;
       me.spots = spots;
+      me.materials = materials;
       me.dataSource = new MatTableDataSource<SessionMaterial>(sessionMaterials);
       me.materialsLoaded = true;
       me.rebuildForm();
@@ -86,9 +91,10 @@ export class SessionDetailsComponent implements OnInit {
     const me = this;
     let sports = me.sportsService.getActiveSports(me.userName),
         spots = me.spotsService.getActiveSpots(me.userName),
-        sessionMaterials = me.sessionMaterialsService.getSessionMaterials(me.userName, me.sessionId)
+        sessionMaterials = me.sessionMaterialsService.getSessionMaterials(me.userName, me.sessionId),
+        materials = me.materialsService.getMaterials(me.userName);
 
-    return forkJoin([sports, spots, sessionMaterials]);
+    return forkJoin([sports, spots, materials, sessionMaterials]);
   }
 
   onClickGoBackButton() {
@@ -96,7 +102,10 @@ export class SessionDetailsComponent implements OnInit {
   }
 
   onClickUndoButton() {
-    this.ngOnInit();
+    const me = this;
+
+    me.globals.maskScreen();
+    me.ngOnInit();
   }
 
   onClickSaveButton() {
