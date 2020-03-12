@@ -6,7 +6,7 @@ import { MaterialsService } from 'src/app/services/materials/materials-service.s
 import { Material } from 'src/app/models/material';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FormattersHelper } from 'src/app/pipes/formaters.helper';
+import { FormattersHelper } from 'src/app/tools/formaters.helper';
 
 @Component({
   selector: 'app-session-material-dialog',
@@ -78,7 +78,7 @@ export class SessionMaterialDialogComponent implements OnInit {
 
     me.validatingForm.setValue({
       material: materialName,
-      time: me.formattersHelper.timeFormatter(me.data.time),
+      time: me.formattersHelper.secondsToTimeFormatter(me.data.time),
       distance: me.formattersHelper.decimalFormatter(me.data.distance),
       usePercentage: me.formattersHelper.decimalFormatter(me.data.usePercentage, '1.0-0')
     });
@@ -90,7 +90,7 @@ export class SessionMaterialDialogComponent implements OnInit {
           newSessionMaterial: SessionMaterial = me.data;
 
     newSessionMaterial.material = me.getMaterialByName(formModel.material);
-    newSessionMaterial.time = formModel.time;
+    newSessionMaterial.time =  me.formattersHelper.timeToSecondsFormatter(formModel.time);
     newSessionMaterial.distance = formModel.distance;
     newSessionMaterial.usePercentage = formModel.usePercentage;
 

@@ -12,7 +12,7 @@ import { SportsService } from 'src/app/services/sports/sports.service';
 import { SpotsService } from 'src/app/services/spots/spots.service';
 import { SessionMaterialsService } from 'src/app/services/sessionMaterials/session-materials.service';
 import { SessionMaterial } from 'src/app/models/sessionMaterial';
-import { FormattersHelper } from 'src/app/pipes/formaters.helper';
+import { FormattersHelper } from 'src/app/tools/formaters.helper';
 
 @Component({
   selector: 'app-session-details',
@@ -121,7 +121,7 @@ export class SessionDetailsComponent implements OnInit {
       name: me.session.name,
       description: me.session.description,
       sessionDate: me.session.sessionDate,
-      sessionTime: me.formattersHelper.timeFormatter(me.session.sessionTime),
+      sessionTime: me.formattersHelper.secondsToTimeFormatter(me.session.sessionTime),
       sessionDistance: me.formattersHelper.decimalFormatter(me.session.sessionDistance),
       sport: sportName,
       spot: spotName,

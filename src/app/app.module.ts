@@ -43,7 +43,7 @@ import { SportTypesComponent } from './components/main/sportTypes/sport-types/sp
 import { SessionDetailsComponent } from './components/main/sessions/session-details/session-details.component';
 import { SportsService } from './services/sports/sports.service';
 import { SpotsService } from './services/spots/spots.service';
-import { FormattersHelper } from './pipes/formaters.helper';
+import { FormattersHelper } from './tools/formaters.helper';
 import { SessionDetailsMaterialsComponent } from './components/main/sessions/session-details-materials/session-details-materials.component';
 import { SessionMaterialDialogComponent } from './components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
 
