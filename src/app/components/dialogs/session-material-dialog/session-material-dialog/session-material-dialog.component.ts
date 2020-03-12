@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormattersHelper } from 'src/app/tools/formaters.helper';
 import { ValidationMessagesList } from 'src/app/tools/validationMessages.list';
+import { ValidateTime } from 'src/app/validators/time.validator';
 
 @Component({
   selector: 'app-session-material-dialog',
@@ -66,7 +67,7 @@ export class SessionMaterialDialogComponent implements OnInit {
 
     me.validatingForm = new FormGroup({
       material: new FormControl('', [Validators.required]),
-      time: new FormControl('', [Validators.required]),
+      time: new FormControl('', { validators: Validators.compose([Validators.required, ValidateTime])}),
       distance: new FormControl('', [Validators.required]),
       usePercentage: new FormControl('', { validators: Validators.compose([Validators.required, Validators.max(100), Validators.min(1)])})
     },

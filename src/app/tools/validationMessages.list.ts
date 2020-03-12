@@ -8,6 +8,7 @@ export class ValidationMessagesList {
         ],
         'time': [
             { type: 'required', message: 'El tiempo es obligatorio.'},
+            { type: 'format', message: 'Formato inválido. Use HH:MM:SS.'}
         ],
         'usePercentage': [
             { type: 'required', message: 'El % de uso es obligatorio.'},
