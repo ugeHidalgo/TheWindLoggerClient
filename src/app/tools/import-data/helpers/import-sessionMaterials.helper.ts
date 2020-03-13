@@ -46,8 +46,10 @@ export class ImportSessionMaterialsHelper {
       sessionMaterial.maxSpeed = rowData[maxSpeedIndex];
 
       sessionMaterials.push(sessionMaterial);
+      console.log('Created session material for session :' + sessionMaterial.session + ' and material ' + sessionMaterial.material);
     }
 
+    console.log('Imported session materials data from excell, sending to server to create.');
     return me.sessionMaterialsService.createSessionMaterials(sessionMaterials);
   }
 };
