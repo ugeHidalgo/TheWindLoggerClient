@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { SessionMaterial } from 'src/app/models/sessionMaterial';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { Material } from 'src/app/models/material';
-import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormattersHelper } from 'src/app/tools/formaters.helper';
 import { ValidationMessagesList } from 'src/app/tools/validationMessages.list';
@@ -21,7 +20,6 @@ export class SessionMaterialDialogComponent implements OnInit {
   validationMessages = ValidationMessagesList.messages;
 
   constructor(
-    private toastr: ToastrService,
     protected globals: GlobalsService,
     private formattersHelper: FormattersHelper,
     public dialogRef: MatDialogRef<SessionMaterialDialogComponent>,
@@ -50,6 +48,18 @@ export class SessionMaterialDialogComponent implements OnInit {
 
   onCancelClick(): void {
     this.dialogRef.close();
+  }
+
+  onMaterialChanged(selection: any): void {
+    const me = this,
+          selectedMaterialName = selection.value,
+          material = me.getMaterialByName(selectedMaterialName);
+    let  materialTypeName = '';
+
+    if (material && material.materialType) {
+      materialTypeName = material.materialType.name;
+    }
+    me.validatingForm.get('materialType').setValue(materialTypeName);
   }
 
   // FormModel methods

@@ -6,7 +6,7 @@
             <mat-grid-tile [colspan]="3" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Material:</mat-label>
-                    <mat-select placeholder="Material: " formControlName="material" required>
+                    <mat-select placeholder="Material: " formControlName="material"  (selectionChange)="onMaterialChanged($event)" required>
                         <mat-option *ngFor="let material of data.materials" [(value)]=material.name>
                             {{material.name}} : {{material.description}}
                         </mat-option>
