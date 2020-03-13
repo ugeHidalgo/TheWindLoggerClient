@@ -58,6 +58,7 @@ export class SessionMaterialDialogComponent implements OnInit {
 
     me.validatingForm = new FormGroup({
       material: new FormControl('', [Validators.required]),
+      materialType:  new FormControl('', []),
       time: new FormControl('', { validators: Validators.compose([Validators.required, ValidateTime])}),
       distance: new FormControl('', [Validators.required]),
       usePercentage: new FormControl('', { validators: Validators.compose([Validators.required, Validators.max(100), Validators.min(1)])})
@@ -68,10 +69,14 @@ export class SessionMaterialDialogComponent implements OnInit {
   rebuildForm() {
     const me = this,
           materialName = me.data.sessionMaterial.material && me.data.sessionMaterial.material.name ? 
-                          me.data.sessionMaterial.material.name : '';
+                         me.data.sessionMaterial.material.name : '',
+          materialTypeName = me.data.sessionMaterial.material && me.data.sessionMaterial.material.materialType && 
+                             me.data.sessionMaterial.material.materialType.name ? 
+                             me.data.sessionMaterial.material.materialType.name : '';
 
     me.validatingForm.setValue({
       material: materialName,
+      materialType: materialTypeName,
       time: me.formattersHelper.secondsToTimeFormatter(me.data.sessionMaterial.time),
       distance: me.formattersHelper.decimalFormatter(me.data.sessionMaterial.distance),
       usePercentage: me.formattersHelper.decimalFormatter(me.data.sessionMaterial.usePercentage, '1.0-0')

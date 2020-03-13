@@ -1,9 +1,9 @@
 <h1 mat-dialog-title>Uso del material</h1>
 <!-- <div mat-dialog-content> -->
     <form [formGroup]="validatingForm">
-        <mat-grid-list cols="4" rowHeight="60px">
+        <mat-grid-list cols="6" rowHeight="60px">
             <!---------------- Row 1 ----------------->
-            <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Material:</mat-label>
                     <mat-select placeholder="Material: " formControlName="material" required>
@@ -17,6 +17,14 @@
                 </mat-form-field>
             </mat-grid-tile>
 
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
+                <mat-form-field class="full-width">
+                    <mat-label>Tipo material:</mat-label>
+                    <input matInput placeholder="Tipo material:" formControlName="materialType" type="text" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <!---------------- Row 2 ----------------->
             <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>% uso:</mat-label>
@@ -27,7 +35,6 @@
                 </mat-form-field>
             </mat-grid-tile>
 
-            <!---------------- Row 2 ----------------->
             <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Tiempo:</mat-label>
