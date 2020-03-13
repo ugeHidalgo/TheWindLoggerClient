@@ -29,3 +29,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   line-height: 24px;
   font-weight: 600;
 }
+
+//Font sizes overrides
+.mat-form-field {
+    font-size: 13px;
+}
+
+.mat-cell, .mat-footer-cell {
+  font-size: 12px;
+}
