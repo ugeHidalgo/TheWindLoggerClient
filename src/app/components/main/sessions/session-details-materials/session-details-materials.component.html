@@ -20,12 +20,12 @@
 
         <ng-container matColumnDef="materialName">
             <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Nombre</h3></th>
-            <td mat-cell *matCellDef="let materialUsed">{{materialUsed.material.name}}</td>
+            <td mat-cell *matCellDef="let materialUsed">{{materialUsed.materialName}}</td>
         </ng-container>
 
         <ng-container matColumnDef="materialType">
             <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Tipo material</h3></th>
-            <td mat-cell *matCellDef="let materialUsed">{{materialUsed.material.materialType.name}}</td>
+            <td mat-cell *matCellDef="let materialUsed">{{materialUsed.materialTypeName}}</td>
         </ng-container>
  
         <ng-container matColumnDef="time">

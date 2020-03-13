@@ -6,6 +6,8 @@ export class SessionMaterial {
     userName: String;
     session: Session;
     material: Material;
+    materialName: String;
+    materialTypeName: String;
     time: number;
     distance: number;
     usePercentage: number;
