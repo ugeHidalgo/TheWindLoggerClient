@@ -13,6 +13,8 @@ import { tap, catchError } from 'rxjs/operators';
 export class SessionMaterialsService {
 
   private sessionMaterialsUrl: string;
+  private importSessionMaterialsUrl: string;
+
   private operationHelper: OperationsHelper;
 
   constructor(
@@ -23,6 +25,8 @@ export class SessionMaterialsService {
     const me = this;
 
     me.sessionMaterialsUrl  = globals.server + 'api/sessionmaterials';
+    me.importSessionMaterialsUrl  = me.sessionMaterialsUrl  + '/import';
+
     me.operationHelper = new OperationsHelper(globals,router);
   }
 
@@ -41,15 +45,15 @@ export class SessionMaterialsService {
   }
 
   /**.*/
-  createSessionMaterials(sessionMaterials: SessionMaterial[]): Observable<SessionMaterial[]> {
+  importSessionMaterials(sessionMaterials: SessionMaterial[]): Observable<SessionMaterial[]> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken();
 
-    return this.http.post<SessionMaterial[]>(me.sessionMaterialsUrl, sessionMaterials, httpOptions)
+    return this.http.post<SessionMaterial[]>(me.importSessionMaterialsUrl, sessionMaterials, httpOptions)
               .pipe(
                 // tslint:disable-next-line:no-shadowed-variable
-                tap( any => console.log(`A total of ${sessionMaterials.length} session materials were successfully created.`)),
-                catchError(me.operationHelper.handleError<SessionMaterial[]>('createSessionMaterials', []))
+                tap( importedSessionMaterials => console.log(`A total of ${importedSessionMaterials.length} session materials were successfully imported.`)),
+                catchError(me.operationHelper.handleError<SessionMaterial[]>('importSessionMaterials', []))
               );
   }
 }

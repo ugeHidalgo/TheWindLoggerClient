@@ -18,6 +18,7 @@ import { Material } from 'src/app/models/material';
 import { MaterialsService } from 'src/app/services/materials/materials-service.service';
 import { ValidateTime } from 'src/app/validators/time.validator';
 import { ValidationMessagesList } from 'src/app/tools/validationMessages.list';
+import { SessionsService } from 'src/app/services/sessions/sessions.service';
 
 @Component({
   selector: 'app-session-details',
@@ -45,6 +46,7 @@ export class SessionDetailsComponent implements OnInit {
     protected globals: GlobalsService,
     private sportsService: SportsService,
     private spotsService: SpotsService,
+    private sessionsService: SessionsService,
     private sessionMaterialsService: SessionMaterialsService,
     private materialsService: MaterialsService,
     private toastr: ToastrService,
@@ -112,6 +114,11 @@ export class SessionDetailsComponent implements OnInit {
   }
 
   onClickSaveButton() {
+    const me = this;
+
+    me.session.materialsUsed = me.dataSource.data;
+    //me.sessionsService.createSessions
+
     this.toastr.warning('To be implemented.');
   }
 

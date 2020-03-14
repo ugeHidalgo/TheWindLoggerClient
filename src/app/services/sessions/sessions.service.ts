@@ -13,6 +13,7 @@ import { tap, catchError } from 'rxjs/operators';
 
 export class SessionsService {
   private sessionsUrl: string;
+  private importSessionsUrl: string;
   private operationHelper: OperationsHelper;
 
   constructor(
@@ -23,6 +24,7 @@ export class SessionsService {
     const me = this;
 
     me.sessionsUrl  = globals.server + 'api/sessions';
+    me.importSessionsUrl  = me.sessionsUrl + '/import';
     me.operationHelper = new OperationsHelper(globals,router);
   }
 
@@ -41,15 +43,15 @@ export class SessionsService {
   }
 
   /**.*/
-  createSessions(sessions: Session[]): Observable<Session[]> {
+  importSessions(sessions: Session[]): Observable<Session[]> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken();
 
-    return this.http.post<Session[]>(me.sessionsUrl, sessions, httpOptions)
+    return this.http.post<Session[]>(me.importSessionsUrl, sessions, httpOptions)
               .pipe(
                 // tslint:disable-next-line:no-shadowed-variable
-                tap( any => console.log(`A total of ${sessions.length} sessions were successfully created.`)),
-                catchError(me.operationHelper.handleError<Session[]>('createSessions', []))
+                tap( importedSessions => console.log(`A total of ${importedSessions.length} sessions were successfully imported.`)),
+                catchError(me.operationHelper.handleError<Session[]>('importSessions', []))
               );
   }
 }

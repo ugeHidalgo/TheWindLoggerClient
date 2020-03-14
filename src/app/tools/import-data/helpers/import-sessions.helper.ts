@@ -74,10 +74,10 @@ export class ImportSessionsHelper {
       session.active = rowData[activeIndex].trim() === 'true' ? true : false;
 
       sessions.push(session);
-      console.log('Created session :' + session.name + ' (' + session.sessionDate + ')');
+      console.log('Imported session :' + session.name + ' (' + session.sessionDate + ')');
     }
 
     console.log('Imported sessions data from excell, sending to server to create.');
-    return me.sessionsService.createSessions(sessions);
+    return me.sessionsService.importSessions(sessions);
   }
 };
