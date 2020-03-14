@@ -16,6 +16,8 @@ import { FormattersHelper } from 'src/app/tools/formaters.helper';
 import { MatTableDataSource } from '@angular/material';
 import { Material } from 'src/app/models/material';
 import { MaterialsService } from 'src/app/services/materials/materials-service.service';
+import { ValidateTime } from 'src/app/validators/time.validator';
+import { ValidationMessagesList } from 'src/app/tools/validationMessages.list';
 
 @Component({
   selector: 'app-session-details',
@@ -35,6 +37,7 @@ export class SessionDetailsComponent implements OnInit {
   dataSource: MatTableDataSource<SessionMaterial>;
   materialsLoaded: boolean = false;
   validatingForm: FormGroup;
+  validationMessages = ValidationMessagesList.messages;
 
   constructor(
     private location : Location,
@@ -117,11 +120,11 @@ export class SessionDetailsComponent implements OnInit {
     const me = this;
 
     me.validatingForm = new FormGroup({
-      sessionDate: new FormControl('', [Validators.required]),
-      name: new FormControl('',  { validators: Validators.compose([Validators.maxLength(80),Validators.required])}),
-      description: new FormControl('', [Validators.maxLength(150)]),
-      sessionTime: new FormControl('', [Validators.required]),
-      sessionDistance: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
+      name: new FormControl('',  { validators: Validators.compose([Validators.maxLength(50),Validators.required])}),
+      description: new FormControl('', [Validators.maxLength(100)]),
+      time: new FormControl('', { validators: Validators.compose([Validators.required, ValidateTime])}),
+      distance: new FormControl('', { validators: Validators.compose([Validators.required, Validators.max(9999), Validators.min(0)])}),
       sport: new FormControl('', [Validators.required]),
       spot: new FormControl('', [Validators.required]),
       race: new FormControl('', []),
@@ -144,9 +147,9 @@ export class SessionDetailsComponent implements OnInit {
     me.validatingForm.setValue({
       name: me.session.name,
       description: me.session.description,
-      sessionDate: me.session.sessionDate,
-      sessionTime: me.formattersHelper.secondsToTimeFormatter(me.session.sessionTime),
-      sessionDistance: me.formattersHelper.decimalFormatter(me.session.sessionDistance),
+      date: me.session.sessionDate,
+      time: me.formattersHelper.secondsToTimeFormatter(me.session.sessionTime),
+      distance: me.formattersHelper.decimalFormatter(me.session.sessionDistance),
       sport: sportName,
       spot: spotName,
       race: me.session.race,
@@ -158,5 +161,15 @@ export class SessionDetailsComponent implements OnInit {
       maxPower: me.formattersHelper.decimalFormatter(me.session.maxPower),
       medPower: me.formattersHelper.decimalFormatter(me.session.medPower)
     });
+  }
+
+  isInvalidField(fieldName: string, validationType: string): boolean {
+    const me = this;
+
+    if (!me.validatingForm.get(fieldName)) {
+      return false;
+    }
+
+    return me.validatingForm.get(fieldName).hasError(validationType);
   }
 }

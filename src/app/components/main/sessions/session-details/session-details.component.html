@@ -15,18 +15,18 @@
     </div>
     <div class="card-body">
       <form [formGroup]="validatingForm">
-        <mat-grid-list cols="8" rowHeight="60px">
+        <mat-grid-list cols="8" rowHeight="70px">
 
             <!---------------- Row 1 ----------------->
             <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Fecha:</mat-label>
-                    <input matInput [matDatepicker]="picker" placeholder="Fecha:" formControlName="sessionDate" required>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha:" formControlName="date" required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <!-- <mat-error *ngFor="let validation of validation_messages.date">
+                    <mat-error *ngFor="let validation of validationMessages.date">
                         <mat-error align="end" *ngIf="isInvalidField('date',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error> -->
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -34,6 +34,9 @@
                 <mat-form-field class="full-width">
                     <mat-label>Nombre:</mat-label>
                     <input matInput placeholder="Nombre:" formControlName="name" required>
+                    <mat-error *ngFor="let validation of validationMessages.name">
+                        <mat-error align="end" *ngIf="isInvalidField('name',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -45,9 +48,9 @@
                             {{sport.name}}: {{sport.description}}
                         </mat-option>
                     </mat-select>
-                    <!--  <mat-error *ngFor="let validation of validation_messages.account">
-                        <mat-error align="end" *ngIf="isInvalidField('account',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error> -->
+                    <mat-error *ngFor="let validation of validationMessages.sport">
+                        <mat-error align="end" *ngIf="isInvalidField('sport',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -60,9 +63,9 @@
                             {{spot.name}}: {{spot.description}}
                         </mat-option>
                     </mat-select>
-                    <!-- <mat-error *ngFor="let validation of validation_messages.costCentre">
-                        <mat-error align="end" *ngIf="isInvalidField('costCentre',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error> -->
+                    <mat-error *ngFor="let validation of validationMessages.spot">
+                        <mat-error align="end" *ngIf="isInvalidField('spot',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -70,6 +73,9 @@
                 <mat-form-field class="full-width">
                     <mat-label>Descripción:</mat-label>
                     <input matInput placeholder="Descripción:" formControlName="description" >
+                    <mat-error *ngFor="let validation of validationMessages.description">
+                        <mat-error align="end" *ngIf="isInvalidField('description',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -80,14 +86,20 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Tiempo:</mat-label>
-                    <input  matInput class="my-numeric-field" placeholder="Tiempo:" formControlName="sessionTime" required>
+                    <input  matInput class="my-numeric-field" placeholder="Tiempo:" formControlName="time" required>
+                    <mat-error *ngFor="let validation of validationMessages.time">
+                        <mat-error align="end" *ngIf="isInvalidField('time',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
     
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Distancia:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="sessionDistance" required>
+                    <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="distance" required>
+                    <mat-error *ngFor="let validation of validationMessages.distance">
+                        <mat-error align="end" *ngIf="isInvalidField('distance',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
             
@@ -95,9 +107,9 @@
                 <mat-form-field class="full-width">
                     <mat-label>V.Max:</mat-label>
                     <input matInput class="my-numeric-field" placeholder="V.Max:"  formControlName="maxSpeed"  type="number">
-                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-                    <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error> -->
+                    <mat-error *ngFor="let validation of validationMessages.maxSpeed">
+                        <mat-error align="end" *ngIf="isInvalidField('maxSpeed',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
             
@@ -112,9 +124,9 @@
                 <mat-form-field class="full-width">
                     <mat-label>Pot.Max:</mat-label>
                     <input matInput class="my-numeric-field" placeholder="Pot.Max:"  formControlName="maxPower" type="number">
-                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-                    <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error> -->
+                    <mat-error *ngFor="let validation of validationMessages.maxPower">
+                        <mat-error align="end" *ngIf="isInvalidField('maxPower',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
             
@@ -122,9 +134,9 @@
                 <mat-form-field class="full-width">
                     <mat-label>Pot.Med:</mat-label>
                     <input matInput class="my-numeric-field" placeholder="Pot.Med:"  formControlName="medPower"  type="number">
-                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-                        <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error> -->
+                    <mat-error *ngFor="let validation of validationMessages.medPower">
+                        <mat-error align="end" *ngIf="isInvalidField('medPower',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -137,16 +149,16 @@
 
             <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-label>Competición:  </mat-label>
-                <mat-checkbox [checked]="session.race"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+                <mat-checkbox [checked]="session.race"  [disableRipple]="false" (click)="$event.preventDefault()"></mat-checkbox>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Valor:</mat-label>
                     <input matInput class="my-numeric-field" placeholder="Valor:"  formControlName="value" type="number">
-                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-                    <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error> -->
+                    <mat-error *ngFor="let validation of validationMessages.value">
+                        <mat-error align="end" *ngIf="isInvalidField('value',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
     
@@ -154,15 +166,15 @@
                 <mat-form-field class="full-width">
                     <mat-label>Esfuerzo:</mat-label>
                     <input matInput class="my-numeric-field" placeholder="Esfuerzo:"  formControlName="effort" type="number">
-                    <!-- <mat-error *ngFor="let validation of validation_messages.amount">
-                    <mat-error *ngIf="isInvalidField('amount',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error> -->
+                    <mat-error *ngFor="let validation of validationMessages.effort">
+                        <mat-error align="end" *ngIf="isInvalidField('effort',validation.type)">{{validation.message}}</mat-error>
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
         
             <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-label>Indoor:</mat-label>
-                <mat-checkbox [checked]="session.indoor"  [disableRipple]="true" (click)="$event.preventDefault()"></mat-checkbox>
+                <mat-checkbox [checked]="session.indoor"  [disableRipple]="false" (click)="$event.preventDefault()"></mat-checkbox>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
