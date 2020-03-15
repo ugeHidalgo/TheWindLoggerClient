@@ -106,7 +106,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>V.Max:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="V.Max:"  formControlName="maxSpeed"  type="number">
+                    <input matInput class="my-numeric-field" placeholder="V.Max:" formControlName="maxSpeed" type="number">
                     <mat-error *ngFor="let validation of validationMessages.maxSpeed">
                         <mat-error align="end" *ngIf="isInvalidField('maxSpeed',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>
@@ -116,14 +116,14 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>V.Med:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="V.Med:"  formControlName="medSpeed" type="number" readonly>
+                    <input matInput class="my-numeric-field" placeholder="V.Med:" formControlName="medSpeed" type="number" readonly>
                 </mat-form-field>
             </mat-grid-tile>
             
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Pot.Max:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="Pot.Max:"  formControlName="maxPower" type="number">
+                    <input matInput class="my-numeric-field" placeholder="Pot.Max:" formControlName="maxPower" type="number">
                     <mat-error *ngFor="let validation of validationMessages.maxPower">
                         <mat-error align="end" *ngIf="isInvalidField('maxPower',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>
@@ -133,7 +133,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Pot.Med:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="Pot.Med:"  formControlName="medPower"  type="number">
+                    <input matInput class="my-numeric-field" placeholder="Pot.Med:" formControlName="medPower" type="number">
                     <mat-error *ngFor="let validation of validationMessages.medPower">
                         <mat-error align="end" *ngIf="isInvalidField('medPower',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>
@@ -148,14 +148,14 @@
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="2" [rowspan]="1">
-                <mat-label>Competición:  </mat-label>
-                <mat-checkbox [checked]="session.race"  [disableRipple]="false" (click)="$event.preventDefault()"></mat-checkbox>
+                <mat-label class="my-checkbox-label">Competición:  </mat-label>
+                <mat-checkbox [checked]="session.race" formControlName="race"></mat-checkbox>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Valor:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="Valor:"  formControlName="value" type="number">
+                    <input matInput class="my-numeric-field" placeholder="Valor:" formControlName="value" type="number">
                     <mat-error *ngFor="let validation of validationMessages.value">
                         <mat-error align="end" *ngIf="isInvalidField('value',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>
@@ -165,7 +165,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Esfuerzo:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="Esfuerzo:"  formControlName="effort" type="number">
+                    <input matInput class="my-numeric-field" placeholder="Esfuerzo:" formControlName="effort" type="number">
                     <mat-error *ngFor="let validation of validationMessages.effort">
                         <mat-error align="end" *ngIf="isInvalidField('effort',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>
@@ -173,17 +173,13 @@
             </mat-grid-tile>
         
             <mat-grid-tile [colspan]="2" [rowspan]="1">
-                <mat-label>Indoor:</mat-label>
-                <mat-checkbox [checked]="session.indoor"  [disableRipple]="false" (click)="$event.preventDefault()"></mat-checkbox>
+                <mat-label class="my-checkbox-label">Indoor:</mat-label>
+                <mat-checkbox [checked]="session.indoor" formControlName="indoor"></mat-checkbox>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
             </mat-grid-tile>
 
-            <!---------------- Row 5 ----------------->
-            <!-- <mat-grid-tile [colspan]="8" [rowspan]="5">
-                <app-session-details-materials></app-session-details-materials>
-            </mat-grid-tile> -->
         </mat-grid-list>
         <div *ngIf="materialsLoaded">
             <app-session-details-materials 
