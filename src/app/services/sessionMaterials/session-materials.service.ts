@@ -44,6 +44,19 @@ export class SessionMaterialsService {
               );
   }
 
+  // /**.*/
+  // createSessionMaterials(sessionMaterials: SessionMaterial[]): Observable<SessionMaterial[]> {
+  //   const me = this,
+  //         httpOptions = me.operationHelper.createHttpOptionsWithToken();
+
+  //   return this.http.post<SessionMaterial[]>(me.sessionMaterialsUrl, sessionMaterials, httpOptions)
+  //             .pipe(
+  //               // tslint:disable-next-line:no-shadowed-variable
+  //               tap( createdSessionMaterials => console.log(`A total of ${createdSessionMaterials.length} session materials were successfully created.`)),
+  //               catchError(me.operationHelper.handleError<SessionMaterial[]>('createSessionMaterials', []))
+  //             );
+  // }
+
   /**.*/
   importSessionMaterials(sessionMaterials: SessionMaterial[]): Observable<SessionMaterial[]> {
     const me = this,

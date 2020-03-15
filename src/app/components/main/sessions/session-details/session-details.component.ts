@@ -116,10 +116,18 @@ export class SessionDetailsComponent implements OnInit {
   onClickSaveButton() {
     const me = this;
 
+    me.session = me.getFormData();
     me.session.materialsUsed = me.dataSource.data;
-    //me.sessionsService.createSessions
-
-    this.toastr.warning('To be implemented.');
+    me.sessionsService.saveSession(me.session).subscribe(
+      (savedSession) => {
+        if (!savedSession) {
+          me.toastr.error('No se pudo grabar la sesión. Inténtelo de nuevo.');
+        } else {
+          me.validatingForm.reset();
+          me.rebuildForm();
+          me.toastr.success(`Sesión ${savedSession.name} guardada correctamente.`);
+        }
+      });
   }
 
   // FormModel methods
@@ -168,6 +176,37 @@ export class SessionDetailsComponent implements OnInit {
       maxPower: me.formattersHelper.decimalFormatter(me.session.maxPower),
       medPower: me.formattersHelper.decimalFormatter(me.session.medPower)
     });
+  }
+
+  getFormData(): Session {
+    const me = this,
+          formModel = me.validatingForm.value,
+          newSession: Session = me.session;
+
+    newSession.name = formModel.name;
+    newSession.description = formModel.description;
+    newSession.sessionDate = formModel.date;
+    newSession.sessionTime =  me.formattersHelper.timeToSecondsFormatter(formModel.time);
+    newSession.sessionDistance = formModel.distance;
+    newSession.sport = me.getSportByName(formModel.sport);
+    newSession.spot = me.getSpotByName(formModel.spot);
+    newSession.race = formModel.race;
+    newSession.indoor = formModel.indoor;
+    newSession.value = formModel.value;
+    newSession.effort = formModel.effort;
+    newSession.maxSpeed = formModel.maxSpeed;
+    newSession.maxPower = formModel.maxPower;
+    newSession.medPower = formModel.medPower;
+
+    return newSession;
+  }
+
+  getSportByName(name): Sport {
+    return this.sports.find( function(x) { return x.name === name; });
+  }
+
+  getSpotByName(name): Spot {
+    return this.spots.find( function(x) { return x.name === name; });
   }
 
   isInvalidField(fieldName: string, validationType: string): boolean {

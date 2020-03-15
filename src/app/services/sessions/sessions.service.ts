@@ -43,6 +43,19 @@ export class SessionsService {
   }
 
   /**.*/
+  saveSession(session: Session): Observable<Session> {
+    const me = this,
+          httpOptions = me.operationHelper.createHttpOptionsWithToken();
+
+    return this.http.post<Session>(me.sessionsUrl, session, httpOptions)
+              .pipe(
+                // tslint:disable-next-line:no-shadowed-variable
+                tap( savedSession => console.log(`Sessions successfully created with id: ${savedSession._id}.`)),
+                catchError(me.operationHelper.handleError<Session>('createSessions', null))
+              );
+  }
+
+  /**.*/
   importSessions(sessions: Session[]): Observable<Session[]> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken();
