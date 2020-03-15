@@ -5,7 +5,7 @@
         <button mat-raised-button color="primary" (click)="onClickGoBackButton()">
           <i class="material-icons">arrow_back</i>
         </button>
-        <button  mat-raised-button color="green" (click)="onClickSaveButton()" type="submit" [disabled]='validatingForm.invalid || !validatingForm.touched'>
+        <button  mat-raised-button color="green" (click)="onClickSaveButton()" type="submit" [disabled]='(validatingForm.invalid || !validatingForm.touched) && !hasChangedMaterials'>
           <i class="material-icons">save</i>
         </button>
         <button mat-raised-button color="warn" (click)="onClickUndoButton()">
@@ -188,7 +188,8 @@
         <div *ngIf="materialsLoaded">
             <app-session-details-materials 
                 [materials]=materials
-                [dataSource]=dataSource>
+                [dataSource]=dataSource
+                on-updatedSessionDetailMaterials="onUpdatedSessionDetailMaterials($event)">
             </app-session-details-materials>
         </div>
       </form>

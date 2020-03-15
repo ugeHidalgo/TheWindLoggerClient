@@ -42,12 +42,12 @@ export class SessionMaterialDialogComponent implements OnInit {
   onOkClick(): void {
     const me = this;
 
-    me.data.sessionMaterial = me.getFormData();
-    me.dialogRef.close();
+    me.getFormData();
+    me.dialogRef.close(true);
   }
 
   onCancelClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onMaterialChanged(selection: any): void {
@@ -93,17 +93,16 @@ export class SessionMaterialDialogComponent implements OnInit {
     });
   }
 
-  getFormData(): SessionMaterial {
+  getFormData(): void {
     const me = this,
-          formModel = me.validatingForm.value,
-          newSessionMaterial: SessionMaterial = me.data.sessionMaterial;
+          formModel = me.validatingForm.value;
 
-    newSessionMaterial.material = me.getMaterialByName(formModel.material);
-    newSessionMaterial.time =  me.formattersHelper.timeToSecondsFormatter(formModel.time);
-    newSessionMaterial.distance = formModel.distance;
-    newSessionMaterial.usePercentage = formModel.usePercentage;
-
-    return newSessionMaterial;
+    me.data.sessionMaterial.material = me.getMaterialByName(formModel.material);
+    me.data.sessionMaterial.materialName = formModel.material;
+    me.data.sessionMaterial.materialTypeName = formModel.materialType;
+    me.data.sessionMaterial.time =  me.formattersHelper.timeToSecondsFormatter(formModel.time);
+    me.data.sessionMaterial.distance = formModel.distance;
+    me.data.sessionMaterial.usePercentage = formModel.usePercentage;
   }
 
   getMaterialByName(name): Material {

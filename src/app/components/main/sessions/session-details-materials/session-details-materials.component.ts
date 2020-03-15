@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, OnInit } from '@angular/core';
+import { Component, ViewChild, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { SessionMaterial } from 'src/app/models/sessionMaterial';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +14,8 @@ export class SessionDetailsMaterialsComponent implements OnInit{
 
   @Input() materials: Material[];
   @Input() dataSource: MatTableDataSource<SessionMaterial>;
+
+  @Output() updatedSessionDetailMaterials = new EventEmitter();
 
   selectedRowId: string = '-1';
   selectedMaterial: SessionMaterial;
@@ -65,6 +67,11 @@ export class SessionDetailsMaterialsComponent implements OnInit{
     dialogRef = me.dialog.open(SessionMaterialDialogComponent, {
         width: '450px',
         data: { sessionMaterial: me.selectedMaterial, materials: me.materials }
+      });
+      dialogRef.afterClosed().subscribe(hasChanges => {
+        if (hasChanges) {
+          me.updatedSessionDetailMaterials.emit()
+        }
       });
   }
 

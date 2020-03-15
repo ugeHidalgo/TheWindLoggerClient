@@ -39,6 +39,7 @@ export class SessionDetailsComponent implements OnInit {
   materialsLoaded: boolean = false;
   validatingForm: FormGroup;
   validationMessages = ValidationMessagesList.messages;
+  hasChangedMaterials:boolean = false;
 
   constructor(
     private location : Location,
@@ -66,6 +67,7 @@ export class SessionDetailsComponent implements OnInit {
     const me = this;
 
     me.materialsLoaded = false;
+    me.hasChangedMaterials = false;
     me.loadInitialData().subscribe(([sports, spots, materials, sessionMaterials]) => {
       me.sports = sports;
       me.spots = spots;
@@ -123,11 +125,17 @@ export class SessionDetailsComponent implements OnInit {
         if (!savedSession) {
           me.toastr.error('No se pudo grabar la sesión. Inténtelo de nuevo.');
         } else {
+          me.hasChangedMaterials = false;
           me.validatingForm.reset();
           me.rebuildForm();
           me.toastr.success(`Sesión ${savedSession.name} guardada correctamente.`);
         }
       });
+  }
+
+  // Custom events
+  onUpdatedSessionDetailMaterials(): void {
+    this.hasChangedMaterials = true;
   }
 
   // FormModel methods
