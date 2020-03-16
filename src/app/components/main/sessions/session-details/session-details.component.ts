@@ -118,17 +118,25 @@ export class SessionDetailsComponent implements OnInit {
   onClickSaveButton() {
     const me = this;
 
+    me.globals.maskScreen();
     me.session = me.getFormData();
     me.session.materialsUsed = me.dataSource.data;
     me.sessionsService.saveSession(me.session).subscribe(
       (savedSession) => {
         if (!savedSession) {
+          me.globals.unMaskScreen();
           me.toastr.error('No se pudo grabar la sesión. Inténtelo de nuevo.');
         } else {
           me.hasChangedMaterials = false;
-          me.validatingForm.reset();
-          me.rebuildForm();
-          me.toastr.success(`Sesión ${savedSession.name} guardada correctamente.`);
+          me.materialsLoaded = false;
+          me.sessionMaterialsService.getSessionMaterials(me.userName, me.sessionId).subscribe( (sessionMaterials) => {
+            me.dataSource = new MatTableDataSource<SessionMaterial>(sessionMaterials);
+            me.materialsLoaded = true;
+            me.validatingForm.reset();
+            me.rebuildForm();
+            me.globals.unMaskScreen();
+            me.toastr.success(`Sesión ${savedSession.name} guardada correctamente.`);
+          });
         }
       });
   }
