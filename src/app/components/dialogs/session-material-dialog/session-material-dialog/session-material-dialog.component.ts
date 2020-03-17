@@ -43,7 +43,7 @@ export class SessionMaterialDialogComponent implements OnInit {
     const me = this;
 
     me.getFormData();
-    me.dialogRef.close(true);
+    me.dialogRef.close(me.data.sessionMaterial);
   }
 
   onCancelClick(): void {

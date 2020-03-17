@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SessionMaterialDialogComponent } from 'src/app/components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
 import { Material } from 'src/app/models/material';
 import { DeleteDialogComponent } from 'src/app/components/dialogs/delete-dialog/delete-dialog.component';
+import { GlobalsService } from 'src/app/globals/globals.service';
 
 @Component({
   selector: 'app-session-details-materials',
@@ -27,7 +28,8 @@ export class SessionDetailsMaterialsComponent implements OnInit{
 
   constructor(
     private dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    protected globals: GlobalsService
   ) { 
     const me = this;
 
@@ -53,7 +55,25 @@ export class SessionDetailsMaterialsComponent implements OnInit{
   }
 
   onAddSessionMaterial() {
-    this.toastr.warning('To be implemented.');
+    const me = this;
+    let dialogRef,
+        newSessionMaterial = new SessionMaterial();
+      
+    newSessionMaterial.session = me.globals.selectedSession._id;
+    newSessionMaterial.userName = me.globals.userNameLogged;
+    newSessionMaterial.time = 0;
+    newSessionMaterial.distance =0;
+
+    dialogRef = me.dialog.open(SessionMaterialDialogComponent, {
+        width: '450px',
+        data: { sessionMaterial: newSessionMaterial, materials: me.materials }
+      });
+      dialogRef.afterClosed().subscribe(sessionMaterial => {
+        if (sessionMaterial) {
+          me.dataSource.data.push(sessionMaterial);
+          me.updatedSessionDetailMaterials.emit(me.dataSource.data)
+        }
+      });
   }
 
   onEditSessionMaterial() {

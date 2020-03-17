@@ -4,7 +4,7 @@ import { Material } from './material';
 export class SessionMaterial {
     _id : String;
     userName: String;
-    session: Session;
+    session: String;
     material: Material;
     materialName: String;
     materialTypeName: String;

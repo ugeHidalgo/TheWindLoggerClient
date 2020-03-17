@@ -147,8 +147,8 @@ export class SessionDetailsComponent implements OnInit {
 
     if (sessionMaterials) {
       me.dataSource = new MatTableDataSource<SessionMaterial>(sessionMaterials);
-      me.hasChangedMaterials = true;
     }
+    me.hasChangedMaterials = true;
   }
 
   // FormModel methods
