@@ -4,4 +4,6 @@ import { Material } from 'src/app/models/material';
 export interface SessionMaterialDialogData {
     materials: Material[];
     sessionMaterial: SessionMaterial;
+    sessionDistance: number;
+    sessionTime: number;
   }

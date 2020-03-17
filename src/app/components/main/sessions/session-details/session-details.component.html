@@ -181,10 +181,13 @@
             </mat-grid-tile>
 
         </mat-grid-list>
+
         <div *ngIf="materialsLoaded">
             <app-session-details-materials 
                 [materials]=materials
                 [dataSource]=dataSource
+                [sessionTime]=session.sessionTime
+                [sessionDistance]=session.sessionDistance
                 on-updatedSessionDetailMaterials="onUpdatedSessionDetailMaterials($event)">
             </app-session-details-materials>
         </div>

@@ -16,6 +16,8 @@ export class SessionDetailsMaterialsComponent implements OnInit{
 
   @Input() materials: Material[];
   @Input() dataSource: MatTableDataSource<SessionMaterial>;
+  @Input() sessionTime: Number;
+  @Input() sessionDistance: Number;
 
   @Output() updatedSessionDetailMaterials = new EventEmitter();
 
@@ -66,7 +68,11 @@ export class SessionDetailsMaterialsComponent implements OnInit{
 
     dialogRef = me.dialog.open(SessionMaterialDialogComponent, {
         width: '450px',
-        data: { sessionMaterial: newSessionMaterial, materials: me.materials }
+        data: { 
+          sessionMaterial: newSessionMaterial, 
+          materials: me.materials,
+          sessionTime: me.sessionTime,
+          sessionDistance: me.sessionDistance }
       });
       dialogRef.afterClosed().subscribe(sessionMaterial => {
         if (sessionMaterial) {
@@ -87,7 +93,11 @@ export class SessionDetailsMaterialsComponent implements OnInit{
 
     dialogRef = me.dialog.open(SessionMaterialDialogComponent, {
         width: '450px',
-        data: { sessionMaterial: me.selectedMaterial, materials: me.materials }
+        data: { 
+          sessionMaterial: me.selectedMaterial,
+          materials: me.materials,
+          sessionTime: me.sessionTime,
+          sessionDistance: me.sessionDistance  }
       });
       dialogRef.afterClosed().subscribe(hasChanges => {
         if (hasChanges) {

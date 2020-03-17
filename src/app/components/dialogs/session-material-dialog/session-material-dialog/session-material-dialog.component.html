@@ -6,7 +6,7 @@
             <mat-grid-tile [colspan]="3" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Material:</mat-label>
-                    <mat-select placeholder="Material: " formControlName="material"  (selectionChange)="onMaterialChanged($event)" required>
+                    <mat-select placeholder="Material: " formControlName="material" (selectionChange)="onMaterialChanged($event)" required>
                         <mat-option *ngFor="let material of data.materials" [(value)]=material.name>
                             {{material.name}} : {{material.description}}
                         </mat-option>
@@ -28,7 +28,8 @@
             <mat-grid-tile [colspan]="2" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>% uso:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="% uso:" formControlName="usePercentage" type="number">
+                    <input matInput class="my-numeric-field" placeholder="% uso:" formControlName="usePercentage"
+                                    type="number" (change)="onUsePercentageChanged($event)">
                     <mat-error *ngFor="let validation of validationMessages.usePercentage">
                         <mat-error align="end" *ngIf="isInvalidField('usePercentage',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>

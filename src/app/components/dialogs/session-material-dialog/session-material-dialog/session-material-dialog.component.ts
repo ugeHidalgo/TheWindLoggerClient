@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { SessionMaterial } from 'src/app/models/sessionMaterial';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { Material } from 'src/app/models/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -60,6 +59,34 @@ export class SessionMaterialDialogComponent implements OnInit {
       materialTypeName = material.materialType.name;
     }
     me.validatingForm.get('materialType').setValue(materialTypeName);
+  }
+
+  onUsePercentageChanged(usePercentage: any): void {
+    const me = this,
+          percentValue = usePercentage.target.valueAsNumber;
+          
+    me.setValueOnPercentChange('distance', percentValue, me.data.sessionDistance);
+    me.setValueOnPercentChange('time', percentValue, me.data.sessionTime);
+  }
+
+  setValueOnPercentChange(fieldName, percent, totalValue) {
+    const me = this,
+          value =  me.calculatePartialValue(percent, totalValue);
+    let formattedValue: any;
+
+    if (fieldName === 'distance') {
+      formattedValue = me.formattersHelper.decimalFormatter(value);
+    }
+
+    if (fieldName === 'time') {
+      formattedValue = me.formattersHelper.secondsToTimeFormatter(value);
+    }
+
+    me.validatingForm.get(fieldName).setValue(formattedValue);
+  }
+
+  calculatePartialValue(percent, total) : number {
+    return percent * total / 100;
   }
 
   // FormModel methods
