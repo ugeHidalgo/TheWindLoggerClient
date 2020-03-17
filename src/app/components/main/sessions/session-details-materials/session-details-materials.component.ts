@@ -4,6 +4,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 import { ToastrService } from 'ngx-toastr';
 import { SessionMaterialDialogComponent } from 'src/app/components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
 import { Material } from 'src/app/models/material';
+import { DeleteDialogComponent } from 'src/app/components/dialogs/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-session-details-materials',
@@ -26,7 +27,7 @@ export class SessionDetailsMaterialsComponent implements OnInit{
 
   constructor(
     private dialog: MatDialog,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) { 
     const me = this;
 
@@ -76,7 +77,36 @@ export class SessionDetailsMaterialsComponent implements OnInit{
   }
 
   onDeleteSessionMaterial() {
-    this.toastr.warning('To be implemented.');
+    const me = this;
+    let dialogRef;
+
+    if (me.selectedRowId==='-1') {
+      me.toastr.error('Debe seleccionar un material para borrar.');
+      return;
+    }
+
+    dialogRef = me.dialog.open(DeleteDialogComponent, {
+        width: '250px',
+        data: {
+          title: 'Confirmar',
+          message: 'Va a borrar el material selecciopnado. ¿Está seguro?'
+        }
+      });
+      dialogRef.afterClosed().subscribe(confirmed => {
+        if (confirmed) {
+          me.onDeleteConfirmed();
+        }
+      });
+  }
+
+  onDeleteConfirmed() {
+    const me = this,
+          index = me.dataSource.data.findIndex(x=>x._id === me.selectedRowId);
+
+    if (index !== -1) {
+      me.dataSource.data.splice(index, 1);
+      me.updatedSessionDetailMaterials.emit(me.dataSource.data);
+    }
   }
 
 }

@@ -142,8 +142,13 @@ export class SessionDetailsComponent implements OnInit {
   }
 
   // Custom events
-  onUpdatedSessionDetailMaterials(): void {
-    this.hasChangedMaterials = true;
+  onUpdatedSessionDetailMaterials(sessionMaterials: SessionMaterial[]): void {
+    const me = this;
+
+    if (sessionMaterials) {
+      me.dataSource = new MatTableDataSource<SessionMaterial>(sessionMaterials);
+      me.hasChangedMaterials = true;
+    }
   }
 
   // FormModel methods
