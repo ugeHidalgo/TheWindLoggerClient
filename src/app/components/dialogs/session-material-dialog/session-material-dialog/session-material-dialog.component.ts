@@ -69,6 +69,22 @@ export class SessionMaterialDialogComponent implements OnInit {
     me.setValueOnPercentChange('time', percentValue, me.data.sessionTime);
   }
 
+  onTimeChanged(distance: any): void {
+    const me = this,
+          timeValue = me.formattersHelper.timeToSecondsFormatter(distance.target.value);
+          
+    me.setValueOnTimeChange('usePercentage', timeValue, me.data.sessionTime);
+    me.setValueOnPercentChange('distance', me.validatingForm.value.usePercentage, me.data.sessionDistance);
+  }
+
+  onDistanceChanged(distance: any): void {
+    const me = this,
+          distanceValue = distance.target.valueAsNumber;
+          
+    me.setValueOnDistanceChange('usePercentage', distanceValue, me.data.sessionDistance);
+    me.setValueOnPercentChange('time', me.validatingForm.value.usePercentage, me.data.sessionTime);
+  }
+
   setValueOnPercentChange(fieldName, percent, totalValue) {
     const me = this,
           value =  me.calculatePartialValue(percent, totalValue);
@@ -83,6 +99,28 @@ export class SessionMaterialDialogComponent implements OnInit {
     }
 
     me.validatingForm.get(fieldName).setValue(formattedValue);
+  }
+
+  setValueOnDistanceChange(fieldName, distance, totalDistance) {
+    const me = this,
+          value =  distance * 100 / totalDistance;
+    let formattedValue: any;
+
+    if (fieldName === 'usePercentage') {
+      formattedValue = me.formattersHelper.decimalFormatter(value, "1.0-0");
+      me.validatingForm.get(fieldName).setValue(formattedValue);
+    }
+  }
+
+  setValueOnTimeChange(fieldName, time, totalTime) {
+    const me = this,
+          value =  time * 100 / totalTime;
+    let formattedValue: any;
+
+    if (fieldName === 'usePercentage') {
+      formattedValue = me.formattersHelper.decimalFormatter(value, "1.0-0");
+      me.validatingForm.get(fieldName).setValue(formattedValue);
+    }
   }
 
   calculatePartialValue(percent, total) : number {
