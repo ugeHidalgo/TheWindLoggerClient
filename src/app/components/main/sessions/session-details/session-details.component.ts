@@ -222,6 +222,20 @@ export class SessionDetailsComponent implements OnInit {
     return newSession;
   }
 
+  getDistanceInForm(): Number {
+    const me = this,
+          formModel = me.validatingForm.value;
+
+    return formModel.distance ==='' ? 0 : formModel.distance;
+  }
+
+  getTimeInForm(): Number {
+    const me = this,
+          formModel = me.validatingForm.value;
+
+    return  me.formattersHelper.timeToSecondsFormatter(formModel.time);
+  }
+
   getSportByName(name): Sport {
     return this.sports.find( function(x) { return x.name === name; });
   }

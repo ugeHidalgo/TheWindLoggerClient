@@ -186,8 +186,8 @@
             <app-session-details-materials 
                 [materials]=materials
                 [dataSource]=dataSource
-                [sessionTime]=session.sessionTime
-                [sessionDistance]=session.sessionDistance
+                [sessionTime]=getTimeInForm()
+                [sessionDistance]=getDistanceInForm()
                 on-updatedSessionDetailMaterials="onUpdatedSessionDetailMaterials($event)">
             </app-session-details-materials>
         </div>
