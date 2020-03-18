@@ -86,7 +86,8 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Tiempo:</mat-label>
-                    <input  matInput class="my-numeric-field" placeholder="Tiempo:" formControlName="time" required>
+                    <input  matInput class="my-numeric-field" placeholder="Tiempo:" formControlName="time" 
+                            (change)="onChangedTime($event)" required>
                     <mat-error *ngFor="let validation of validationMessages.time">
                         <mat-error align="end" *ngIf="isInvalidField('time',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>
@@ -96,7 +97,8 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Distancia:</mat-label>
-                    <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="distance" required>
+                    <input matInput class="my-numeric-field" placeholder="Distancia:" formControlName="distance" 
+                          (change)="onChangedDistance($event)" type="number" required>
                     <mat-error *ngFor="let validation of validationMessages.distance">
                         <mat-error align="end" *ngIf="isInvalidField('distance',validation.type)">{{validation.message}}</mat-error>
                     </mat-error>

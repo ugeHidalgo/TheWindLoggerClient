@@ -19,6 +19,7 @@ import { MaterialsService } from 'src/app/services/materials/materials-service.s
 import { ValidateTime } from 'src/app/validators/time.validator';
 import { ValidationMessagesList } from 'src/app/tools/validationMessages.list';
 import { SessionsService } from 'src/app/services/sessions/sessions.service';
+import { ɵAnimationGroupPlayer } from '@angular/animations';
 
 @Component({
   selector: 'app-session-details',
@@ -139,6 +140,26 @@ export class SessionDetailsComponent implements OnInit {
           });
         }
       });
+  }
+
+  onChangedDistance(value: any) {
+    const me = this,
+          sessionDistance = value.target.valueAsNumber,
+          materials = me.dataSource.data;
+    materials.forEach(material=>{
+      material.distance = material.usePercentage  * sessionDistance / 100;
+    });
+    me.dataSource = new MatTableDataSource<SessionMaterial>(materials);
+  }
+
+  onChangedTime(value: any) {
+    const me = this,
+          sessionTime =  me.formattersHelper.timeToSecondsFormatter(value.target.value),
+          materials = me.dataSource.data;
+    materials.forEach(material=>{
+      material.time = material.usePercentage  * sessionTime / 100;
+    });
+    me.dataSource = new MatTableDataSource<SessionMaterial>(materials);
   }
 
   // Custom events
