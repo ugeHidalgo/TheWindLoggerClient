@@ -7,6 +7,7 @@ import { FormattersHelper } from 'src/app/tools/formaters.helper';
 import { ValidationMessagesList } from 'src/app/tools/validationMessages.list';
 import { ValidateTime } from 'src/app/validators/time.validator';
 import { SessionMaterialDialogData } from './session-material-dialog.data';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-session-material-dialog',
@@ -19,6 +20,7 @@ export class SessionMaterialDialogComponent implements OnInit {
   validationMessages = ValidationMessagesList.messages;
 
   constructor(
+    private toastr: ToastrService,
     protected globals: GlobalsService,
     private formattersHelper: FormattersHelper,
     public dialogRef: MatDialogRef<SessionMaterialDialogComponent>,
@@ -64,67 +66,68 @@ export class SessionMaterialDialogComponent implements OnInit {
   onUsePercentageChanged(usePercentage: any): void {
     const me = this,
           percentValue = usePercentage.target.valueAsNumber;
-          
-    me.setValueOnPercentChange('distance', percentValue, me.data.sessionDistance);
-    me.setValueOnPercentChange('time', percentValue, me.data.sessionTime);
+
+    if (percentValue > 100) {
+      return;
+    }
+
+    me.setFieldValue('distance', percentValue, me.data.sessionDistance);
+    me.setFieldValue('time', percentValue, me.data.sessionTime);
   }
 
   onTimeChanged(distance: any): void {
-    const me = this,
-          timeValue = me.formattersHelper.timeToSecondsFormatter(distance.target.value);
-          
-    me.setValueOnTimeChange('usePercentage', timeValue, me.data.sessionTime);
-    me.setValueOnPercentChange('distance', me.validatingForm.value.usePercentage, me.data.sessionDistance);
+    const me = this;
+    let timeValue = me.formattersHelper.timeToSecondsFormatter(distance.target.value),
+        formattedValue;
+
+    if (timeValue > me.data.sessionTime) {
+      timeValue = me.data.sessionTime;
+      formattedValue = me.formattersHelper.secondsToTimeFormatter(me.data.sessionTime);
+      me.validatingForm.get('time').setValue(formattedValue);
+      me.toastr.warning('No se puede sobrepasar el tiempo de la sessión.');
+    }
+
+    me.setPercentageFieldValue(timeValue, me.data.sessionTime);
+    me.setFieldValue('distance', me.validatingForm.value.usePercentage, me.data.sessionDistance);
   }
 
   onDistanceChanged(distance: any): void {
-    const me = this,
-          distanceValue = distance.target.valueAsNumber;
-          
-    me.setValueOnDistanceChange('usePercentage', distanceValue, me.data.sessionDistance);
-    me.setValueOnPercentChange('time', me.validatingForm.value.usePercentage, me.data.sessionTime);
+    const me = this;
+    let distanceValue = distance.target.valueAsNumber;
+
+    if (distanceValue > me.data.sessionDistance) {
+      distanceValue = me.data.sessionDistance;
+      me.validatingForm.get('distance').setValue(me.data.sessionDistance);
+      me.toastr.warning('No se puede sobrepasar la distancia de la sessión.');
+    }
+
+    me.setPercentageFieldValue(distanceValue, me.data.sessionDistance);
+    me.setFieldValue('time', me.validatingForm.value.usePercentage, me.data.sessionTime);
   }
 
-  setValueOnPercentChange(fieldName, percent, totalValue) {
-    const me = this,
-          value =  me.calculatePartialValue(percent, totalValue);
-    let formattedValue: any;
+  setFieldValue(fieldName, value, totalValue) {
+    const me = this;
+    let newValue =  value * totalValue / 100, 
+        formattedValue: any;
 
     if (fieldName === 'distance') {
-      formattedValue = me.formattersHelper.decimalFormatter(value);
+      formattedValue = me.formattersHelper.decimalFormatter(newValue);
     }
 
     if (fieldName === 'time') {
-      formattedValue = me.formattersHelper.secondsToTimeFormatter(value);
+      formattedValue = me.formattersHelper.secondsToTimeFormatter(newValue);
     }
 
     me.validatingForm.get(fieldName).setValue(formattedValue);
   }
 
-  setValueOnDistanceChange(fieldName, distance, totalDistance) {
-    const me = this,
-          value =  distance * 100 / totalDistance;
-    let formattedValue: any;
+  setPercentageFieldValue(value, totalValue) {
+    const me = this;  
+    let newValue=  value * 100 / totalValue, 
+        formattedValue: any;
 
-    if (fieldName === 'usePercentage') {
-      formattedValue = me.formattersHelper.decimalFormatter(value, "1.0-0");
-      me.validatingForm.get(fieldName).setValue(formattedValue);
-    }
-  }
-
-  setValueOnTimeChange(fieldName, time, totalTime) {
-    const me = this,
-          value =  time * 100 / totalTime;
-    let formattedValue: any;
-
-    if (fieldName === 'usePercentage') {
-      formattedValue = me.formattersHelper.decimalFormatter(value, "1.0-0");
-      me.validatingForm.get(fieldName).setValue(formattedValue);
-    }
-  }
-
-  calculatePartialValue(percent, total) : number {
-    return percent * total / 100;
+    formattedValue = me.formattersHelper.decimalFormatter(newValue, "1.0-0");
+    me.validatingForm.get('usePercentage').setValue(formattedValue);
   }
 
   // FormModel methods
@@ -135,7 +138,7 @@ export class SessionMaterialDialogComponent implements OnInit {
       material: new FormControl('', [Validators.required]),
       materialType:  new FormControl('', []),
       time: new FormControl('', { validators: Validators.compose([Validators.required, ValidateTime])}),
-      distance: new FormControl('', [Validators.required]),
+      distance: new FormControl('', { validators: Validators.compose([Validators.required, Validators.min(0)])}),
       usePercentage: new FormControl('', { validators: Validators.compose([Validators.required, Validators.max(100), Validators.min(1)])})
     },
     { updateOn: 'blur'});
