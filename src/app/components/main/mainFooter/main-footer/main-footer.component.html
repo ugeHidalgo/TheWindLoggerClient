@@ -1,6 +1,30 @@
-<div class="card highlight-card card-small">
-    <img id="windlogger-logo" alt="WindLogger logo" src="https://img.icons8.com/ios-filled/50/000000/strategy-game.png">
 
-    <div><h5><span>TheWindLogger app</span> by UgeHidalgo 2020.</h5></div>
-    <div *ngIf="globals.server && globals.showServerUrl"><h5>{{globals.server}}</h5></div>
-</div>
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <div class="footer-icons">
+            <div>
+                <img id="windlogger-logo" alt="WindLogger logo" src="https://img.icons8.com/ios-filled/50/000000/strategy-game.png">
+            </div>
+            <div>
+                <h5>TheWind<span>Logger</span></h5>
+            </div>
+        </div>
+        <p class="footer-company-name">By UgeHidalgo &copy; 2020</p>
+    </div>
+
+    <div class="footer-right">
+
+        <div class="footer-icons">
+            <a href="mailto:ehidalgo@hotmail.com"><i class="material-icons">arrow_back</i></a>
+            <a href="#"><i class="material-icons">arrow_back</i></a>
+            <a href="#"><i class="material-icons">arrow_back</i></a>
+        </div>
+
+        <p class="footer-app-status" *ngIf="globals.server && globals.showServerUrl">
+            Server @ {{globals.server}}
+        </p>
+    </div>
+
+</footer>

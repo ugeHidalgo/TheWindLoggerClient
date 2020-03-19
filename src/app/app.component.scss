@@ -30,6 +30,21 @@ p {
   align-items: center;
 }
 
+footer {
+  width: 100vw;
+  height: 100px;
+  margin-top: 8px;
+  display: inline-block;
+  align-items: center;
+  line-height: 20px;
+  opacity: 0.7;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+}
+
 svg#clouds {
   position: fixed;
   bottom: -160px;
@@ -58,7 +73,7 @@ a:hover {
 #screen-container {
   width: 100vw;
   height: 100vh;
-  margin: 0px;
+  margin: 2px;
   position: relative;
   text-align:center;
 }
