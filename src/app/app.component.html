@@ -46,11 +46,9 @@
     <div class="content" role="main">
 
       <router-outlet></router-outlet>
-
       <!-- Footer -->
       <footer>
-          <div><h5>By UgeHidalgo 2020.</h5></div>
-          <div *ngIf="globals.server && globals.showServerUrl"><h5>{{globals.server}}</h5></div>
+          <app-main-footer></app-main-footer>
       </footer>
 
       <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">

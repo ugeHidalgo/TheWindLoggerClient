@@ -46,6 +46,7 @@ import { SpotsService } from './services/spots/spots.service';
 import { FormattersHelper } from './tools/formaters.helper';
 import { SessionDetailsMaterialsComponent } from './components/main/sessions/session-details-materials/session-details-materials.component';
 import { SessionMaterialDialogComponent } from './components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
+import { MainFooterComponent } from './components/main/mainFooter/main-footer/main-footer.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { SessionMaterialDialogComponent } from './components/dialogs/session-mat
     ImportDataComponent,
     SportsComponent,
     SportTypesComponent,
-    SecondsToTimePipe
+    SecondsToTimePipe,
+    MainFooterComponent
   ],
   imports: [
     GlobalRoutingModule,

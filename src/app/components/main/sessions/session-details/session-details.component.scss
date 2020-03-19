@@ -2,17 +2,18 @@
     max-width: 900px;
     min-width: 600px;
     width: 100%;
-    padding: 10px 10px 20px 10px;
+    padding: 0px 10px 20px 10px;
   }
   
-  .card-title {
-    border-radius: 4px;
+   .card-title {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
     border: none;
     background-color: #95d420;
     color: black;
     height: 16px;
     width: auto;
-    min-width: 30%;
+    min-width: 20%;
     position: relative;
     margin: 0px;
     padding-top: 5px;
@@ -24,7 +25,7 @@
     transition: all 0.2s ease-in-out;
     line-height: 24px;
     font-weight: 600;
-  }
+  } 
   
   .my-header-bar > * {
     margin-right: 10px;
