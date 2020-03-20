@@ -17,9 +17,10 @@
     <div class="footer-right">
 
         <div class="footer-icons">
-            <a href="mailto:ehidalgo@hotmail.com"><i class="material-icons">arrow_back</i></a>
-            <a href="#"><i class="material-icons">arrow_back</i></a>
-            <a href="#"><i class="material-icons">arrow_back</i></a>
+            <a routerLink="/mainscreen"><mat-icon svgIcon="home"></mat-icon></a>
+            <a href="mailto:ehidalgo@hotmail.com"><mat-icon svgIcon="email"></mat-icon></a>
+            <a href="https://github.com/ugeHidalgo" target="_blank"><mat-icon svgIcon="github"></mat-icon></a>
+            <a href="https://www.linkedin.com/in/ugehidalgo/" target="_blank"><mat-icon svgIcon="linkedin"></mat-icon></a>
         </div>
 
         <p class="footer-app-status" *ngIf="globals.server && globals.showServerUrl">

@@ -45,7 +45,8 @@ import { FormsModule } from '@angular/forms';
     MatSortModule,
     MatTableModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatIconModule
   ],
 
   exports: [
@@ -68,7 +69,8 @@ import { FormsModule } from '@angular/forms';
     MatSortModule,
     MatTableModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatIconModule
   ]
 })
 
