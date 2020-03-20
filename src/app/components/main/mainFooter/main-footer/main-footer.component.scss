@@ -14,7 +14,7 @@ section {
 }
 
 .footer-distributed{
-	background: white;
+	background: transparent;
 	box-sizing: border-box;
 	width: 100%;
 	text-align: center;
@@ -36,7 +36,7 @@ section {
 
 .footer-distributed .footer-icons div {
 	display: inline-block;
-	background-color:  white;
+	background-color:  transparent;
 	color: #ffffff;
 	text-align: center;
 }
@@ -116,7 +116,7 @@ img {
 	width: 35px;
 	height: 35px;
 	cursor: pointer;
-	background-color:  white;
+	background-color:  transparent;
 	border-radius: 2px;
 
 	font-size: 20px;
