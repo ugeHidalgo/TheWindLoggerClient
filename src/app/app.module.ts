@@ -47,6 +47,7 @@ import { FormattersHelper } from './tools/formaters.helper';
 import { SessionDetailsMaterialsComponent } from './components/main/sessions/session-details-materials/session-details-materials.component';
 import { SessionMaterialDialogComponent } from './components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
 import { MainFooterComponent } from './components/main/mainFooter/main-footer/main-footer.component';
+import { SessionsInfoComponent } from './components/info/sessions-info/sessions-info.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { MainFooterComponent } from './components/main/mainFooter/main-footer/ma
     SportsComponent,
     SportTypesComponent,
     SecondsToTimePipe,
-    MainFooterComponent
+    MainFooterComponent,
+    SessionsInfoComponent
   ],
   imports: [
     GlobalRoutingModule,

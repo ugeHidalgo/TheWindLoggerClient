@@ -18,7 +18,8 @@ import {
   MatSortModule,
   MatTableModule,
   MatDialogModule,
-  MatGridListModule
+  MatGridListModule,
+  MatButtonToggleModule
 } from  '@angular/material';
 import { FormsModule } from '@angular/forms';
 
@@ -46,7 +47,8 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatDialogModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonToggleModule
   ],
 
   exports: [
@@ -70,7 +72,8 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatDialogModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonToggleModule
   ]
 })
 
