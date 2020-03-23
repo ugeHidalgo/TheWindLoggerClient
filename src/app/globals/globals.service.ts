@@ -13,9 +13,9 @@ export class GlobalsService {
 
   selectedSession: Session;
 
-  server = 'https://thewindloggerserver.herokuapp.com/';  //To be used when API is in production
+  //server = 'https://thewindloggerserver.herokuapp.com/';  //To be used when API is in production
   //server = 'http://192.168.1.106:3000/';  //To be used when API is in development mode and in local network server.
-  //server = 'http://localhost:3000/';  // To be used when API is in development mode and without connection to any network
+  server = 'http://localhost:3000/';  // To be used when API is in development mode and without connection to any network
   showServerUrl:boolean = true;
 
   constructor() {

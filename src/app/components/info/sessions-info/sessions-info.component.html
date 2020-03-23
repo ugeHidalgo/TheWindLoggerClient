@@ -20,18 +20,18 @@
             <mat-grid-list cols="3" rowHeight="70px">
                 <!---------------- Row 1 ----------------->
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-button-toggle-group #searchTypeGroup="matButtonToggleGroup" value="week">
+                    <mat-button-toggle-group #group="matButtonToggleGroup" value="week" (change)="onSearchPeriodTypeChange(group.value)">
                         <mat-button-toggle value="year" aria-label="Año">Año</mat-button-toggle>
                         <mat-button-toggle value="month" aria-label="Mes">Mes</mat-button-toggle>
                         <mat-button-toggle value="week" aria-label="Semana">Sem.</mat-button-toggle>
-                        <mat-button-toggle value="manual" aria-label="Manual">Man.</mat-button-toggle>
                       </mat-button-toggle-group>
                 </mat-grid-tile>
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-form-field>
                         <mat-label>Desde:</mat-label>
-                        <input matInput [matDatepicker]="fromPicker" placeholder="Desde:" formControlName="fromDate" required>
+                        <input matInput [matDatepicker]="fromPicker" placeholder="Desde:" formControlName="dateFrom" 
+                               (change)="onDateFromChanged()" required>
                         <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
                         <mat-datepicker #fromPicker></mat-datepicker>
                     </mat-form-field>
@@ -40,7 +40,7 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-form-field>
                         <mat-label>Hasta:</mat-label>
-                        <input matInput [matDatepicker]="toPicker" placeholder="Hasta:" formControlName="toDate" required>
+                        <input matInput [matDatepicker]="toPicker" placeholder="Hasta:" formControlName="dateTo" required>
                         <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
                         <mat-datepicker #toPicker></mat-datepicker>
                     </mat-form-field>
