@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { SessionFilterData } from 'src/app/models/sessionFilterData';
 import * as moment from 'moment';
+import { SessionsService } from 'src/app/services/sessions/sessions.service';
+import { Session } from 'src/app/models/session';
+import { ToastrService } from 'ngx-toastr';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-sessions-info',
@@ -13,12 +17,23 @@ export class SessionsInfoComponent implements OnInit {
 
   userName: string;
   validatingForm: FormGroup;
-  sessionFilterData: SessionFilterData
+  sessionFilterData: SessionFilterData;
+  sessions: Session[];
+  displayedColumns: string[];
+  displayedFooterColumns: string[];
+  dataSource: MatTableDataSource<Session>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    protected globals: GlobalsService
+    protected globals: GlobalsService,
+    protected sessionsService: SessionsService,
+    protected toastr: ToastrService
   ) {
     const me = this;
+
+    me.displayedColumns = ['sessionDate', 'name', 'sportName', 'spotName', 'sessionTime', 'sessionDistance','maxSpeed', 'medSpeed'];
 
     me.createForm();
     me.sessionFilterData = new SessionFilterData();
@@ -32,6 +47,8 @@ export class SessionsInfoComponent implements OnInit {
 
     me.writeDateFromInForm();
     me.writeDateToInForm();
+
+    me.onClickSearchButton();
   }
 
   //Screen events
@@ -48,8 +65,26 @@ export class SessionsInfoComponent implements OnInit {
         }
   }
 
-  onDateFromChanged() {
-    
+  onClickSearchButton() {
+    var me = this;
+
+    me.globals.maskScreen();
+
+    me.sessionFilterData.dateFrom = me.getDateFrom();
+    me.sessionFilterData.dateTo = me.getDateTo();
+
+    me.sessionsService.getFilteredSessions(me.sessionFilterData)
+      .subscribe(sessions => {
+        me.sessions = sessions;
+        me.dataSource = new MatTableDataSource<Session>(sessions);
+        me.dataSource.paginator = me.paginator;
+        me.dataSource.sort = me.sort;
+        me.globals.unMaskScreen();
+      },
+      error => {
+        me.globals.unMaskScreen();
+        me.toastr.error(error.message);
+      });
   }
 
   // FormModel methods
@@ -63,7 +98,7 @@ export class SessionsInfoComponent implements OnInit {
     { updateOn: 'blur'});
   }
 
-  getDateFrom(): Date {
+  getDateFrom(): string {
     const me = this,
           formModel = me.validatingForm.value;
 
@@ -76,7 +111,7 @@ export class SessionsInfoComponent implements OnInit {
     me.validatingForm.patchValue({dateFrom: me.sessionFilterData.dateFrom })
   }
 
-  getDateTo(): Date {
+  getDateTo(): string {
     const me = this,
           formModel = me.validatingForm.value;
 
