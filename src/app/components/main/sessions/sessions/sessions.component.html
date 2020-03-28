@@ -2,6 +2,9 @@
     <div class="card-header">
         <div class="grid-title">Sesiones</div>
         <mat-toolbar color="primary" class="my-header-bar">
+          <button  mat-raised-button color="green" (click)="onClickSearchButton()" type="submit">
+            <i class="material-icons">flash_on</i>
+          </button>
           <button mat-raised-button color="primary" (click)="onClickAddButton()">
             <i class="material-icons">note_add</i>
           </button>
@@ -18,6 +21,38 @@
         </mat-toolbar>
     </div>
     <div class="card-body">
+      <form [formGroup]="validatingForm">
+        <mat-grid-list cols="3" rowHeight="70px">
+            <!---------------- Row 1 ----------------->
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-button-toggle-group #group="matButtonToggleGroup" value="week" (change)="onSearchPeriodTypeChange(group.value)">
+                    <mat-button-toggle value="year" aria-label="Año">Año</mat-button-toggle>
+                    <mat-button-toggle value="month" aria-label="Mes">Mes</mat-button-toggle>
+                    <mat-button-toggle value="week" aria-label="Semana">Sem.</mat-button-toggle>
+                  </mat-button-toggle-group>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>Desde:</mat-label>
+                    <input matInput [matDatepicker]="fromPicker" placeholder="Desde:" formControlName="dateFrom" 
+                           (change)="onDateFromChanged()" required>
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>Hasta:</mat-label>
+                    <input matInput [matDatepicker]="toPicker" placeholder="Hasta:" formControlName="dateTo" required>
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+
       <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="sessionDate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Fecha</h3></th>
