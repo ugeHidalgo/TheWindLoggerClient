@@ -7,6 +7,8 @@ import { SessionsService } from 'src/app/services/sessions/sessions.service';
 import { Session } from 'src/app/models/session';
 import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { SessionsInfo } from 'src/app/models/sessionsInfo';
+import { FormattersHelper } from 'src/app/tools/formaters.helper';
 
 @Component({
   selector: 'app-sessions-info',
@@ -18,7 +20,7 @@ export class SessionsInfoComponent implements OnInit {
   userName: string;
   validatingForm: FormGroup;
   sessionFilterData: SessionFilterData;
-  sessions: Session[];
+  sessionsInfo: SessionsInfo;
   displayedColumns: string[];
   displayedFooterColumns: string[];
   dataSource: MatTableDataSource<Session>;
@@ -29,11 +31,10 @@ export class SessionsInfoComponent implements OnInit {
   constructor(
     protected globals: GlobalsService,
     protected sessionsService: SessionsService,
-    protected toastr: ToastrService
+    protected toastr: ToastrService,
+    private formattersHelper: FormattersHelper
   ) {
     const me = this;
-
-    me.displayedColumns = ['sessionDate', 'name', 'sportName', 'spotName', 'sessionTime', 'sessionDistance','maxSpeed', 'medSpeed'];
 
     me.createForm();
     me.sessionFilterData = new SessionFilterData();
@@ -73,12 +74,10 @@ export class SessionsInfoComponent implements OnInit {
     me.sessionFilterData.dateFrom = me.getDateFrom();
     me.sessionFilterData.dateTo = me.getDateTo();
 
-    me.sessionsService.getFilteredSessions(me.sessionFilterData)
-      .subscribe(sessions => {
-        me.sessions = sessions;
-        me.dataSource = new MatTableDataSource<Session>(sessions);
-        me.dataSource.paginator = me.paginator;
-        me.dataSource.sort = me.sort;
+    me.sessionsService.getSessionsInfo(me.sessionFilterData)
+      .subscribe(sessionsInfo => {
+        me.sessionsInfo = sessionsInfo;
+        me.rebuildForm();
         me.globals.unMaskScreen();
       },
       error => {
@@ -93,9 +92,32 @@ export class SessionsInfoComponent implements OnInit {
 
     me.validatingForm = new FormGroup({
       dateFrom: new FormControl('', [Validators.required]),
-      dateTo: new FormControl('', [Validators.required])
+      dateTo: new FormControl('', [Validators.required]),
+      sessions: new FormControl('', []),
+      distance: new FormControl('', []),
+      maxDistance: new FormControl('', []),
+      medDistance: new FormControl('', []),
+      time: new FormControl('', []),
+      maxTime: new FormControl('', []),
+      medTime: new FormControl('', []),
+      vmax: new FormControl('', []),
+      vmed: new FormControl('', [])
     },
     { updateOn: 'blur'});
+  }
+
+  rebuildForm() {
+    const me = this;
+
+    me.validatingForm.patchValue({sessions: me.formattersHelper.decimalFormatter(me.sessionsInfo.sessions)});
+    me.validatingForm.patchValue({distance: me.formattersHelper.decimalFormatter(me.sessionsInfo.distance)});
+    me.validatingForm.patchValue({maxDistance: me.formattersHelper.decimalFormatter(me.sessionsInfo.maxDistance)});
+    me.validatingForm.patchValue({medDistance: me.formattersHelper.decimalFormatter(me.sessionsInfo.medDistance)});
+    me.validatingForm.patchValue({time: me.formattersHelper.secondsToTimeFormatter(me.sessionsInfo.time)});
+    me.validatingForm.patchValue({maxTime: me.formattersHelper.secondsToTimeFormatter(me.sessionsInfo.maxTime)});
+    me.validatingForm.patchValue({medTime: me.formattersHelper.secondsToTimeFormatter(me.sessionsInfo.medTime)});
+    me.validatingForm.patchValue({vmax: me.formattersHelper.decimalFormatter(me.sessionsInfo.maxSpeed)});
+    me.validatingForm.patchValue({vmed: me.formattersHelper.decimalFormatter(me.sessionsInfo.medSpeed)});
   }
 
   getDateFrom(): string {

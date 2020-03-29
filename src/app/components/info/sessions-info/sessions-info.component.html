@@ -17,13 +17,13 @@
 
     <div class="card-body">
         <form [formGroup]="validatingForm">
-            <mat-grid-list cols="3" rowHeight="70px">
+            <mat-grid-list cols="4" rowHeight="70px">
                 <!---------------- Row 1 ----------------->
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-button-toggle-group #group="matButtonToggleGroup" value="week" (change)="onSearchPeriodTypeChange(group.value)">
-                        <mat-button-toggle value="year" aria-label="Año">Año</mat-button-toggle>
-                        <mat-button-toggle value="month" aria-label="Mes">Mes</mat-button-toggle>
-                        <mat-button-toggle value="week" aria-label="Semana">Sem.</mat-button-toggle>
+                        <mat-button-toggle value="year" aria-label="Año">A</mat-button-toggle>
+                        <mat-button-toggle value="month" aria-label="Mes">M</mat-button-toggle>
+                        <mat-button-toggle value="week" aria-label="Semana">S</mat-button-toggle>
                       </mat-button-toggle-group>
                 </mat-grid-tile>
 
@@ -45,58 +45,76 @@
                         <mat-datepicker #toPicker></mat-datepicker>
                     </mat-form-field>
                 </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+
+                 <!---------------- Row 2 ----------------->
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Sesiones:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="sessions" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Dist. Total:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="distance" type="text" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Dist. Max:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="maxDistance" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Dist. Med:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="medDistance" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                 <!---------------- Row 3 ----------------->
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tiempo Total:</mat-label>
+                        <input matInput class="my-text-field" formControlName="time" type="text" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Mayor Tiempo:</mat-label>
+                        <input matInput class="my-text-field" formControlName="maxTime" type="text" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tiempo med:</mat-label>
+                        <input matInput class="my-text-field" formControlName="medTime" type="text" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Vel. máx:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="vmax" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                 <!---------------- Row 4----------------->
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Vel. med:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="vmed" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
             </mat-grid-list>
         </form>
-
-        <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
-            <ng-container matColumnDef="sessionDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Fecha</h3></th>
-                <td mat-cell *matCellDef="let session">{{session.sessionDate | date:'dd/MM/yyyy'}}</td>
-            </ng-container>
-     
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Nombre</h3></th>
-              <td mat-cell *matCellDef="let session">{{session.name}}</td>
-            </ng-container>
-    
-            <ng-container matColumnDef="sportName">
-                <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Deporte</h3></th>
-                <td mat-cell *matCellDef="let session">{{session.sportName}}</td>
-            </ng-container>
-    
-            <ng-container matColumnDef="spotName">
-                <th mat-header-cell  *matHeaderCellDef mat-sort-header><h3>Lugar</h3></th>
-                <td mat-cell *matCellDef="let session">{{session.spotName}}</td>
-            </ng-container>
-      
-            <ng-container matColumnDef="sessionTime">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Tiempo</h3></th>
-              <td mat-cell *matCellDef="let session">{{session.sessionTime | secondsToTimePipe }}</td>
-            </ng-container>
-    
-            <ng-container matColumnDef="sessionDistance">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Dist.</h3></th>
-                <td mat-cell *matCellDef="let session">{{session.sessionDistance | number:'1.1-1'}}</td>
-            </ng-container>
-    
-            <ng-container matColumnDef="maxSpeed">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Max</h3></th>
-              <td mat-cell *matCellDef="let session">{{session.maxSpeed | number:'1.1-1'}}</td>
-            </ng-container>
-    
-            <ng-container matColumnDef="medSpeed">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Med</h3></th>
-              <td mat-cell *matCellDef="let session">{{session.medSpeed | number:'1.1-1'}}</td>
-            </ng-container>
-      
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                (click)="selectRow(row)"
-                [style.background]="row._id == selectedRowId ? 'bisque' : ''">
-            </tr>
-            <tr mat-footer-row *matFooterRowDef="displayedFooterColumns"></tr>
-        </table>
-        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
     </div>
   </div>
   
