@@ -20,8 +20,12 @@ export class AppComponent {
     const me = this,
           username = me.globals.getUserNameFromLocalStorage();
 
-    me.globals.setUser(username);
-    me.router.navigate(['/mainscreen']);
+    if (username === '') {
+      me.router.navigate(['/login']);
+    } else {
+      me.globals.setUser(username);
+      me.router.navigate(['/mainscreen']);
+    }
     me.registerSvgIcons();
   }
 

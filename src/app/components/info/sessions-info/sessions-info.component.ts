@@ -76,8 +76,10 @@ export class SessionsInfoComponent implements OnInit {
 
     me.sessionsService.getSessionsInfo(me.sessionFilterData)
       .subscribe(sessionsInfo => {
-        me.sessionsInfo = sessionsInfo;
-        me.rebuildForm();
+        if (sessionsInfo) {
+          me.sessionsInfo = sessionsInfo;
+          me.rebuildForm();
+        }
         me.globals.unMaskScreen();
       },
       error => {
