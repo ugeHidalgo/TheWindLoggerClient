@@ -17,7 +17,7 @@
 
     <div class="card-body">
         <form [formGroup]="validatingForm">
-            <mat-grid-list cols="4" rowHeight="70px">
+            <mat-grid-list cols="4" rowHeight="60px">
                 <!---------------- Row 1 ----------------->
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-button-toggle-group #group="matButtonToggleGroup" value="week" (change)="onSearchPeriodTypeChange(group.value)">
@@ -28,20 +28,21 @@
                 </mat-grid-tile>
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-form-field>
+                    
+                    <mat-form-field >                        
                         <mat-label>Desde:</mat-label>
-                        <input matInput [matDatepicker]="fromPicker" placeholder="Desde:" formControlName="dateFrom" 
+                        <input matInput [matDatepicker]="fromPicker" formControlName="dateFrom"
                                (change)="onDateFromChanged()" required>
                         <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
                         <mat-datepicker #fromPicker></mat-datepicker>
                     </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" >
                     <mat-form-field>
                         <mat-label>Hasta:</mat-label>
-                        <input matInput [matDatepicker]="toPicker" placeholder="Hasta:" formControlName="dateTo" required>
-                        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                        <input matInput [matDatepicker]="toPicker" formControlName="dateTo" required>
+                        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>                        
                         <mat-datepicker #toPicker></mat-datepicker>
                     </mat-form-field>
                 </mat-grid-tile>
