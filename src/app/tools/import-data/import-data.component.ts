@@ -16,6 +16,7 @@ import { ImportSessionsHelper } from './helpers/import-sessions.helper';
 import { SessionsService } from 'src/app/services/sessions/sessions.service';
 import { SessionMaterialsService } from 'src/app/services/sessionMaterials/session-materials.service';
 import { ImportSessionMaterialsHelper } from './helpers/import-sessionMaterials.helper';
+import { ImportStravaSessionsHelper } from './helpers/import-stravaSessions.helper';
 
 type AOA = any[][];
 export interface DataEntity {
@@ -38,6 +39,7 @@ export class ImportDataComponent {
   importSpotsHelper: ImportSpotsHelper;
   importSportsHelper: ImportSportsHelper;
   importSessionsHelper: ImportSessionsHelper;
+  importStravaSessionsHelper: ImportStravaSessionsHelper;
   importSessionMaterialsHelper: ImportSessionMaterialsHelper;
   importSportTypesHelper: ImportSportTypesHelper;
 	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
@@ -71,6 +73,7 @@ export class ImportDataComponent {
     me.importSpotsHelper = new ImportSpotsHelper(spotsService);
     me.importSportsHelper = new ImportSportsHelper(sportsService);
     me.importSessionsHelper = new ImportSessionsHelper(sessionsService);
+    me.importStravaSessionsHelper = new ImportStravaSessionsHelper(sessionsService, globals);
     me.importSessionMaterialsHelper = new ImportSessionMaterialsHelper(sessionMaterialsService);
     me.importSportTypesHelper = new ImportSportTypesHelper(sportTypesService);
   }
@@ -180,15 +183,15 @@ export class ImportDataComponent {
         break;
 
       case "strava_sessions":
-         /*  me.importStravaSessionsHelper.import(me.data)
+          me.importStravaSessionsHelper.import(me.data)
           .subscribe(savedObjects => {
             me.globals.unMaskScreen();
-            me.toastr.success(`A total of ${savedObjects.length} sessions were successfully created.`);
+            me.toastr.success(`A total of ${savedObjects.length} sessions from Strava were successfully created.`);
           },
-          error => { */
+          error => { 
             me.globals.unMaskScreen();
-            //me.toastr.error(error.message);
-          //});
+            me.toastr.error(error.message);
+          });
         break;
 
       case "sessionMaterials":
