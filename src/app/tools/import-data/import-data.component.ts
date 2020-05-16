@@ -31,6 +31,7 @@ export interface DataEntity {
 export class ImportDataComponent {
 
   data: AOA;
+  stravaData: any;
   selectedEntity : string;
   importMaterialTypesHelper: ImportMaterialTypesHelper;
   importMaterialsHelper: ImportMaterialsHelper;
@@ -47,8 +48,9 @@ export class ImportDataComponent {
     {value: 'materials', viewValue: 'Material deportivo'},
     {value: 'materialTypes', viewValue: 'Tipos de material deportivo'},
     {value: 'spots', viewValue: 'Lugares'},
-    {value: 'sessions', viewValue: 'Sesiones'},
-    {value: 'sessionMaterials', viewValue: 'Materiales usados en sesiones'}
+    {value: 'sessions', viewValue: 'Sesiones(excell)'},
+    {value: 'strava_sessions', viewValue: 'Sesiones(Strava)'},
+    {value: 'sessionMaterials', viewValue: 'Materiales usados en sesiones(excell)'}
   ];
 
   constructor(
@@ -75,19 +77,27 @@ export class ImportDataComponent {
 
   onFileChange(evt: any) {
 		/* wire up file reader */
-    const reader: FileReader = new FileReader(),
-          target: DataTransfer = <DataTransfer>(evt.target);
+    const  me = this,
+           reader: FileReader = new FileReader(),
+           target: DataTransfer = <DataTransfer>(evt.target);
 
-		if (target.files.length !== 1) throw new Error('Cannot use multiple files');
-		reader.onload = (e: any) => {
-      const bstr = e.target.result,
-            wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'}), // read workbook
-            wsname: string = wb.SheetNames[0], // grab first sheet
-            ws: XLSX.WorkSheet = wb.Sheets[wsname];
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    if (me.selectedEntity === 'strava_sessions')
+    {
+      reader.onloadend = (e: any) => {        
+        me.data = JSON.parse(e.target.result);
+      }; 
+    } else {
+      reader.onload = (e: any) => {
+        const bstr = e.target.result,
+              wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'}), // read workbook
+              wsname: string = wb.SheetNames[0], // grab first sheet
+              ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
-			// save data
-      this.data = <AOA>(XLSX.utils.sheet_to_json(ws, {header: 1}));
-		};
+        // save data
+        me.data = <AOA>(XLSX.utils.sheet_to_json(ws, {header: 1}));
+      };
+    }
 		reader.readAsBinaryString(target.files[0]);
 	}
 
@@ -167,6 +177,18 @@ export class ImportDataComponent {
             me.globals.unMaskScreen();
             me.toastr.error(error.message);
           });
+        break;
+
+      case "strava_sessions":
+         /*  me.importStravaSessionsHelper.import(me.data)
+          .subscribe(savedObjects => {
+            me.globals.unMaskScreen();
+            me.toastr.success(`A total of ${savedObjects.length} sessions were successfully created.`);
+          },
+          error => { */
+            me.globals.unMaskScreen();
+            //me.toastr.error(error.message);
+          //});
         break;
 
       case "sessionMaterials":
