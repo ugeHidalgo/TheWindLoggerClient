@@ -73,7 +73,7 @@ export class ImportDataComponent {
     me.importSpotsHelper = new ImportSpotsHelper(spotsService);
     me.importSportsHelper = new ImportSportsHelper(sportsService);
     me.importSessionsHelper = new ImportSessionsHelper(sessionsService);
-    me.importStravaSessionsHelper = new ImportStravaSessionsHelper(sessionsService, globals);
+    me.importStravaSessionsHelper = new ImportStravaSessionsHelper(sessionsService, globals, sportsService);
     me.importSessionMaterialsHelper = new ImportSessionMaterialsHelper(sessionMaterialsService);
     me.importSportTypesHelper = new ImportSportTypesHelper(sportTypesService);
   }
