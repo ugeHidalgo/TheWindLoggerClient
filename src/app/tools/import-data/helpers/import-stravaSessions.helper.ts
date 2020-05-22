@@ -41,7 +41,7 @@ export class ImportStravaSessionsHelper {
         session.name = sessionToImport.id;
         session.description = sessionToImport.name;
         session.sessionDate = sessionToImport.start_date;
-        session.sessionTime = sessionToImport.movingTime;
+        session.sessionTime = sessionToImport.moving_time;
         session.sessionDistance = sessionToImport.distance/1000;
         session.sport = me.mapSport(sessionToImport.type, sessionToImport.trainer);
         session.spot = undefined;
