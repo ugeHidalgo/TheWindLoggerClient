@@ -58,14 +58,11 @@
             <mat-grid-tile [colspan]="3" [rowspan]="1">
                 <mat-form-field class="full-width">
                     <mat-label>Lugar:</mat-label>
-                    <mat-select placeholder="Lugar: " formControlName="spot" required>
+                    <mat-select placeholder="Lugar: " formControlName="spot">
                         <mat-option *ngFor="let spot of spots" [(value)]=spot.name>
                             {{spot.name}}: {{spot.description}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngFor="let validation of validationMessages.spot">
-                        <mat-error align="end" *ngIf="isInvalidField('spot',validation.type)">{{validation.message}}</mat-error>
-                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 

@@ -183,7 +183,7 @@ export class SessionDetailsComponent implements OnInit {
       time: new FormControl('', { validators: Validators.compose([Validators.required, ValidateTime])}),
       distance: new FormControl('', { validators: Validators.compose([Validators.required, Validators.max(9999), Validators.min(0)])}),
       sport: new FormControl('', [Validators.required]),
-      spot: new FormControl('', [Validators.required]),
+      spot: new FormControl('', []),
       race: new FormControl('', { validators:[], updateOn: 'change'}),
       indoor: new FormControl('', { validators:[], updateOn: 'change'}),
       value: new FormControl('', { validators: Validators.compose([Validators.max(10), Validators.min(1)])}),
