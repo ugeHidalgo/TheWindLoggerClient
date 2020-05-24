@@ -20,7 +20,7 @@
 
 <mat-divider></mat-divider>
 
-<div class="import-step">
+<div *ngIf="xmlImport" class="import-step">
 	<mat-label>Datos a importar.</mat-label>
 	<table class="sjs-table">
 		<tr *ngFor="let row of data">

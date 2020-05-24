@@ -32,6 +32,7 @@ export interface DataEntity {
 export class ImportDataComponent {
 
   data: AOA;
+  xmlImport: boolean;
   stravaData: any;
   selectedEntity : string;
   importMaterialTypesHelper: ImportMaterialTypesHelper;
@@ -73,7 +74,7 @@ export class ImportDataComponent {
     me.importSpotsHelper = new ImportSpotsHelper(spotsService);
     me.importSportsHelper = new ImportSportsHelper(sportsService);
     me.importSessionsHelper = new ImportSessionsHelper(sessionsService);
-    me.importStravaSessionsHelper = new ImportStravaSessionsHelper(sessionsService, globals, sportsService);
+    me.importStravaSessionsHelper = new ImportStravaSessionsHelper(sessionsService, globals);
     me.importSessionMaterialsHelper = new ImportSessionMaterialsHelper(sessionMaterialsService);
     me.importSportTypesHelper = new ImportSportTypesHelper(sportTypesService);
   }
@@ -107,6 +108,7 @@ export class ImportDataComponent {
 	import(): void {
     const me = this;
 
+    me.xmlImport = true;
     me.globals.maskScreen();
     if (!me.selectedEntity) return;
     switch (me.selectedEntity) {
@@ -183,6 +185,7 @@ export class ImportDataComponent {
         break;
 
       case "strava_sessions":
+          me.xmlImport = false;
           me.importStravaSessionsHelper.import(me.data)
           .subscribe(savedObjects => {
             me.globals.unMaskScreen();

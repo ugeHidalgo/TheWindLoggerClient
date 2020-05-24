@@ -3,31 +3,16 @@ import { Session } from 'src/app/models/session';
 import { ImportFieldTools } from './import-fieldTools';
 import { SessionsService } from 'src/app/services/sessions/sessions.service';
 import { GlobalsService } from 'src/app/globals/globals.service';
-import { Sport } from 'src/app/models/sport';
-import { SportsService } from 'src/app/services/sports/sports.service';
 
 export class ImportStravaSessionsHelper {
     private importFielTools: ImportFieldTools;
     private fieldNames: string[];
-    private sports: Sport[];
 
   constructor(
     private sessionsService: SessionsService,
-    private globals: GlobalsService,
-    private sportsService: SportsService
+    private globals: GlobalsService,    
   ) {
-    const me = this;
-
-    me.importFielTools = new ImportFieldTools();
-    me.globals.maskScreen();
-    me.sportsService.getSports(me.globals.userNameLogged)
-        .subscribe(sports => {
-            me.sports = sports;
-            me.globals.unMaskScreen();
-        },
-        error => {
-            me.globals.unMaskScreen();
-        });
+    this.importFielTools = new ImportFieldTools();
   }
 
   import(sessionsToImport): Observable<Session[]> {
@@ -44,7 +29,7 @@ export class ImportStravaSessionsHelper {
         session.sessionTime = sessionToImport.moving_time;
         session.sessionDistance = sessionToImport.distance/1000;
         session.sport = me.mapSport(sessionToImport.type, sessionToImport.trainer);
-        session.spot = undefined;
+        session.spot = me.mapSpot(sessionToImport);
         session.race = false;
         session.indoor = sessionToImport.trainer;
         session.value = 1;
@@ -64,55 +49,54 @@ export class ImportStravaSessionsHelper {
 
 
   private mapSport(stravaSportType, isIndoorSession) {
-      const me = this;
-      var sport: Sport;
+      let sportName : any;
 
-      switch (stravaSportType) {          
+      switch (stravaSportType) {
             case 'Run':
                 if (isIndoorSession) {
-                    sport = me.getSportByName('Carrera cinta');
+                    sportName = 'Carrera cinta';
                 } else {
-                    sport = me.getSportByName('Carrera');
+                    sportName = 'Carrera';
                 }
                 break;
             
             case 'Hike':
-                sport = me.getSportByName('Carrera');
+                sportName = 'Carrera';
                 break;
 
             case 'Walk':
-                sport = me.getSportByName('Carrera');
+                sportName = 'Carrera';
                 break;
 
             case 'WeightTraining':
-                sport = me.getSportByName('Fuerza');
+                sportName = 'Fuerza';
                 break;
 
             case 'Workout':
-                sport = me.getSportByName('Fuerza');
+                sportName = 'Fuerza';
                 break;
 
-            case 'Swim':                
-                sport = me.getSportByName('Nado piscina');
+            case 'Swim':
+                sportName = 'Nado piscina';
                 break;
 
             case 'Windsurf':
-                sport = me.getSportByName('Windsurf');
+                sportName = 'Windsurf';
                 break;
 
             default:
                 if (isIndoorSession) {
-                    sport = me.getSportByName('Ciclo');
+                    sportName = 'Ciclo';
                 } else {
-                    sport = me.getSportByName('Ciclismo crta');
+                    sportName = 'Ciclismo crta';
                 }
                 break;
       }
 
-    return sport;
+    return sportName;
   }
 
-  getSportByName(name: string): Sport {
-    return this.sports.find( function(x) { return x.name === name; });
+  private mapSpot(sessionToImport) {    
+    return sessionToImport.spotName ? sessionToImport.spotName : undefined;
   }
 };
