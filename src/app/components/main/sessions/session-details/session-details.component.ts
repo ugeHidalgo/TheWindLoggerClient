@@ -203,7 +203,7 @@ export class SessionDetailsComponent implements OnInit {
 
     me.validatingForm.setValue({
       name: me.session.name,
-      description: me.session.description,
+      description: me.session.description ? me.session.description : '',
       date: me.session.sessionDate,
       time: me.formattersHelper.secondsToTimeFormatter(me.session.sessionTime),
       distance: me.formattersHelper.decimalFormatter(me.session.sessionDistance),
