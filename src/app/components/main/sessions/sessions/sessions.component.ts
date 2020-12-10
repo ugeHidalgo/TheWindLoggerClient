@@ -83,16 +83,18 @@ export class SessionsComponent implements OnInit {
 
   //Screen events
   onClickAddButton() {
-    this.toastr.warning('To be implemented.');
-    /* const pathToAccountDetail = `/accountdetail/-1`;
+    //this.toastr.warning('To be implemented.');
+    const me = this,
+          pathToSessionDetail = `/session-details/-1`;
 
-    this.router.navigate([pathToAccountDetail]); */
+    me.router.navigate([pathToSessionDetail]);
   }
 
   onClickEditButton() {
-    const pathToAccountDetail = `/session-details/` + this.selectedRowId;
+    const me = this,
+          pathToSessionDetail = `/session-details/` + me.selectedRowId;
 
-    this.router.navigate([pathToAccountDetail]);
+    me.router.navigate([pathToSessionDetail]);
   }
 
   onClickRemoveButton() {

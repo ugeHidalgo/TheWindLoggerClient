@@ -20,6 +20,7 @@ import { ValidateTime } from 'src/app/validators/time.validator';
 import { ValidationMessagesList } from 'src/app/tools/validationMessages.list';
 import { SessionsService } from 'src/app/services/sessions/sessions.service';
 import { ɵAnimationGroupPlayer } from '@angular/animations';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-session-details',
@@ -59,7 +60,7 @@ export class SessionDetailsComponent implements OnInit {
     me.globals.maskScreen();
     me.createForm();
     me.sessionId = me.route.snapshot.paramMap.get('id');
-    me.session = me.globals.selectedSession;
+    me.session = me.prepareSession();
     me.setScreenTitle();
     me.userName = me.globals.userNameLogged;
   }
@@ -105,6 +106,28 @@ export class SessionDetailsComponent implements OnInit {
     return forkJoin([sports, spots, materials, sessionMaterials]);
   }
 
+  prepareSession(): Session {
+    const me = this,
+          todaysDate = moment(); //.format('YYYY-MM-DD[T00:00:00.000Z]');
+    let session : Session;
+
+    if (me.sessionId === '-1'){
+      session = new Session ();
+      //session._id = '-1';
+      session.userName = me.userName;
+      session.sessionDate = new Date();
+      session.sessionTime = 0;
+      session.name = 'Session-' + todaysDate;
+      session.race = false;
+      session.indoor = false;
+      session.value = 1;
+      session.effort = 5;
+    } else {
+      session = me.globals.selectedSession;
+    }
+    return session;
+  }
+
   onClickGoBackButton() {
     this.location.back();
   }
@@ -121,6 +144,7 @@ export class SessionDetailsComponent implements OnInit {
 
     me.globals.maskScreen();
     me.session = me.getFormData();
+    me.session.userName = me.userName;
     me.session.materialsUsed = me.dataSource.data;
     me.sessionsService.saveSession(me.session).subscribe(
       (savedSession) => {
@@ -130,7 +154,7 @@ export class SessionDetailsComponent implements OnInit {
         } else {
           me.hasChangedMaterials = false;
           me.materialsLoaded = false;
-          me.sessionMaterialsService.getSessionMaterials(me.userName, me.sessionId).subscribe( (sessionMaterials) => {
+          me.sessionMaterialsService.getSessionMaterials(me.userName, savedSession._id).subscribe( (sessionMaterials) => {
             me.dataSource = new MatTableDataSource<SessionMaterial>(sessionMaterials);
             me.materialsLoaded = true;
             me.validatingForm.reset();
