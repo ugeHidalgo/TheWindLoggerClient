@@ -181,7 +181,7 @@
 
         </mat-grid-list>
 
-        <div *ngIf="materialsLoaded">
+        <div *ngIf="materialsLoaded && sessionId != '-1'">
             <app-session-details-materials 
                 [materials]=materials
                 [dataSource]=dataSource

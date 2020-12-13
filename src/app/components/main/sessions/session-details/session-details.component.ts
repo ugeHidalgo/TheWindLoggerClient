@@ -113,7 +113,6 @@ export class SessionDetailsComponent implements OnInit {
 
     if (me.sessionId === '-1'){
       session = new Session ();
-      //session._id = '-1';
       session.userName = me.userName;
       session.sessionDate = new Date();
       session.sessionTime = 0;
@@ -158,7 +157,11 @@ export class SessionDetailsComponent implements OnInit {
             me.dataSource = new MatTableDataSource<SessionMaterial>(sessionMaterials);
             me.materialsLoaded = true;
             me.validatingForm.reset();
+            me.sessionId = savedSession._id;
+            me.setScreenTitle();
             me.rebuildForm();
+            me.session = savedSession;
+            me.globals.selectedSession = me.session;
             me.globals.unMaskScreen();
             me.toastr.success(`Sesión ${savedSession.name} guardada correctamente.`);
           });
