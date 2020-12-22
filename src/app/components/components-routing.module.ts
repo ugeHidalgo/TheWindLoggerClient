@@ -10,6 +10,7 @@ import { SessionsComponent } from './main/sessions/sessions/sessions.component';
 import { SportsComponent } from './main/sports/sports/sports.component';
 import { SportTypesComponent } from './main/sportTypes/sport-types/sport-types.component';
 import { SessionDetailsComponent } from './main/sessions/session-details/session-details.component';
+import { MaterialDetailStatsComponent } from './main/materials/material-detail-stats/material-detail-stats.component';
 
 const componentRoutes: Routes = [
     { path: 'mainscreen', component: MainScreenComponent },
@@ -20,6 +21,7 @@ const componentRoutes: Routes = [
     { path: 'session-details/:id', component: SessionDetailsComponent },
     { path: 'material-types', component: MaterialTypesComponent },
     { path: 'materials', component: MaterialsComponent },
+    { path: 'material-detail-stat/:id', component: MaterialDetailStatsComponent },
     { path: 'import-data', component: ImportDataComponent }
 ];
 

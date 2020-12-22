@@ -62,16 +62,15 @@ export class MaterialsComponent {
 
   onClickStatsButton() {
     const me = this;
+    let pathToMaterialDetailStat: string;
 
     if (me.selectedRowId === '-1') {
       me.toastr.error('Debe seleccionar el material para el que quiere consultar las estadísticas.');
       return;
     }
 
-    this.toastr.warning('To be implemented.');
-    /* const pathToAccountDetail = `/accountdetail/` + this.selectedRowId;
-
-    this.router.navigate([pathToAccountDetail]); */
+    pathToMaterialDetailStat = `/material-detail-stat/` + this.selectedRowId;
+    me.router.navigate([pathToMaterialDetailStat]); 
   }
 
   onClickAddButton() {
