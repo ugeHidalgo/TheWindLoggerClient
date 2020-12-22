@@ -60,6 +60,20 @@ export class MaterialsComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  onClickStatsButton() {
+    const me = this;
+
+    if (me.selectedRowId === '-1') {
+      me.toastr.error('Debe seleccionar el material para el que quiere consultar las estadísticas.');
+      return;
+    }
+
+    this.toastr.warning('To be implemented.');
+    /* const pathToAccountDetail = `/accountdetail/` + this.selectedRowId;
+
+    this.router.navigate([pathToAccountDetail]); */
+  }
+
   onClickAddButton() {
     this.toastr.warning('To be implemented.');
     /* const pathToAccountDetail = `/accountdetail/-1`;

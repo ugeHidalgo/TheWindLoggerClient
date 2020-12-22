@@ -48,6 +48,7 @@ import { SessionDetailsMaterialsComponent } from './components/main/sessions/ses
 import { SessionMaterialDialogComponent } from './components/dialogs/session-material-dialog/session-material-dialog/session-material-dialog.component';
 import { MainFooterComponent } from './components/main/mainFooter/main-footer/main-footer.component';
 import { SessionsInfoComponent } from './components/info/sessions-info/sessions-info.component';
+import { MaterialDetailStatsComponent } from './components/main/materials/material-detail-stats/material-detail-stats.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { SessionsInfoComponent } from './components/info/sessions-info/sessions-
     SportTypesComponent,
     SecondsToTimePipe,
     MainFooterComponent,
-    SessionsInfoComponent
+    SessionsInfoComponent,
+    MaterialDetailStatsComponent
   ],
   imports: [
     GlobalRoutingModule,
