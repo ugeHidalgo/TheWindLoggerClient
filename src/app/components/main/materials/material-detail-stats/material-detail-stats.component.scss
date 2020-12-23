@@ -1,0 +1,62 @@
+.mat-card {
+    margin: 5px;
+}
+
+.my-header-bar > * {
+    margin-right: 10px;
+}
+
+.material-info-card {
+    max-width: 900px;
+    min-width: 750px;
+    width: 100%;
+    padding: 0px 10px 20px 10px;
+}
+
+//Tables styles
+table {
+    width: 100%;
+  }
+  
+  .mat-header-row {
+    font: bold;
+    height: 25px;
+  }
+  
+  .mat-header-cell {
+    padding: 5px;
+  }
+  
+  .mat-row {
+    height: 15px;
+  }
+  
+  tr.mat-row:hover {
+    background-color: aliceblue;
+  }
+  
+  .mat-cell {
+    padding: 5px;
+  }
+  
+  .mat-column {
+    margin-right: 10px;
+  }
+  
+  .mat-column-name,
+  .mat-column-sportName,
+  .mat-column-spotName {
+    text-align: left;
+  }
+  
+  .mat-column-sessionDistance,
+  .mat-column-maxSpeed,
+  .mat-column-medSpeed,
+  .mat-column-value{
+    text-align: right;
+  }
+  
+  .my-header-bar > * {
+    margin-right: 10px;
+  }
+  //Tables styles

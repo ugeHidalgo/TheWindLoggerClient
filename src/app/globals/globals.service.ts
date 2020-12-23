@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Material } from '../models/material';
 import { Session } from '../models/session';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class GlobalsService {
   localStorageStore = 'currentUser';
 
   selectedSession: Session;
+  selectedMaterial: Material;
 
   //server = 'https://thewindloggerserver.herokuapp.com/';  //To be used when API is in production
   //server = 'http://192.168.1.106:3000/';  //To be used when API is in development mode and in local network server.

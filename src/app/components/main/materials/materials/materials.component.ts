@@ -96,6 +96,7 @@ export class MaterialsComponent {
 
     me.selectedRowId = row._id;
     me.selectedMaterial = me.getMaterialById(me.selectedRowId);
+    me.globals.selectedMaterial = me.selectedMaterial;
   }
 
   getMaterialById(selectedRowId: string): Material {

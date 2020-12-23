@@ -1,1 +1,121 @@
-<p>material-detail-stats works!</p>
+<div class="material-info-card">
+    <div class="card-header">
+        <div class="grid-title">{{title}}</div>
+        <mat-toolbar color="primary" class="my-header-bar">
+
+            <button  mat-raised-button color="green" (click)="onClickSearchButton()" type="submit">
+                <i class="material-icons">flash_on</i>
+            </button>
+
+            <i class="material-icons">search</i>
+            <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)">
+            </mat-form-field>
+
+        </mat-toolbar>
+    </div>
+
+    <div class="card-body">
+        <form [formGroup]="validatingForm">
+            <mat-grid-list cols="4" rowHeight="60px">
+                <!---------------- Row 1 ----------------->
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-button-toggle-group #group="matButtonToggleGroup" value="week" (change)="onSearchPeriodTypeChange(group.value)">
+                        <mat-button-toggle value="year" aria-label="Año">A</mat-button-toggle>
+                        <mat-button-toggle value="month" aria-label="Mes">M</mat-button-toggle>
+                        <mat-button-toggle value="week" aria-label="Semana">S</mat-button-toggle>
+                      </mat-button-toggle-group>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    
+                    <mat-form-field >                        
+                        <mat-label>Desde:</mat-label>
+                        <input matInput [matDatepicker]="fromPicker" formControlName="dateFrom"
+                               (change)="onDateFromChanged()" required>
+                        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #fromPicker></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" >
+                    <mat-form-field>
+                        <mat-label>Hasta:</mat-label>
+                        <input matInput [matDatepicker]="toPicker" formControlName="dateTo" required>
+                        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>                        
+                        <mat-datepicker #toPicker></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+
+                 <!---------------- Row 2 ----------------->
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Sesiones:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="sessions" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Dist. Total:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="distance" type="text" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Dist. Max:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="maxDistance" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Dist. Med:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="medDistance" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                 <!---------------- Row 3 ----------------->
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tiempo Total:</mat-label>
+                        <input matInput class="my-text-field" formControlName="time" type="text" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Mayor Tiempo:</mat-label>
+                        <input matInput class="my-text-field" formControlName="maxTime" type="text" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tiempo med:</mat-label>
+                        <input matInput class="my-text-field" formControlName="medTime" type="text" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Vel. máx:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="vmax" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                 <!---------------- Row 4----------------->
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Vel. med:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="vmed" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </div>
+  </div>
+  
