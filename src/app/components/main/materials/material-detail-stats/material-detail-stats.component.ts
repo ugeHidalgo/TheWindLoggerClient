@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { FormattersHelper } from 'src/app/tools/formaters.helper';
+import { FilterData } from 'src/app/models/filterData';
 
 @Component({
   selector: 'app-material-detail-stats',
@@ -18,7 +19,7 @@ export class MaterialDetailStatsComponent implements OnInit {
   userName: string;
   title: string;
   validatingForm: FormGroup;
-  // filterData: FilterData;
+  filterData: FilterData;
   // sessionsInfo: SessionsInfo;
   displayedColumns: string[];
   displayedFooterColumns: string[];
@@ -37,13 +38,13 @@ export class MaterialDetailStatsComponent implements OnInit {
 
     me.createForm();
     me.setScreenTitle();
-    //me.filterData = new FilterData();
+    me.filterData = new FilterData();
   }
 
   ngOnInit() {
     const me = this;
           
-    //me.filterData.userName = me.globals.userNameLogged;
+    me.filterData.userName = me.globals.userNameLogged;
     me.setSearchPeriod('week');
 
     me.writeDateFromInForm();
@@ -134,7 +135,7 @@ export class MaterialDetailStatsComponent implements OnInit {
   writeDateFromInForm() {
     const me = this;
 
-    //me.validatingForm.patchValue({dateFrom: me.filterData.dateFrom })
+    me.validatingForm.patchValue({dateFrom: me.filterData.dateFrom })
   }
 
   getDateTo(): string {
@@ -147,7 +148,7 @@ export class MaterialDetailStatsComponent implements OnInit {
   writeDateToInForm() {
     const me = this;
 
-    //me.validatingForm.patchValue({dateTo: me.filterData.dateTo })
+    me.validatingForm.patchValue({dateTo: me.filterData.dateTo })
   }
 
   setSearchPeriod(unitOfTime: moment.unitOfTime.StartOf) {
@@ -155,8 +156,8 @@ export class MaterialDetailStatsComponent implements OnInit {
           startDate = moment().startOf(unitOfTime).format('YYYY-MM-DD[T00:00:00.000Z]'),
           endDate = moment().endOf(unitOfTime).format('YYYY-MM-DD[T00:00:00.000Z]');
 
-    // me.filterData.dateFrom = startDate;
-    // me.filterData.dateTo = endDate;
+    me.filterData.dateFrom = startDate;
+    me.filterData.dateTo = endDate;
   }
 
   setScreenTitle(): void {
