@@ -47,6 +47,9 @@ export class MaterialDetailStatsComponent implements OnInit {
     const me = this;
           
     me.filterData.userName = me.globals.userNameLogged;
+    me.filterData._id = me.globals.selectedMaterial._id;
+    me.filterData.name = me.globals.selectedMaterial.name;
+    
     me.setSearchPeriod('week');
 
     me.writeDateFromInForm();
