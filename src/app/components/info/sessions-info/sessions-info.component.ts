@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { GlobalsService } from 'src/app/globals/globals.service';
-import { SessionFilterData } from 'src/app/models/sessionFilterData';
+import { FilterData } from 'src/app/models/filterData';
 import * as moment from 'moment';
 import { SessionsService } from 'src/app/services/sessions/sessions.service';
 import { Session } from 'src/app/models/session';
@@ -19,7 +19,7 @@ export class SessionsInfoComponent implements OnInit {
 
   userName: string;
   validatingForm: FormGroup;
-  sessionFilterData: SessionFilterData;
+  filterData: FilterData;
   sessionsInfo: SessionsInfo;
   displayedColumns: string[];
   displayedFooterColumns: string[];
@@ -37,13 +37,13 @@ export class SessionsInfoComponent implements OnInit {
     const me = this;
 
     me.createForm();
-    me.sessionFilterData = new SessionFilterData();
+    me.filterData = new FilterData();
   }
 
   ngOnInit() {
     const me = this;
           
-    me.sessionFilterData.userName = me.globals.userNameLogged;
+    me.filterData.userName = me.globals.userNameLogged;
     me.setSearchPeriod('week');
 
     me.writeDateFromInForm();
@@ -71,10 +71,10 @@ export class SessionsInfoComponent implements OnInit {
 
     me.globals.maskScreen();
 
-    me.sessionFilterData.dateFrom = me.getDateFrom();
-    me.sessionFilterData.dateTo = me.getDateTo();
+    me.filterData.dateFrom = me.getDateFrom();
+    me.filterData.dateTo = me.getDateTo();
 
-    me.sessionsService.getSessionsInfo(me.sessionFilterData)
+    me.sessionsService.getSessionsInfo(me.filterData)
       .subscribe(sessionsInfo => {
         if (sessionsInfo) {
           me.sessionsInfo = sessionsInfo;
@@ -132,7 +132,7 @@ export class SessionsInfoComponent implements OnInit {
   writeDateFromInForm() {
     const me = this;
 
-    me.validatingForm.patchValue({dateFrom: me.sessionFilterData.dateFrom })
+    me.validatingForm.patchValue({dateFrom: me.filterData.dateFrom })
   }
 
   getDateTo(): string {
@@ -145,7 +145,7 @@ export class SessionsInfoComponent implements OnInit {
   writeDateToInForm() {
     const me = this;
 
-    me.validatingForm.patchValue({dateTo: me.sessionFilterData.dateTo })
+    me.validatingForm.patchValue({dateTo: me.filterData.dateTo })
   }
 
   setSearchPeriod(unitOfTime: moment.unitOfTime.StartOf) {
@@ -153,7 +153,7 @@ export class SessionsInfoComponent implements OnInit {
           startDate = moment().startOf(unitOfTime).format('YYYY-MM-DD[T00:00:00.000Z]'),
           endDate = moment().endOf(unitOfTime).format('YYYY-MM-DD[T00:00:00.000Z]');
 
-    me.sessionFilterData.dateFrom = startDate;
-    me.sessionFilterData.dateTo = endDate;
+    me.filterData.dateFrom = startDate;
+    me.filterData.dateTo = endDate;
   }
 }

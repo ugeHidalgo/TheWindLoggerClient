@@ -1,4 +1,4 @@
-export class SessionFilterData {
+export class FilterData {
     userName: string;
     dateFrom: string;
     dateTo: string;

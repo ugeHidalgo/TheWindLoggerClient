@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Session } from 'src/app/models/session';
 import { tap, catchError } from 'rxjs/operators';
-import { SessionFilterData } from 'src/app/models/sessionFilterData';
+import { FilterData } from 'src/app/models/filterData';
 import { SessionsInfo } from 'src/app/models/sessionsInfo';
 
 @Injectable({
@@ -45,11 +45,11 @@ export class SessionsService {
   }
 
   /**.*/
-  getFilteredSessions(sessionFilterData: SessionFilterData): Observable<Session[]> {
+  getFilteredSessions(filterData: FilterData): Observable<Session[]> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken();
 
-    return this.http.post<Session[]>(me.sessionsUrl + '-filtered', sessionFilterData, httpOptions)
+    return this.http.post<Session[]>(me.sessionsUrl + '-filtered', filterData, httpOptions)
               .pipe(
                 // tslint:disable-next-line:no-shadowed-variable
                 tap( sessions => console.log(`A total of ${sessions.length} sessions were successfully retrieved.`)),
@@ -58,11 +58,11 @@ export class SessionsService {
   }
 
   /**.*/
-  getSessionsInfo(sessionFilterData: SessionFilterData): Observable<SessionsInfo> {
+  getSessionsInfo(filterData: FilterData): Observable<SessionsInfo> {
     const me = this,
           httpOptions = me.operationHelper.createHttpOptionsWithToken();
 
-    return this.http.post<SessionsInfo>(me.sessionsUrl + '-info', sessionFilterData, httpOptions)
+    return this.http.post<SessionsInfo>(me.sessionsUrl + '-info', filterData, httpOptions)
               .pipe(
                 // tslint:disable-next-line:no-shadowed-variable
                 tap( any => console.log('sessions info successfully retrieved.')),

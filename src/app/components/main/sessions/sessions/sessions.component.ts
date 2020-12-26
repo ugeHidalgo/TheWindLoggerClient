@@ -6,8 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { SessionFilterData } from 'src/app/models/sessionFilterData';
 import * as moment from 'moment';
+import { FilterData } from 'src/app/models/filterData';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class SessionsComponent implements OnInit {
   displayedFooterColumns: string[];
   dataSource: MatTableDataSource<Session>;
   validatingForm: FormGroup;
-  sessionFilterData: SessionFilterData;
+  filterData: FilterData;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -41,7 +41,7 @@ export class SessionsComponent implements OnInit {
 
     me.displayedColumns = ['sessionDate', 'name', 'sportName', 'spotName', 'sessionTime', 'sessionDistance','maxSpeed', 'medSpeed'];
     me.userName = me.globals.userNameLogged;
-    me.sessionFilterData = new SessionFilterData();
+    me.filterData = new FilterData();
 
     me.createForm();
     //me.getSessionsForCompany(me.userName);
@@ -50,7 +50,7 @@ export class SessionsComponent implements OnInit {
   ngOnInit() {
     const me = this;
           
-    me.sessionFilterData.userName = me.globals.userNameLogged;
+    me.filterData.userName = me.globals.userNameLogged;
     me.setSearchPeriod('week');
 
     me.writeDateFromInForm();
@@ -119,10 +119,10 @@ export class SessionsComponent implements OnInit {
 
     me.globals.maskScreen();
 
-    me.sessionFilterData.dateFrom = me.getDateFrom();
-    me.sessionFilterData.dateTo = me.getDateTo();
+    me.filterData.dateFrom = me.getDateFrom();
+    me.filterData.dateTo = me.getDateTo();
 
-    me.sessionsService.getFilteredSessions(me.sessionFilterData)
+    me.sessionsService.getFilteredSessions(me.filterData)
       .subscribe(sessions => {
         me.sessions = sessions;
         me.dataSource = new MatTableDataSource<Session>(sessions);
@@ -157,7 +157,7 @@ export class SessionsComponent implements OnInit {
   writeDateFromInForm() {
     const me = this;
 
-    me.validatingForm.patchValue({dateFrom: me.sessionFilterData.dateFrom })
+    me.validatingForm.patchValue({dateFrom: me.filterData.dateFrom })
   }
 
   getDateTo(): string {
@@ -170,7 +170,7 @@ export class SessionsComponent implements OnInit {
   writeDateToInForm() {
     const me = this;
 
-    me.validatingForm.patchValue({dateTo: me.sessionFilterData.dateTo })
+    me.validatingForm.patchValue({dateTo: me.filterData.dateTo })
   }
 
   setSearchPeriod(unitOfTime: moment.unitOfTime.StartOf) {
@@ -178,8 +178,8 @@ export class SessionsComponent implements OnInit {
           startDate = moment().startOf(unitOfTime).format('YYYY-MM-DD[T00:00:00.000Z]'),
           endDate = moment().endOf(unitOfTime).format('YYYY-MM-DD[T00:00:00.000Z]');
 
-    me.sessionFilterData.dateFrom = startDate;
-    me.sessionFilterData.dateTo = endDate;
+    me.filterData.dateFrom = startDate;
+    me.filterData.dateTo = endDate;
   }
 
   selectRow(row) {
