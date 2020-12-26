@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Material } from 'src/app/models/material';
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { FilterData } from 'src/app/models/filterData';
+import { MainStatsInfo } from 'src/app/models/mainStatsInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +52,19 @@ export class MaterialsService {
                 // tslint:disable-next-line:no-shadowed-variable
                 tap( any => console.log(`A total of ${materials.length} materials were successfully created.`)),
                 catchError(me.operationHelper.handleError<Material[]>('createMaterials', []))
+              );
+  }
+
+  /**.*/
+  getMaterialsInfo(filterData: FilterData): Observable<MainStatsInfo> {
+    const me = this,
+          httpOptions = me.operationHelper.createHttpOptionsWithToken();
+
+    return this.http.post<MainStatsInfo>(me.materialsUrl + '-info', filterData, httpOptions)
+              .pipe(
+                // tslint:disable-next-line:no-shadowed-variable
+                tap( any => console.log('materials stats info successfully retrieved.')),
+                catchError(me.operationHelper.handleError<MainStatsInfo>('getMaterialsInfo', null))
               );
   }
 }

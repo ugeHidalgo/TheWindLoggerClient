@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { GlobalsService } from 'src/app/globals/globals.service';
 import { FormattersHelper } from 'src/app/tools/formaters.helper';
 import { FilterData } from 'src/app/models/filterData';
+import { MainStatsInfo } from 'src/app/models/mainStatsInfo';
+import { MaterialsService } from 'src/app/services/materials/materials-service.service';
 
 @Component({
   selector: 'app-material-detail-stats',
@@ -20,7 +22,7 @@ export class MaterialDetailStatsComponent implements OnInit {
   title: string;
   validatingForm: FormGroup;
   filterData: FilterData;
-  // sessionsInfo: SessionsInfo;
+  statsInfo: MainStatsInfo;
   displayedColumns: string[];
   displayedFooterColumns: string[];
   dataSource: MatTableDataSource<Session>;
@@ -30,7 +32,7 @@ export class MaterialDetailStatsComponent implements OnInit {
 
   constructor(
     protected globals: GlobalsService,
-    //protected sessionsService: SessionsService,
+    protected materialsService: MaterialsService,
     protected toastr: ToastrService,
     private formattersHelper: FormattersHelper
   ) {
@@ -70,17 +72,18 @@ export class MaterialDetailStatsComponent implements OnInit {
   onClickSearchButton() {
     var me = this;
 
-    me.toastr.warning('Not implemented');
+    me.toastr.warning('Not implemented'); 
 
-    /* me.globals.maskScreen();
+    /*To Be uncommented when server side become implemented.
+    me.globals.maskScreen();
 
     me.filterData.dateFrom = me.getDateFrom();
     me.filterData.dateTo = me.getDateTo();
 
-    me.sessionsService.getSessionsInfo(me.filterData)
-      .subscribe(sessionsInfo => {
-        if (sessionsInfo) {
-          me.sessionsInfo = sessionsInfo;
+    me.materialsService.getMaterialsInfo(me.filterData)
+      .subscribe(statsInfo => {
+        if (statsInfo) {
+          me.statsInfo = statsInfo;
           me.rebuildForm();
         }
         me.globals.unMaskScreen();
@@ -114,15 +117,15 @@ export class MaterialDetailStatsComponent implements OnInit {
   rebuildForm() {
     const me = this;
 
-    /* me.validatingForm.patchValue({sessions: me.formattersHelper.decimalFormatter(me.sessionsInfo.sessions)});
-    me.validatingForm.patchValue({distance: me.formattersHelper.decimalFormatter(me.sessionsInfo.distance)});
-    me.validatingForm.patchValue({maxDistance: me.formattersHelper.decimalFormatter(me.sessionsInfo.maxDistance)});
-    me.validatingForm.patchValue({medDistance: me.formattersHelper.decimalFormatter(me.sessionsInfo.medDistance)});
-    me.validatingForm.patchValue({time: me.formattersHelper.secondsToTimeFormatter(me.sessionsInfo.time)});
-    me.validatingForm.patchValue({maxTime: me.formattersHelper.secondsToTimeFormatter(me.sessionsInfo.maxTime)});
-    me.validatingForm.patchValue({medTime: me.formattersHelper.secondsToTimeFormatter(me.sessionsInfo.medTime)});
-    me.validatingForm.patchValue({vmax: me.formattersHelper.decimalFormatter(me.sessionsInfo.maxSpeed)});
-    me.validatingForm.patchValue({vmed: me.formattersHelper.decimalFormatter(me.sessionsInfo.medSpeed)}); */
+    me.validatingForm.patchValue({sessions: me.formattersHelper.decimalFormatter(me.statsInfo.sessions)});
+    me.validatingForm.patchValue({distance: me.formattersHelper.decimalFormatter(me.statsInfo.distance)});
+    me.validatingForm.patchValue({maxDistance: me.formattersHelper.decimalFormatter(me.statsInfo.maxDistance)});
+    me.validatingForm.patchValue({medDistance: me.formattersHelper.decimalFormatter(me.statsInfo.medDistance)});
+    me.validatingForm.patchValue({time: me.formattersHelper.secondsToTimeFormatter(me.statsInfo.time)});
+    me.validatingForm.patchValue({maxTime: me.formattersHelper.secondsToTimeFormatter(me.statsInfo.maxTime)});
+    me.validatingForm.patchValue({medTime: me.formattersHelper.secondsToTimeFormatter(me.statsInfo.medTime)});
+    me.validatingForm.patchValue({vmax: me.formattersHelper.decimalFormatter(me.statsInfo.maxSpeed)});
+    me.validatingForm.patchValue({vmed: me.formattersHelper.decimalFormatter(me.statsInfo.medSpeed)}); 
   }
 
   getDateFrom(): string {
