@@ -24,12 +24,11 @@
                         <mat-button-toggle value="year" aria-label="Año">A</mat-button-toggle>
                         <mat-button-toggle value="month" aria-label="Mes">M</mat-button-toggle>
                         <mat-button-toggle value="week" aria-label="Semana">S</mat-button-toggle>
-                      </mat-button-toggle-group>
+                    </mat-button-toggle-group>
                 </mat-grid-tile>
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    
-                    <mat-form-field >                        
+                    <mat-form-field >
                         <mat-label>Desde:</mat-label>
                         <input matInput [matDatepicker]="fromPicker" formControlName="dateFrom"
                                (change)="onDateFromChanged()" required>
@@ -46,16 +45,15 @@
                         <mat-datepicker #toPicker></mat-datepicker>
                     </mat-form-field>
                 </mat-grid-tile>
-
-                <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
-
-                 <!---------------- Row 2 ----------------->
+                
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-form-field class="full-width">
                         <mat-label>Sesiones:</mat-label>
                         <input matInput class="my-numeric-field" formControlName="sessions" type="number" readonly>
                     </mat-form-field>
                 </mat-grid-tile>
+
+                <!---------------- Row 2 ----------------->
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-form-field class="full-width">
@@ -75,6 +73,13 @@
                     <mat-form-field class="full-width">
                         <mat-label>Dist. Med:</mat-label>
                         <input matInput class="my-numeric-field" formControlName="medDistance" type="number" readonly>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width">
+                        <mat-label>Vel. máx:</mat-label>
+                        <input matInput class="my-numeric-field" formControlName="vmax" type="number" readonly>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -98,16 +103,8 @@
                         <mat-label>Tiempo med:</mat-label>
                         <input matInput class="my-text-field" formControlName="medTime" type="text" readonly>
                     </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-form-field class="full-width">
-                        <mat-label>Vel. máx:</mat-label>
-                        <input matInput class="my-numeric-field" formControlName="vmax" type="number" readonly>
-                    </mat-form-field>
-                </mat-grid-tile>
-
-                 <!---------------- Row 4----------------->
+                </mat-grid-tile>                
+                 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-form-field class="full-width">
                         <mat-label>Vel. med:</mat-label>
