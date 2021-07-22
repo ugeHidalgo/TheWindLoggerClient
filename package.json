@@ -26,7 +26,7 @@
     "ngx-toastr": "^11.3.3",
     "rxjs": "~6.4.0",
     "tslib": "^1.14.1",
-    "xlsx": "^0.15.6",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
